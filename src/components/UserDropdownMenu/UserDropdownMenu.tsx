@@ -41,7 +41,7 @@ const UserDropdownMenu = ({ isAuthenticated, setIsAuthenticated }: UserDropdownM
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link className="flex items-center gap-2 w-full cursor-pointer" href="#">
+              <Link className="flex items-center gap-2 w-full cursor-pointer" href="/profile">
                 <User />
                 <span className="text-base">Profile</span>
               </Link>
