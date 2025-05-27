@@ -18,7 +18,7 @@ export const useAuth = () => {
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setAuthentication] = useState(false);
   const [user, setUser] = useState<Customer | null>(null);
-
+  const [isUserLoading, setUserLoading] = useState(true);
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -47,6 +47,8 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         await fetch('/api/auth/logout', { method: 'DELETE' });
         setAuthentication(false);
         setUser(null);
+      } finally {
+        setUserLoading(false);
       }
     };
 
@@ -54,7 +56,9 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setAuthentication, user, setUser }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, setAuthentication, user, setUser, isUserLoading, setUserLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );

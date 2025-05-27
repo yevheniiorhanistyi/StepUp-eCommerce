@@ -5,6 +5,8 @@ export interface IAuthContextType {
   setAuthentication: React.Dispatch<React.SetStateAction<boolean>>;
   user: Customer | null;
   setUser: (data: Customer | null) => void;
+  isUserLoading: boolean;
+  setUserLoading: (value: boolean) => void;
 }
 
 export interface IAuthStatus {

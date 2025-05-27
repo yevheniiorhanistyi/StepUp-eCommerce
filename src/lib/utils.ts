@@ -10,3 +10,14 @@ export const getEnvVar = (value: string | undefined, name: string): string => {
 
   return value;
 };
+
+export const getInitials = (name: string | undefined) => {
+  if (!name) return '?';
+
+  return name
+    .split(' ')
+    .map((word) => word[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2);
+};
