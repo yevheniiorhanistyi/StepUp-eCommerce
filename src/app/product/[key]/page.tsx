@@ -52,13 +52,13 @@ export default async function ProductPage(props: Props) {
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       <div className="grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] grid-rows-[auto_auto] gap-x-6 gap-y-4 md:gap-y-2">
-        <div className="row-start-1 col-span-1 md:col-start-1 flex flex-col sm:flex-row gap-4">
+        <div className="row-start-1 col-span-1 md:col-start-1 flex flex-col sm:flex-row gap-16">
           {masterVariant.images && masterVariant.images.length > 1 && (
             <div className="hidden sm:flex flex-col space-y-3">
               {masterVariant.images.slice(1).map((image, index) => (
                 <div
                   key={index}
-                  className="relative w-20 aspect-square rounded-md overflow-hidden hover:shadow-md"
+                  className="relative w-20 aspect-square rounded-md overflow-hidden hover:cursor-pointer"
                 >
                   <Image
                     src={image.url}
@@ -97,7 +97,7 @@ export default async function ProductPage(props: Props) {
               {price.discounted ? (
                 <div className="flex items-center space-y-3">
                   <span className="text-primary">{formatPrice(price.discounted.value)}</span>
-                  <span className="text-lg line-through text-gray-500">
+                  <span className="text-sm line-through text-gray-500">
                     {formatPrice(price.value)}
                   </span>
                 </div>
