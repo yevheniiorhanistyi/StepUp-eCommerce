@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { IAuthContextType, IAuthStatus } from './types';
+import { Customer } from '@commercetools/platform-sdk';
 
 const AuthContext = createContext<IAuthContextType | undefined>(undefined);
 
@@ -16,6 +17,7 @@ export const useAuth = () => {
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setAuthentication] = useState(false);
+  const [user, setUser] = useState<Customer | null>(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -31,9 +33,20 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         }
 
         setAuthentication(data.isAuthenticated);
+
+        if (data.isAuthenticated) {
+          const userResponse = await fetch('/api/user/me');
+          if (!userResponse.ok) throw new Error('Failed to fetch user info');
+
+          const userData: Customer = await userResponse.json();
+          setUser(userData);
+        } else {
+          setUser(null);
+        }
       } catch {
         await fetch('/api/auth/logout', { method: 'DELETE' });
         setAuthentication(false);
+        setUser(null);
       }
     };
 
@@ -41,7 +54,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setAuthentication }}>
+    <AuthContext.Provider value={{ isAuthenticated, setAuthentication, user, setUser }}>
       {children}
     </AuthContext.Provider>
   );

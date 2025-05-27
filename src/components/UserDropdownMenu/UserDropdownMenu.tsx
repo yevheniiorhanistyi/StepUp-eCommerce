@@ -11,6 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { useAuth } from '@/context/AuthContext';
 
 interface UserDropdownMenuProps {
   isAuthenticated: boolean;
@@ -18,6 +19,8 @@ interface UserDropdownMenuProps {
 }
 
 const UserDropdownMenu = ({ isAuthenticated, setIsAuthenticated }: UserDropdownMenuProps) => {
+  const { user } = useAuth();
+  const userName = `${user?.firstName} ${user?.lastName}`;
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'DELETE' });
     setIsAuthenticated(false);
@@ -38,7 +41,7 @@ const UserDropdownMenu = ({ isAuthenticated, setIsAuthenticated }: UserDropdownM
       <DropdownMenuContent>
         {isAuthenticated ? (
           <>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel>{`Hi, ${userName}!`}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <Link className="flex items-center gap-2 w-full cursor-pointer" href="/profile">
@@ -47,7 +50,7 @@ const UserDropdownMenu = ({ isAuthenticated, setIsAuthenticated }: UserDropdownM
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem
-              className="flex items-center gap-2 w-full cursor-pointer"
+              className="flex items-center gap-2 w-full cursor-pointer text-[16px]/[20px]"
               onClick={handleLogout}
             >
               <LogOut />
