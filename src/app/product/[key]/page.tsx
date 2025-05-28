@@ -32,7 +32,10 @@ export default async function ProductPage(props: Props) {
 
   const mainImage = masterVariant.images?.[0];
   const price = masterVariant.prices?.[0];
-  const category = current.categories?.[0]?.obj?.name?.['en-US'] || 'Uncategorized';
+  const categories = current.categories
+    .map((category) => category.obj?.name?.['en-US'])
+    .filter((categoryName) => categoryName && categoryName !== 'All-Time Favorites')
+    .join(' / ');
 
   const sizeVariants = allVariants
     .map((variant) => {
@@ -88,7 +91,7 @@ export default async function ProductPage(props: Props) {
 
         <div className="row-start-2 md:row-start-1 md:col-start-2 flex flex-col space-y-4">
           <div>
-            <span className="text-sm text-gray-500">{category}</span>
+            <span className="text-sm text-gray-500">{categories}</span>
             <h1 className="text-2xl md:text-3xl font-bold">{current.name['en-US']}</h1>
           </div>
 
