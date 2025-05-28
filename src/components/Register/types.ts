@@ -8,7 +8,10 @@ type RegisterFormProps = Pick<
 type PersonalInfoProps = Pick<
   FormikProps<PersonalInfoFieldsValues>,
   'values' | 'errors' | 'touched' | 'handleChange' | 'handleBlur'
-> & { setFieldValue: (field: string, value: unknown) => void };
+> & {
+  setFieldValue: (field: string, value: unknown) => void;
+  withEmail?: boolean;
+};
 
 type UserAddress = {
   country: string;
@@ -54,6 +57,7 @@ type PersonalInfoFieldsValues = {
   lastName: string;
   dateOfBirth: string;
   phoneNumber: string;
+  email?: string;
 };
 
 export type {

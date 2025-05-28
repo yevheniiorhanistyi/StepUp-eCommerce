@@ -7,7 +7,8 @@ function PersonalInfoFields({
   touched,
   handleChange,
   handleBlur,
-  setFieldValue
+  setFieldValue,
+  withEmail = false
 }: PersonalInfoProps): JSX.Element {
   return (
     <>
@@ -33,6 +34,19 @@ function PersonalInfoFields({
         error={errors.lastName}
         touched={touched.lastName}
       />
+      {withEmail && (
+        <FormField
+          name="email"
+          label="Email"
+          type="email"
+          placeholder="Enter your email"
+          value={values.email ?? ''}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={errors.email}
+          touched={touched.email}
+        />
+      )}
       <FormField
         name="dateOfBirth"
         label="Date of Birth"
