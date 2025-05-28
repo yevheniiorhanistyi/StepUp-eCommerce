@@ -5,6 +5,11 @@ type RegisterFormProps = Pick<
   'values' | 'errors' | 'touched' | 'handleChange' | 'handleBlur'
 > & { setFieldValue: (field: string, value: unknown) => void };
 
+type PersonalInfoProps = Pick<
+  FormikProps<PersonalInfoFieldsValues>,
+  'values' | 'errors' | 'touched' | 'handleChange' | 'handleBlur'
+> & { setFieldValue: (field: string, value: unknown) => void };
+
 type UserAddress = {
   country: string;
   city: string;
@@ -44,4 +49,18 @@ type CommonFormProps = {
   onDatePick?: (value: string) => void;
 };
 
-export type { RegisterFormProps, UserAddress, RegisterFormFields, CommonFormProps };
+type PersonalInfoFieldsValues = {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  phoneNumber: string;
+};
+
+export type {
+  RegisterFormProps,
+  UserAddress,
+  RegisterFormFields,
+  CommonFormProps,
+  PersonalInfoFieldsValues,
+  PersonalInfoProps
+};
