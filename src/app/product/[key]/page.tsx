@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { getProductByKey } from '@/lib/commercetools';
 import { notFound } from 'next/navigation';
@@ -10,6 +9,7 @@ import {
   AccordionTrigger
 } from '@/components/ui/accordion';
 import { ProductSizeSelector } from '@/components/ProductSizeSelector/product-size-selector';
+import { ProductSlider } from '@/components/ProductSlider/ProductSlider';
 
 type Props = {
   params: { key: string };
@@ -30,7 +30,6 @@ export default async function ProductPage(props: Props) {
   const { masterVariant, variants } = current;
   const allVariants = [masterVariant, ...variants];
 
-  const mainImage = masterVariant.images?.[0];
   const price = masterVariant.prices?.[0];
   const categories = current.categories
     .map((category) => category.obj?.name?.['en-US'])
@@ -55,39 +54,7 @@ export default async function ProductPage(props: Props) {
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       <div className="grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] grid-rows-[auto_auto] gap-x-6 gap-y-4 md:gap-y-2">
-        <div className="row-start-1 col-span-1 md:col-start-1 flex flex-col sm:flex-row gap-16">
-          {masterVariant.images && masterVariant.images.length > 1 && (
-            <div className="hidden sm:flex flex-col space-y-3">
-              {masterVariant.images.slice(1).map((image, index) => (
-                <div
-                  key={index}
-                  className="relative w-20 aspect-square rounded-md overflow-hidden hover:cursor-pointer"
-                >
-                  <Image
-                    src={image.url}
-                    alt={`${current.name['en-US']} - ${index + 2}`}
-                    fill
-                    className="object-contain"
-                    sizes="80px"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-
-          {mainImage && (
-            <div className="relative rounded-lg overflow-hidden">
-              <Image
-                src={mainImage.url}
-                alt={current.name['en-US']}
-                width={600}
-                height={450}
-                className="object-contain w-full h-full"
-                priority
-              />
-            </div>
-          )}
-        </div>
+        <ProductSlider images={masterVariant.images ?? []} productName={current.name['en-US']} />
 
         <div className="row-start-2 md:row-start-1 md:col-start-2 flex flex-col space-y-4">
           <div>

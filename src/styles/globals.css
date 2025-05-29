@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/thumbs';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -118,4 +121,25 @@
   body {
     @apply bg-background text-foreground font-[family-name:var(--font-montserrat)];
   }
+}
+
+/* Swiper navigation arrows — used in ProductSlider */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 30px !important;
+  height: 30px !important;
+  background-color: rgba(128, 128, 128, 0.3);
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgba(107, 114, 128, 0.4);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: #6b7280;
+  font-size: 12px !important;
 }
