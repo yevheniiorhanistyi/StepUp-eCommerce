@@ -17,8 +17,25 @@ export const useAuth = () => {
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setAuthentication] = useState(false);
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
   const [user, setUser] = useState<Customer | null>(null);
   const [isUserLoading, setUserLoading] = useState(true);
+
+  const refreshUser = async () => {
+    setUserLoading(true);
+    try {
+      const userResponse = await fetch('/api/user/me');
+      if (!userResponse.ok) throw new Error('Failed to fetch user info');
+
+      const userData: Customer = await userResponse.json();
+      setUser(userData);
+    } catch {
+      setUser(null);
+    } finally {
+      setUserLoading(false);
+    }
+  };
+
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -35,11 +52,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         setAuthentication(data.isAuthenticated);
 
         if (data.isAuthenticated) {
-          const userResponse = await fetch('/api/user/me');
-          if (!userResponse.ok) throw new Error('Failed to fetch user info');
-
-          const userData: Customer = await userResponse.json();
-          setUser(userData);
+          await refreshUser();
         } else {
           setUser(null);
         }
@@ -49,6 +62,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         setUser(null);
       } finally {
         setUserLoading(false);
+        setIsAuthChecked(true);
       }
     };
 
@@ -57,7 +71,17 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, setAuthentication, user, setUser, isUserLoading, setUserLoading }}
+      value={{
+        isAuthenticated,
+        setAuthentication,
+        user,
+        setUser,
+        isUserLoading,
+        setUserLoading,
+        refreshUser,
+        isAuthChecked,
+        setIsAuthChecked
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -7,6 +7,9 @@ export interface IAuthContextType {
   setUser: (data: Customer | null) => void;
   isUserLoading: boolean;
   setUserLoading: (value: boolean) => void;
+  refreshUser: () => Promise<void>;
+  isAuthChecked: boolean;
+  setIsAuthChecked: (value: boolean) => void;
 }
 
 export interface IAuthStatus {
