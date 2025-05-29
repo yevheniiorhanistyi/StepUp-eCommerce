@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createTokenClient } from '@/services/commercetools/client/createTokenClient';
+import { handleErrors } from '@/components/Register/registerUtils';
 
 export async function GET(req: NextRequest) {
   try {
@@ -14,9 +15,10 @@ export async function GET(req: NextRequest) {
     const response = await client.me().get().execute();
 
     return NextResponse.json(response.body);
-  } catch (error) {
+  } catch (error: unknown) {
+    const handled = handleErrors(error);
     console.error('Failed to fetch user data:', error);
 
-    return NextResponse.json({ error: 'Failed to fetch user data' }, { status: 500 });
+    return NextResponse.json({ error: handled.message }, { status: 500 });
   }
 }
