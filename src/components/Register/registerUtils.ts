@@ -5,7 +5,7 @@ interface CommercetoolsError {
   body: ErrorResponse;
 }
 
-function handleRegError(error: unknown): Error {
+function handleErrors(error: unknown): Error {
   if (typeof error === 'object' && error !== null && 'body' in error) {
     const commercetoolsError = error as CommercetoolsError;
     const { statusCode, message, errors } = commercetoolsError.body;
@@ -17,6 +17,13 @@ function handleRegError(error: unknown): Error {
       console.error('User with this email already exists');
 
       return new Error('User with this email already exists');
+    }
+
+    const invalidPassword = errors?.find((e: ErrorObject) => e.code === 'InvalidCurrentPassword');
+    if (invalidPassword) {
+      console.error('Invalid current password');
+
+      return new Error('Invalid current password');
     }
 
     console.error(`Commercetools error ${statusCode}:`, message);
@@ -42,9 +49,9 @@ async function checkEmailAvailability(email: string): Promise<boolean> {
 
     return response.body.total === 0;
   } catch (error) {
-    const handledError = handleRegError(error);
+    const handledError = handleErrors(error);
     throw handledError;
   }
 }
 
-export { handleRegError, checkEmailAvailability };
+export { handleErrors, checkEmailAvailability };

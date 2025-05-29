@@ -4,6 +4,14 @@ const today = new Date();
 const MIN_AGE = 14;
 const minValidDate = new Date(today.getFullYear() - MIN_AGE, today.getMonth(), today.getDate());
 
+const passwordSchema = Yup.string()
+  .transform((value) => value?.trim())
+  .min(8, 'Password must be at least 8 characters long')
+  .matches(/[a-z]/, 'Must contain at least one lowercase letter')
+  .matches(/[A-Z]/, 'Must contain at least one uppercase letter')
+  .matches(/\d/, 'Must contain at least one digit')
+  .required('Password is required');
+
 const registerStep0Schema = Yup.object({
   email: Yup.string()
     .trim()
@@ -11,13 +19,7 @@ const registerStep0Schema = Yup.object({
     .matches(/^.+@.+\..+$/, 'Email address must contain a domain name')
     .required('Email is required'),
 
-  password: Yup.string()
-    .trim('Password must not contain leading or trailing spaces')
-    .min(8, 'Password must be at least 8 characters long')
-    .matches(/[a-z]/, 'Must contain at least one lowercase letter')
-    .matches(/[A-Z]/, 'Must contain at least one uppercase letter')
-    .matches(/\d/, 'Must contain at least one digit')
-    .required('Password is required'),
+  password: passwordSchema,
 
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), undefined], 'Passwords must match')
@@ -99,4 +101,4 @@ const registerStep1Schema = Yup.object({
   })
 });
 
-export { registerStep0Schema, registerStep1Schema };
+export { registerStep0Schema, registerStep1Schema, passwordSchema };

@@ -18,6 +18,8 @@ const mapFormData = (formData: RegisterFormFields): CustomerDraft => {
   } = formData;
 
   const useSame = shippingAddress.useSame === true;
+  const billingIsDefault = billingAddress.isDefault === true;
+  const shippingIsDefault = shippingAddress.isDefault === true;
 
   const mappedBillingAddress = mapAddress(billingAddress, {
     firstName: formData.firstName,
@@ -45,8 +47,8 @@ const mapFormData = (formData: RegisterFormFields): CustomerDraft => {
     lastName,
     dateOfBirth,
     addresses,
-    defaultBillingAddress: 0,
-    defaultShippingAddress: useSame ? 0 : 1,
+    defaultBillingAddress: billingIsDefault ? 0 : undefined,
+    defaultShippingAddress: shippingIsDefault ? (useSame ? 0 : 1) : undefined,
     billingAddresses: [0],
     shippingAddresses: [useSame ? 0 : 1],
     custom: {
@@ -65,8 +67,9 @@ function mapAddress(
   address: UserAddress,
   contact: { firstName: string; lastName: string; email?: string; phone?: string }
 ): Address {
-  const { useSame, ...rest } = address;
+  const { useSame, isDefault, ...rest } = address;
   void useSame;
+  void isDefault;
   const countryCode = countries.getAlpha2Code(address.country, 'en');
 
   if (!countryCode) {

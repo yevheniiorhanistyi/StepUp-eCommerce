@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 
 import { RegisterFormFields } from './types';
 import mapFormData from './FormUserData';
-import { handleRegError } from './registerUtils';
+import { handleErrors } from './registerUtils';
 
 const registerUser = async (userData: RegisterFormFields): Promise<Customer | undefined> => {
   const apiRoot = createAnonymousClient();
@@ -34,7 +34,7 @@ const registerUser = async (userData: RegisterFormFields): Promise<Customer | un
 
     return result.customer as Customer;
   } catch (error: unknown) {
-    toast.message(handleRegError(error).message);
+    toast.error(handleErrors(error).message);
   }
 };
 export default registerUser;

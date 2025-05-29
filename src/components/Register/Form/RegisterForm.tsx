@@ -15,7 +15,7 @@ import { registerStep0Schema, registerStep1Schema } from '../RegisterSchema';
 import AccountStep from './AccountStep';
 import PersonalInfoStep from './PersonalInfoStep';
 import registerUser from '../RegisterUser';
-import { handleRegError, checkEmailAvailability } from '../registerUtils';
+import { checkEmailAvailability, handleErrors } from '../registerUtils';
 
 const RegisterForm = (): JSX.Element => {
   const { setAuthentication } = useAuth();
@@ -40,13 +40,15 @@ const RegisterForm = (): JSX.Element => {
       country: '',
       city: '',
       streetName: '',
-      postalCode: ''
+      postalCode: '',
+      isDefault: true
     },
     shippingAddress: {
       country: '',
       city: '',
       streetName: '',
       postalCode: '',
+      isDefault: true,
       useSame: true
     }
   };
@@ -70,7 +72,7 @@ const RegisterForm = (): JSX.Element => {
                   toast.success(`Registration successful. Logged in as ${values.email}`);
                   router.push('/');
                 } catch (error: unknown) {
-                  toast.message(handleRegError(error).message);
+                  toast.error(handleErrors(error).message);
                 } finally {
                   setSubmitting(false);
                 }
@@ -160,7 +162,7 @@ const RegisterForm = (): JSX.Element => {
                               }
                               methods.next();
                             } catch (error) {
-                              toast.message(handleRegError(error).message);
+                              toast.message(handleErrors(error).message);
                             }
                           } else {
                             submitForm();

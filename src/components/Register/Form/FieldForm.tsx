@@ -45,7 +45,7 @@ const FormField = ({
         onBlur={onBlur}
         autoComplete={withToggle ? 'new-password' : 'off'}
         readOnly={withDatePicker}
-        aria-label={label}
+        aria-label={label ? label : name}
         className={cn(
           '!text-sm !placeholder:text-sm',
           error && touched

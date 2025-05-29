@@ -44,7 +44,7 @@ function renderAddressFields(
   props: RegisterFormProps,
   label: 'billingAddress' | 'shippingAddress'
 ): JSX.Element {
-  const { values, errors, touched, handleChange, handleBlur } = props;
+  const { values, errors, touched, handleChange, handleBlur, setFieldValue } = props;
   const addressFields = [
     { name: 'country', label: 'Country', placeholder: 'Enter your country' },
     { name: 'city', label: 'City', placeholder: 'Enter your city' },
@@ -72,6 +72,20 @@ function renderAddressFields(
           />
         );
       })}
+      <div className="flex grow items-center justify-between">
+        <label htmlFor={`${label}isDefault`} className="font-medium">
+          Use address as default
+        </label>
+        <Switch
+          className="hover:cursor-pointer"
+          id={`${label}isDefault`}
+          name="isDefault"
+          checked={values[label].isDefault}
+          onCheckedChange={(checked) => {
+            setFieldValue(`${label}.isDefault`, checked);
+          }}
+        />
+      </div>
     </fieldset>
   );
 }
