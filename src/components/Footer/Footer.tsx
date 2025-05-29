@@ -11,8 +11,8 @@ const Footer = (): JSX.Element => {
   return (
     <footer className="px-4 sm:px-10 py-10 grow-0 shrink-0 basis-auto bg-neutral-950 text-amber-50">
       <div className="w-full max-w-[1440px] mx-auto flex flex-col">
-        <div className="flex flex-wrap justify-between gap-8 xl:flex-nowrap">
-          <div className="flex flex-col gap-2 sm:gap-3 min-w-[288px] max-w-[560px] order-1 xl:order-none flex-[1_1_400px] xl:flex-[1_1_40%]">
+        <div className="flex flex-wrap justify-center gap-8 xl:flex-nowrap">
+          <div className="flex flex-col gap-2 sm:gap-3 min-w-[288px] min-[768px]:max-w-[560px] order-1 xl:order-none flex-[1_1_45%] max-[700px]:flex-[1_1_100%]">
             <h3 className="font-bold text-lg sm:text-xl">
               StepUp — More than sneakers. A lifestyle.
             </h3>
@@ -33,7 +33,7 @@ const Footer = (): JSX.Element => {
             ))}
           </ul>
 
-          <div className="flex flex-col gap-2 sm:gap-3 min-w-[288px] max-w-[560px] order-2 xl:order-none flex-[1_1_400px] xl:flex-[1_1_40%]">
+          <div className="flex flex-col gap-2 sm:gap-3 min-w-[288px] min-[768px]:max-w-[560px]  order-2 xl:order-none flex-[1_1_45%] max-[700px]:flex-[1_1_100%]">
             <h2 className="font-bold text-lg sm:text-xl">Subscribe to our Newsletter</h2>
             <p className="text-sm text-amber-50/80">
               Stay in step with new releases, style tips, and special deals — just for you.

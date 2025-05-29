@@ -50,7 +50,7 @@ const UserDropdownMenu = ({ isAuthenticated, setIsAuthenticated }: UserDropdownM
           variant="ghost"
           size="icon"
         >
-          <span className="uppercase text-sm font-semibold text-[16px]">
+          <span className="uppercase text-[16px]/[16px] font-semibold">
             {getInitials(userName)}
           </span>
         </Button>
