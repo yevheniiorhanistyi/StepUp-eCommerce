@@ -2,6 +2,7 @@
 
 import { Category } from '@commercetools/platform-sdk';
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { getAllCategories } from '@/services/getAllCategories';
 
 const CategoryDataContext = createContext<{ categoryData: Category[] }>({
   categoryData: []
@@ -22,10 +23,7 @@ export const CategoryDataProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const fetchCategoryData = async () => {
       try {
-        const res = await fetch('/api/category');
-        if (!res.ok) throw new Error('Failed to fetch category data');
-
-        const data: Category[] = await res.json();
+        const data = await getAllCategories();
         setCategoryData(data);
       } catch {
         setCategoryData([]);
