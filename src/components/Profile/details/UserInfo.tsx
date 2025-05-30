@@ -74,7 +74,7 @@ const UserInfo = (): JSX.Element => {
   };
 
   return (
-    <Card className="flex align-middle justify-center basis-1/2 max-w-[400px] min-w-[270px] py-0 p-5 gap-6">
+    <Card className="flex align-middle justify-center basis-1/2 max-w-[400px] min-w-[270px] py-0 p-5 gap-6 max-[701px]:min-w-[400px] max-[456px]:min-w-full">
       <CardHeader className="px-0 w-full">
         <CardTitle className="min-[975px]:text-[24px]/[24px] text-[20px]/[20px] font-bold">
           Personal Information
