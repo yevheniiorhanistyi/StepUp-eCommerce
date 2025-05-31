@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { getProductByKey } from '@/lib/commercetools';
+import { getProductByKey } from '@/services/getProductByKey';
 import { notFound } from 'next/navigation';
 import { formatPrice } from '@/lib/price-utils';
 import {

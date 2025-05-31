@@ -1,6 +1,6 @@
-import { createAnonymousClient } from '@/services/commercetools/client/createAnonymousClient';
+import { createCredentialsClient } from '@/services/commercetools/client/createCredentialsClient';
 
-const apiRoot = createAnonymousClient();
+const apiRoot = createCredentialsClient();
 
 export const getProductByKey = async (key: string) => {
   try {
