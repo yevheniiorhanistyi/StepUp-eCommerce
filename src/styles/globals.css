@@ -126,8 +126,8 @@
 /* Swiper navigation arrows — used in ProductSlider */
 .swiper-button-next,
 .swiper-button-prev {
-  width: 30px !important;
-  height: 30px !important;
+  width: 34px !important;
+  height: 34px !important;
   background-color: rgba(128, 128, 128, 0.3);
   border-radius: 50%;
   transition: background-color 0.2s;
@@ -142,4 +142,9 @@
 .swiper-button-prev::after {
   color: #6b7280;
   font-size: 12px !important;
+}
+
+.swiper-slide {
+  width: 100% !important;
+  height: 100% !important;
 }

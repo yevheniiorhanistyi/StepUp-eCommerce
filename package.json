@@ -18,7 +18,7 @@
     "@commercetools/sdk-client-v2": "^3.0.0",
     "@commercetools/ts-client": "^3.3.0",
     "@radix-ui/react-accordion": "^1.2.11",
-    "@radix-ui/react-dialog": "^1.1.11",
+    "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-dropdown-menu": "^2.1.12",
     "@radix-ui/react-label": "^2.1.6",
     "@radix-ui/react-navigation-menu": "^1.2.10",
