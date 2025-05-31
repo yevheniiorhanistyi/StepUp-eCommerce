@@ -27,7 +27,7 @@ const SearchInput = ({ searchParams, setSearchParams }: ICommonCatalogProps) => 
 
     return () => clearTimeout(delayInputTimeoutId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedInputValue, 500]);
+  }, [debouncedInputValue, isTyping]);
 
   return (
     <div className="relative w-full">
