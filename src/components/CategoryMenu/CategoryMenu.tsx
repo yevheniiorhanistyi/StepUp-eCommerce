@@ -73,8 +73,8 @@ const CategoryMenu = ({ categorySlug, onCategoryClick }: ICategoryMenuProps) => 
                         role="button"
                         onClick={() => onCategoryClick(child.slug['en-US'])}
                         className={cn(
-                          'flex text-sm text-muted-foreground hover:text-primary hover:underline text-left w-1/2 cursor-pointer',
-                          categorySlug === child.slug['en-US'] && 'text-primary font-semibold'
+                          'flex font-medium text-sm text-primary hover:text-primary hover:underline text-left w-1/2 cursor-pointer',
+                          categorySlug === child.slug['en-US'] && 'font-semibold'
                         )}
                       >
                         {child.name['en-US']}
