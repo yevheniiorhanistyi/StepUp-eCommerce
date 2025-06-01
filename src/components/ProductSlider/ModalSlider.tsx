@@ -36,7 +36,7 @@ export function ModalSlider({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-5xl w-full p-4 space-y-4">
+      <DialogContent className="w-[calc(100%-1rem)] max-w-[95rem] sm:max-w-[85vw] md:max-w-[70vw] space-y-4 p-4">
         <DialogClose asChild>
           <button className="absolute top-2 right-2 z-50" onClick={onClose} aria-label="Close">
             <X className="w-8 h-8" />
@@ -50,7 +50,7 @@ export function ModalSlider({
           </DialogDescription>
         </div>
 
-        <div className="relative w-full h-[80vh] aspect-[4/3]">
+        <div className="relative w-full max-h-[80vh] aspect-[4/3] sm:aspect-[16/9]">
           <Swiper
             modules={[Navigation, Pagination]}
             navigation
