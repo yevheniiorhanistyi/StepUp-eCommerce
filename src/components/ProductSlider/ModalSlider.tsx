@@ -38,7 +38,11 @@ export function ModalSlider({
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="w-[calc(100%-1rem)] max-w-[95rem] sm:max-w-[85vw] md:max-w-[70vw] space-y-4 p-4">
         <DialogClose asChild>
-          <button className="absolute top-2 right-2 z-50" onClick={onClose} aria-label="Close">
+          <button
+            className="absolute top-2 right-2 z-50 cursor-pointer rounded-xl hover:bg-muted active:scale-90"
+            onClick={onClose}
+            aria-label="Close"
+          >
             <X className="w-8 h-8" />
           </button>
         </DialogClose>
