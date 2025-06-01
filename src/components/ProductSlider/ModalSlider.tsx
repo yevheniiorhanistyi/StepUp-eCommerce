@@ -10,9 +10,10 @@ import {
 import { X } from 'lucide-react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import type { Swiper as SwiperType } from 'swiper';
 import { useRef } from 'react';
 
@@ -51,8 +52,9 @@ export function ModalSlider({
 
         <div className="relative w-full h-[80vh] aspect-[4/3]">
           <Swiper
-            modules={[Navigation]}
+            modules={[Navigation, Pagination]}
             navigation
+            pagination={{ clickable: true }}
             initialSlide={initialIndex}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
