@@ -11,7 +11,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
     }
 
-    const { version, firstName, lastName, dateOfBirth, email, phoneNumber } = await req.json();
+    const {
+      version,
+      firstName,
+      lastName,
+      dateOfBirth,
+      email,
+      phoneNumber,
+      actions: addressActions
+    } = await req.json();
 
     if (typeof version !== 'number') {
       return NextResponse.json({ error: 'Missing version' }, { status: 400 });
@@ -37,6 +45,14 @@ export async function POST(req: NextRequest) {
         value: phoneNumber
       });
 
+    if (Array.isArray(addressActions)) {
+      for (const action of addressActions) {
+        if (action && typeof action.action === 'string') {
+          actions.push(action);
+        }
+      }
+    }
+
     if (actions.length === 0) {
       return NextResponse.json({ error: 'No update fields provided' }, { status: 400 });
     }
@@ -53,7 +69,7 @@ export async function POST(req: NextRequest) {
       })
       .execute();
 
-    return NextResponse.json(response.body);
+    return NextResponse.json({ user: response.body });
   } catch (error: unknown) {
     const handled = handleErrors(error);
     console.error('Profile update error:', error);

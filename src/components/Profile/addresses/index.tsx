@@ -1,0 +1,68 @@
+'use client';
+
+import { useAuth } from '@/context/AuthContext';
+import { AddressesSection } from './AddressSection';
+import { updateUserAddresses } from './updateAddress';
+import { Address } from '@commercetools/platform-sdk';
+
+const UserAddresses = (): JSX.Element => {
+  const { user, refreshUser } = useAuth();
+
+  if (!user) return <div>Loading...</div>;
+
+  const handleEdit = async (addressId: string, changes: Partial<Address>) => {
+    await updateUserAddresses({
+      version: user.version,
+      updatedAddress: { id: addressId, changes }
+    });
+    refreshUser();
+  };
+
+  const handleDelete = async (addressId: string) => {
+    await updateUserAddresses({
+      version: user.version,
+      addressIdToRemove: addressId
+    });
+    refreshUser();
+  };
+
+  const handleSetDefault = async (type: 'billing' | 'shipping', addressId: string) => {
+    await updateUserAddresses({
+      version: user.version,
+      ...(type === 'billing'
+        ? { defaultBillingAddressId: addressId }
+        : { defaultShippingAddressId: addressId })
+    });
+    refreshUser();
+  };
+
+  const billingAddresses = user?.addresses.filter((address) =>
+    user?.billingAddressIds?.includes(address.id ?? '')
+  );
+  const shippingAddresses = user?.addresses.filter((address) =>
+    user?.shippingAddressIds?.includes(address.id ?? '')
+  );
+
+  return (
+    <div className="flex  min-[975px]:justify-start w-full min-[1180px]:gap-20 gap-8 max-[768px]:gap-4 max-[701px]:flex-col max-[701px]:justify-center max-[701px]:items-center">
+      <AddressesSection
+        type="billing"
+        addresses={billingAddresses || []}
+        defaultAddressId={user.defaultBillingAddressId}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        onSetDefault={(id) => handleSetDefault('billing', id)}
+      />
+      <AddressesSection
+        type="shipping"
+        addresses={shippingAddresses}
+        defaultAddressId={user.defaultShippingAddressId}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        onSetDefault={(id) => handleSetDefault('shipping', id)}
+      />
+    </div>
+  );
+};
+
+export default UserAddresses;
