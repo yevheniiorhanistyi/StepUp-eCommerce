@@ -90,14 +90,14 @@ export const SIZES = [
 ];
 
 export const COLORS = [
-  { label: 'Black', value: 'Black' },
-  { label: 'Red', value: 'Red' },
-  { label: 'Blue', value: 'Blue' },
-  { label: 'Green', value: 'Green' },
-  { label: 'Pink', value: 'Pink' },
-  { label: 'White', value: 'White' },
-  { label: 'Gray', value: 'Gray' },
-  { label: 'Yellow', value: 'Yellow' }
+  { label: 'Black', value: '#000000' },
+  { label: 'Red', value: '#B22222' },
+  { label: 'Blue', value: '#2A52BE' },
+  { label: 'Green', value: '#407921' },
+  { label: 'Pink', value: '#D990A3' },
+  { label: 'White', value: '#FFFFFF' },
+  { label: 'Gray', value: '#B0B0B0' },
+  { label: 'Yellow', value: '#F0C300' }
 ];
 
 export const LANGUAGE_CODE = 'en-US';

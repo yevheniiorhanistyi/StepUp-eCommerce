@@ -40,18 +40,18 @@ const ColorSelectorGroup = ({
         <CollapsibleContent>
           <div className="flex flex-wrap gap-3 p-3">
             {labelList.map((item) => {
-              const isActive = (searchParams[property] || []).includes(item.value);
+              const isActive = (searchParams[property] || []).includes(item.label);
 
               return (
                 <div key={item.value} className="flex flex-col items-center gap-1 w-12">
                   <button
                     type="button"
-                    onClick={() => toggleColor(item.value)}
+                    onClick={() => toggleColor(item.label)}
                     className={cn(
                       'w-9 h-9 rounded-full transition-all duration-200 border',
                       'flex items-center justify-center cursor-pointer',
                       isActive
-                        ? 'ring-1 ring-black border-black'
+                        ? 'ring-2 ring-offset-1 ring-black'
                         : 'border-zinc-300 hover:border-black'
                     )}
                     style={{ backgroundColor: item.value.toLowerCase() }}
