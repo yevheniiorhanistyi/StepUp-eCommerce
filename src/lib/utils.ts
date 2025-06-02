@@ -10,3 +10,14 @@ export const getEnvVar = (value: string | undefined, name: string): string => {
 
   return value;
 };
+
+export const getCookieValue = (name: string) => {
+  const matches = document.cookie.match(
+    new RegExp(`(?:^|; )${name.replace(/([.$?*|{}[\]\\/+^])/g, '\\$1')}=([^;]*)`)
+  );
+
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+};
+
+export const getInitials = (firstName: string, lastName: string) =>
+  `${(firstName?.[0] ?? '').toUpperCase()}${(lastName?.[0] ?? '').toUpperCase()}`;
