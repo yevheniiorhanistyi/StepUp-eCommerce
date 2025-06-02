@@ -57,7 +57,10 @@ const FormField = ({
             onBlur?.({ target: { name } } as React.FocusEvent<HTMLInputElement>);
           }}
         >
-          <SelectTrigger className="w-full border border-gray-300 p-2 rounded-md text-sm">
+          <SelectTrigger
+            className="w-full border border-gray-300 p-2 rounded-md text-sm"
+            aria-label={label}
+          >
             <SelectValue placeholder="Select a country" />
           </SelectTrigger>
           <SelectContent>

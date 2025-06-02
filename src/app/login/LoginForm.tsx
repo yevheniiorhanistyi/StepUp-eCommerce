@@ -15,7 +15,7 @@ import LoginSchema from './LoginSchema';
 
 const LoginForm = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
-  const { setAuthentication } = useAuth();
+  const { setAuthentication, refreshUser } = useAuth();
   const router = useRouter();
 
   return (
@@ -42,6 +42,7 @@ const LoginForm = (): JSX.Element => {
           setAuthentication(true);
           toast.success(`Logged in as ${values.email}`);
           router.push('/');
+          await refreshUser();
         } catch (error) {
           if (error instanceof Error) {
             toast.error(error.message || 'Login failed.');

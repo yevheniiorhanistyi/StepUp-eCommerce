@@ -2,6 +2,9 @@ import { Switch } from '@/components/ui/switch';
 import { RegisterFormProps } from '../types';
 import FormField from './FieldForm';
 import PersonalInfoFields from './PersonalInfoFields';
+import { countries } from '@/constants/constants';
+
+const countryOptions = countries.map((c) => ({ value: c.code, label: c.name }));
 
 function PersonalInfoStep(props: RegisterFormProps): JSX.Element {
   const { values, errors, touched, handleChange, handleBlur, setFieldValue } = props;
@@ -69,6 +72,8 @@ function renderAddressFields(
             onBlur={handleBlur}
             error={errors[label]?.[field.name]}
             touched={touched[label]?.[field.name]}
+            asSelect={field.name === 'country'}
+            options={field.name === 'country' ? countryOptions : undefined}
           />
         );
       })}

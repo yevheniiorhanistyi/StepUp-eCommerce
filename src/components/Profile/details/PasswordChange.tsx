@@ -21,7 +21,7 @@ const validationSchema = Yup.object({
 });
 
 const PasswordChange = (): JSX.Element => {
-  const { user } = useAuth();
+  const { user, refreshUser } = useAuth();
   const [showCurrent, setShowCurrent] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -66,6 +66,7 @@ const PasswordChange = (): JSX.Element => {
                 throw new Error(err.message || 'Failed to reauthenticate');
               }
 
+              await refreshUser();
               resetForm();
               toast.success('Password updated successfully!');
             } catch (error: unknown) {
