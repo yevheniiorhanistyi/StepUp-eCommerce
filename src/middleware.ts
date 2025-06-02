@@ -9,9 +9,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
+  if (!isAuthenticated && pathname === '/profile') {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/login', '/register']
+  matcher: ['/login', '/register', '/profile']
 };
