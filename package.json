@@ -36,6 +36,7 @@
     "embla-carousel-react": "^8.6.0",
     "formik": "^2.4.6",
     "framer-motion": "^12.11.0",
+    "framer-motion": "^12.11.0",
     "i18n-iso-countries": "^7.14.0",
     "lucide-react": "^0.503.0",
     "next": "15.3.1",
@@ -43,6 +44,7 @@
     "react": "^18",
     "react-dom": "^18",
     "sonner": "^2.0.3",
+    "swiper": "^11.2.8",
     "tailwind-merge": "^3.2.0",
     "vaul": "^1.1.2",
     "yup": "^1.6.1"
