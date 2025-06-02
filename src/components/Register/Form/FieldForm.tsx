@@ -5,6 +5,13 @@ import { Eye, EyeOff, Calendar } from 'lucide-react';
 import { ErrorMessage } from 'formik';
 import { CommonFormProps } from '../types';
 import { useRef } from 'react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select';
 
 const FormField = ({
   name,
@@ -20,7 +27,9 @@ const FormField = ({
   show = false,
   onToggle,
   withDatePicker = false,
-  onDatePick
+  onDatePick,
+  asSelect = false,
+  options = []
 }: CommonFormProps): JSX.Element => {
   const stringValue = typeof value === 'boolean' ? String(value) : value || '';
 
@@ -35,26 +44,51 @@ const FormField = ({
       <label htmlFor={name} className="mb-1 font-medium text-sm">
         {label}
       </label>
-      <Input
-        id={name}
-        name={name}
-        type={withToggle ? (show ? 'text' : 'password') : withDatePicker ? 'text' : type}
-        placeholder={placeholder}
-        value={stringValue}
-        onChange={onChange}
-        onBlur={onBlur}
-        autoComplete={withToggle ? 'new-password' : 'off'}
-        readOnly={withDatePicker}
-        aria-label={label}
-        className={cn(
-          '!text-sm !placeholder:text-sm',
-          error && touched
-            ? 'border-red-500 focus:border-red-500'
-            : 'border-gray-300 focus:border-black',
-          (withToggle || withDatePicker) && 'pr-10'
-        )}
-      />
-
+      {asSelect ? (
+        <Select
+          value={stringValue}
+          onValueChange={(val) => {
+            onChange({
+              target: {
+                name,
+                value: val
+              }
+            } as React.ChangeEvent<HTMLInputElement>);
+            onBlur?.({ target: { name } } as React.FocusEvent<HTMLInputElement>);
+          }}
+        >
+          <SelectTrigger className="w-full border border-gray-300 p-2 rounded-md text-sm">
+            <SelectValue placeholder="Select a country" />
+          </SelectTrigger>
+          <SelectContent>
+            {options?.map((opt) => (
+              <SelectItem key={opt.value} value={opt.value}>
+                {opt.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      ) : (
+        <Input
+          id={name}
+          name={name}
+          type={withToggle ? (show ? 'text' : 'password') : withDatePicker ? 'text' : type}
+          placeholder={placeholder}
+          value={stringValue}
+          onChange={onChange}
+          onBlur={onBlur}
+          autoComplete={withToggle ? 'new-password' : 'off'}
+          readOnly={withDatePicker}
+          aria-label={label ? label : name}
+          className={cn(
+            '!text-sm !placeholder:text-sm',
+            error && touched
+              ? 'border-red-500 focus:border-red-500'
+              : 'border-gray-300 focus:border-black',
+            (withToggle || withDatePicker) && 'pr-10'
+          )}
+        />
+      )}
       {withToggle && onToggle && (
         <Button
           type="button"

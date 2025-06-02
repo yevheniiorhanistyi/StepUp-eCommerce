@@ -6,6 +6,18 @@ jest.mock('@/components/Register/Form/RegisterForm', () => ({
   default: jest.fn(() => <div>RegisterForm</div>)
 }));
 
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    replace: jest.fn()
+  })
+}));
+
+jest.mock('@/context/AuthContext', () => ({
+  useAuth: () => ({
+    isAuthenticated: false
+  })
+}));
+
 describe('Register', () => {
   it('should render all components', () => {
     render(<Register />);
