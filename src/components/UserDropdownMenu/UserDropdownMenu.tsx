@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { CircleUserRound, KeyRound, UserRoundPlus, User, LogOut } from 'lucide-react';
 import { Button } from '../ui/button';
-import { getCookieValue, getInitials } from '@/lib/utils';
+import { getInitials } from '@/lib/utils';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +14,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { useAuth } from '@/context/AuthContext';
 
 interface UserDropdownMenuProps {
   isAuthenticated: boolean;
@@ -21,17 +22,11 @@ interface UserDropdownMenuProps {
 }
 
 const UserDropdownMenu = ({ isAuthenticated, setIsAuthenticated }: UserDropdownMenuProps) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const { user } = useAuth();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      setFirstName(getCookieValue('user_first_name') || '');
-      setLastName(getCookieValue('user_last_name') || '');
-      setEmail(getCookieValue('user_email') || '');
-    }
-  }, [isAuthenticated]);
+  const firstName = user?.firstName || '';
+  const lastName = user?.lastName || '';
+  const email = user?.email || '';
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'DELETE' });
@@ -61,7 +56,7 @@ const UserDropdownMenu = ({ isAuthenticated, setIsAuthenticated }: UserDropdownM
       <DropdownMenuSeparator />
       <DropdownMenuItem
         onClick={handleLogout}
-        className="flex items-center gap-2 px-5 mb-1 cursor-pointer"
+        className="flex items-center gap-2 px-5 cursor-pointer text-[16px]/[20px]"
       >
         <LogOut />
         <span>Log out</span>

@@ -4,6 +4,7 @@ import { useAuth } from '@/context/AuthContext';
 import { AddressesSection } from './AddressSection';
 import { updateUserAddresses } from './updateAddress';
 import { Address } from '@commercetools/platform-sdk';
+import { toast } from 'sonner';
 
 const UserAddresses = (): JSX.Element => {
   const { user, refreshUser } = useAuth();
@@ -16,6 +17,7 @@ const UserAddresses = (): JSX.Element => {
       updatedAddress: { id: addressId, changes }
     });
     refreshUser();
+    toast.success('Address successfully updated.');
   };
 
   const handleDelete = async (addressId: string) => {
@@ -24,6 +26,7 @@ const UserAddresses = (): JSX.Element => {
       addressIdToRemove: addressId
     });
     refreshUser();
+    toast.success('Address successfully deleted.');
   };
 
   const handleSetDefault = async (type: 'billing' | 'shipping', addressId: string) => {
@@ -34,6 +37,7 @@ const UserAddresses = (): JSX.Element => {
         : { defaultShippingAddressId: addressId })
     });
     refreshUser();
+    toast.success('Address successfully set default.');
   };
 
   const billingAddresses = user?.addresses.filter((address) =>

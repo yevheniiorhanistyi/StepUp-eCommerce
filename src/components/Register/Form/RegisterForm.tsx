@@ -18,7 +18,7 @@ import registerUser from '../RegisterUser';
 import { checkEmailAvailability, handleErrors } from '../registerUtils';
 
 const RegisterForm = (): JSX.Element => {
-  const { setAuthentication } = useAuth();
+  const { setAuthentication, refreshUser } = useAuth();
   const router = useRouter();
 
   const steps = [
@@ -71,6 +71,7 @@ const RegisterForm = (): JSX.Element => {
                   setAuthentication(true);
                   toast.success(`Registration successful. Logged in as ${values.email}`);
                   router.push('/');
+                  await refreshUser();
                 } catch (error: unknown) {
                   toast.error(handleErrors(error).message);
                 } finally {

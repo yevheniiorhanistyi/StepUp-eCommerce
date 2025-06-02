@@ -124,7 +124,7 @@ const AddressCard = ({ address, isDefault, onDelete, onSetDefault }: Props) => {
           className={`flex gap-2 items-start justify-center h-full ${!isDefault ? 'text-muted-foreground' : ''}`}
         >
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <DialogTrigger asChild>
+            <DialogTrigger className="cursor-pointer" asChild>
               <Button variant="ghost" className="cursor-pointer min-h-[40px]">
                 <Pencil className={`w-6 h-6 cursor-pointer`} />
               </Button>
