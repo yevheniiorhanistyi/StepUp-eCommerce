@@ -5,11 +5,20 @@ type RegisterFormProps = Pick<
   'values' | 'errors' | 'touched' | 'handleChange' | 'handleBlur'
 > & { setFieldValue: (field: string, value: unknown) => void };
 
+type PersonalInfoProps = Pick<
+  FormikProps<PersonalInfoFieldsValues>,
+  'values' | 'errors' | 'touched' | 'handleChange' | 'handleBlur'
+> & {
+  setFieldValue: (field: string, value: unknown) => void;
+  withEmail?: boolean;
+};
+
 type UserAddress = {
   country: string;
   city: string;
   streetName: string;
   postalCode: string;
+  isDefault: boolean;
   useSame?: boolean;
   [key: string]: string | boolean | undefined;
 };
@@ -32,8 +41,8 @@ type CommonFormProps = {
   type?: string;
   placeholder?: string;
   value: string | boolean | undefined;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
-  onBlur: React.FocusEventHandler<HTMLInputElement>;
+  onChange: React.ChangeEventHandler<HTMLElement>;
+  onBlur: React.FocusEventHandler<HTMLElement>;
   error?: string;
   touched?: boolean;
   withToggle?: boolean;
@@ -42,6 +51,23 @@ type CommonFormProps = {
   withDatePicker?: boolean;
   autoComplete?: string;
   onDatePick?: (value: string) => void;
+  asSelect?: boolean;
+  options?: { value: string; label: string }[];
 };
 
-export type { RegisterFormProps, UserAddress, RegisterFormFields, CommonFormProps };
+type PersonalInfoFieldsValues = {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  phoneNumber: string;
+  email?: string;
+};
+
+export type {
+  RegisterFormProps,
+  UserAddress,
+  RegisterFormFields,
+  CommonFormProps,
+  PersonalInfoFieldsValues,
+  PersonalInfoProps
+};
