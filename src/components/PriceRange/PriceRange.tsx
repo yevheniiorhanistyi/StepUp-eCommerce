@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ICommonCatalogProps } from '@/types/types';
 import { Slider } from '@/components/ui/slider';
 
@@ -8,6 +8,11 @@ const PriceRange = ({ searchParams, setSearchParams }: ICommonCatalogProps) => {
 
     return [prices?.[0] ?? 0, prices?.[1] ?? 1000];
   });
+
+  useEffect(() => {
+    const prices = searchParams.prices;
+    setRange([prices?.[0] ?? 0, prices?.[1] ?? 1000]);
+  }, [searchParams.prices]);
 
   const handleSliderChange = (val: number[]) => {
     setRange(val as [number, number]);
