@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+@import 'swiper/css/thumbs';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -67,7 +71,7 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
+  --sidebar: oklch(1 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
@@ -118,4 +122,64 @@
   body {
     @apply bg-background text-foreground font-[family-name:var(--font-montserrat)];
   }
+}
+
+/* Swiper navigation arrows — used in ProductSlider */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 34px !important;
+  height: 34px !important;
+  background-color: rgba(128, 128, 128, 0.3);
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgba(107, 114, 128, 0.4);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: #6b7280;
+  font-size: 12px !important;
+}
+
+.swiper-slide {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: rgb(28, 28, 28) !important;
+}
+
+/* Swiper navigation arrows — used in ProductSlider */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 34px !important;
+  height: 34px !important;
+  background-color: rgba(128, 128, 128, 0.3);
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgba(107, 114, 128, 0.4);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: #6b7280;
+  font-size: 12px !important;
+}
+
+.swiper-slide {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: rgb(28, 28, 28) !important;
 }

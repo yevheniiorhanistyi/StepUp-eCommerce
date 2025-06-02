@@ -41,7 +41,7 @@ const AllTimeFavorites = (): JSX.Element => {
 
             return (
               <Link
-                href="/catalog"
+                href={`/product/${product.key}`}
                 key={product.id}
                 className="max-w-[364px] xl:max-w-[250px] w-full justify-self-center"
               >

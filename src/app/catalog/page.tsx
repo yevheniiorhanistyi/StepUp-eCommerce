@@ -1,8 +1,13 @@
+import { Suspense } from 'react';
+
+import SpinnerFallback from '@/components/SpinnerFallback/SpinnerFallback';
+import CatalogClient from '@/components/CatalogClient/CatalogClient';
+
 const Catalog = (): JSX.Element => {
   return (
-    <main className="flex items-center justify-center p-8 sm:p-20">
-      <h1 className="text-2xl font-bold">Catalog Page</h1>
-    </main>
+    <Suspense fallback={<SpinnerFallback />}>
+      <CatalogClient />
+    </Suspense>
   );
 };
 

@@ -10,7 +10,6 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 import { Eye, EyeOff } from 'lucide-react';
-import { TOKEN_AUTH_INFO } from '@/constants/constants';
 
 import LoginSchema from './LoginSchema';
 
@@ -42,7 +41,6 @@ const LoginForm = (): JSX.Element => {
 
           setAuthentication(true);
           toast.success(`Logged in as ${values.email}`);
-          console.warn(TOKEN_AUTH_INFO);
           router.push('/');
         } catch (error) {
           if (error instanceof Error) {
