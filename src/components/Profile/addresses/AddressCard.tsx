@@ -140,9 +140,9 @@ const AddressCard = ({ address, isDefault, onDelete, onSetDefault }: Props) => {
                 onSubmit={handleEdit}
               >
                 {(formik) => (
-                  <form onSubmit={formik.handleSubmit} className="space-y-4">
+                  <form onSubmit={formik.handleSubmit} className="flex flex-col gap-5">
                     <AddressFields {...formik} />
-                    <Button type="submit" className="w-full cursor-pointer duration-300">
+                    <Button type="submit" className="w-full cursor-pointer duration-300 mt-1">
                       Save
                     </Button>
                   </form>

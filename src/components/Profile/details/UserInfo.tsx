@@ -112,9 +112,9 @@ const UserInfo = (): JSX.Element => {
               onSubmit={handleUpdate}
             >
               {(formik) => (
-                <form onSubmit={formik.handleSubmit} className="space-y-4">
+                <form onSubmit={formik.handleSubmit} className="flex flex-col gap-5">
                   <PersonalInfoFields {...formik} withEmail />
-                  <Button type="submit" className="w-full cursor-pointer duration-300">
+                  <Button type="submit" className="w-full cursor-pointer duration-300 mt-1">
                     Save
                   </Button>
                 </form>

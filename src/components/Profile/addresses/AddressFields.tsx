@@ -22,7 +22,7 @@ function AddressFields({
   ];
 
   return (
-    <fieldset className="flex gap-7 flex-wrap">
+    <fieldset className="flex gap-5 flex-wrap">
       <legend className="basis-full text-[16px] font-bold w-full border-b-2 border-b-black not-last:mb-2.5">
         Address Information
       </legend>
