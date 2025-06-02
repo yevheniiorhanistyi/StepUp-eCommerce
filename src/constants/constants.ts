@@ -1,3 +1,5 @@
+import { ISearchParams } from '@/types/types';
+
 export const ANNOUNCEMENT_TEXTS = {
   seasonalSale: {
     text: ['Seasonal savings are here! Shop our bestsellers before they are gone!']
@@ -36,17 +38,6 @@ export const SOCIAL_LOGOS = [
   'twitter.png'
 ];
 
-export const TOKEN_AUTH_INFO = `
-Уважаемый проверяющий!
-
-[INFO] Это приложение создано с использованием Next.js (App Router).
-
-Access token от Commercetools запрашивается на сервере через API Route (/api/auth/login) с использованием SDK Commercetools. 
-SDK автоматически отправляет запрос к /customers/token, после чего токен сохраняется в HttpOnly cookie для безопасного использования.
-
-Поскольку запрос выполняется на серверной стороне, он не отображается во вкладке Network.
-Проверить наличие токена можно во вкладке Application → Cookies → [домен].`;
-
 export const countries = [
   { code: 'AT', name: 'Austria' },
   { code: 'BE', name: 'Belgium' },
@@ -70,3 +61,67 @@ export const countries = [
   { code: 'SK', name: 'Slovakia' },
   { code: 'US', name: 'United States' }
 ];
+
+export const ITEMS_PER_PAGE = 6;
+
+export const INITIAL_SEARCH_PARAMS: ISearchParams = {
+  offset: 0,
+  limit: ITEMS_PER_PAGE,
+  term: '',
+  sort: 'price asc',
+  colors: [],
+  sizes: [],
+  brands: [],
+  prices: [0, 1000]
+};
+
+export const SORTING_OPTIONS = [
+  { label: 'Name: A - Z', value: 'name.en-us asc' },
+  { label: 'Name: Z - A', value: 'name.en-us desc' },
+  { label: 'Price: Low - High', value: 'price asc' },
+  { label: 'Price: High - Low', value: 'price desc' }
+];
+
+export const BRANDS = [
+  { label: 'Addidas', value: 'Addidas' },
+  { label: 'Nike', value: 'Nike' },
+  { label: 'ECCO', value: 'ECCO' },
+  { label: 'Fila', value: 'Fila' },
+  { label: 'Puma', value: 'Puma' },
+  { label: 'Reebok', value: 'Reebok' },
+  { label: 'Lacoste', value: 'Lacoste' },
+  { label: 'New Balance', value: 'New Balance' },
+  { label: 'Ellesse', value: 'Ellesse' },
+  { label: 'Converse', value: 'Converse' },
+  { label: 'Asics', value: 'Asics' }
+];
+
+export const SIZES = [
+  { label: '33', value: '33' },
+  { label: '34', value: '34' },
+  { label: '35', value: '35' },
+  { label: '36', value: '36' },
+  { label: '37', value: '37' },
+  { label: '38', value: '38' },
+  { label: '39', value: '39' },
+  { label: '40', value: '40' },
+  { label: '41', value: '41' },
+  { label: '42', value: '42' },
+  { label: '43', value: '43' },
+  { label: '44', value: '44' },
+  { label: '45', value: '45' },
+  { label: '46', value: '46' }
+];
+
+export const COLORS = [
+  { label: 'Black', value: '#000000' },
+  { label: 'Red', value: '#B22222' },
+  { label: 'Blue', value: '#2A52BE' },
+  { label: 'Green', value: '#407921' },
+  { label: 'Pink', value: '#D990A3' },
+  { label: 'White', value: '#FFFFFF' },
+  { label: 'Gray', value: '#B0B0B0' },
+  { label: 'Yellow', value: '#F0C300' }
+];
+
+export const LANGUAGE_CODE = 'en-US';

@@ -3,6 +3,7 @@ import { Montserrat, Mr_Dafoe } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
 import Layout from '@/components/Layout/Layout';
 import { AuthContextProvider } from '@/context/AuthContext';
+import { CategoryDataProvider } from '@/context/CategoryContext';
 import '@/styles/globals.css';
 
 const montserrat = Montserrat({
@@ -34,9 +35,11 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.png" type="image/x-icon" />
       </head>
       <body className={`${montserrat.variable} ${mrDafoe.variable} antialiased`}>
-        <AuthContextProvider>
-          <Layout>{children}</Layout>
-        </AuthContextProvider>
+        <CategoryDataProvider>
+          <AuthContextProvider>
+            <Layout>{children}</Layout>
+          </AuthContextProvider>
+        </CategoryDataProvider>
         <Toaster position="bottom-left" />
       </body>
     </html>
