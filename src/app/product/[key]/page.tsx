@@ -11,15 +11,10 @@ import {
 import { ProductSizeSelector } from '@/components/ProductSizeSelector/product-size-selector';
 import { ProductSlider } from '@/components/ProductSlider/ProductSlider';
 
-type Props = {
-  params: { key: string };
-};
-
 const ATTRIBUTE_NAME = 'size';
 
-export default async function ProductPage(props: Props) {
-  const { key } = await props.params;
-
+export default async function ProductPage({ params }: { params: Promise<{ key: string }> }) {
+  const { key } = await params;
   if (!key) return notFound();
 
   const product = await getProductByKey(key);
