@@ -1,9 +1,5 @@
 import { Address, CustomerDraft } from '@commercetools/platform-sdk';
 import { RegisterFormFields, UserAddress } from './types';
-import countries from 'i18n-iso-countries';
-import enLocale from 'i18n-iso-countries/langs/en.json';
-
-countries.registerLocale(enLocale);
 
 const mapFormData = (formData: RegisterFormFields): CustomerDraft => {
   const {
@@ -70,15 +66,9 @@ function mapAddress(
   const { useSame, isDefault, ...rest } = address;
   void useSame;
   void isDefault;
-  const countryCode = countries.getAlpha2Code(address.country, 'en');
-
-  if (!countryCode) {
-    throw new Error(`Invalid country name: ${address.country}`);
-  }
 
   return {
     ...rest,
-    country: countryCode,
     ...contact
   };
 }

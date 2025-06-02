@@ -17,11 +17,7 @@ import { UserAddress } from '@/components/Register/types';
 import AddressFields from './AddressFields';
 import { updateUserAddresses } from './updateAddress';
 import { toast } from 'sonner';
-import countries from 'i18n-iso-countries';
-import enLocale from 'i18n-iso-countries/langs/en.json';
 import * as Yup from 'yup';
-
-countries.registerLocale(enLocale);
 
 type Props = {
   type: 'billing' | 'shipping';
@@ -100,16 +96,11 @@ export function AddressesSection({
     };
 
     try {
-      const countryCode = countries.getAlpha2Code(values.country.trim(), 'en');
-      if (!countryCode) {
-        throw new Error(`Invalid country name: ${values.country}`);
-      }
-
       const result = await updateUserAddresses({
         version: user.version,
         newAddress: {
           ...userDetails,
-          country: countryCode,
+          country: values.country,
           city: values.city.trim(),
           streetName: values.streetName.trim(),
           postalCode: values.postalCode.trim()
@@ -164,7 +155,7 @@ export function AddressesSection({
             <Plus className="flex self-center h-4 w-4" /> Add a new address
           </Button>
         </DialogTrigger>
-        <DialogContent className="p-6 sm:px-[50px] sm:py-[35px]" aria-describedby={undefined}>
+        <DialogContent className="p-6 sm:px-[50px] sm:py-[35px]">
           <DialogHeader>
             <DialogTitle className="text-[24px]/[24px]">{title} Information</DialogTitle>
             <DialogDescription>Update your personal information below.</DialogDescription>

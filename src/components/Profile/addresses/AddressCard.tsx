@@ -116,7 +116,8 @@ const AddressCard = ({ address, isDefault, onDelete, onSetDefault }: Props) => {
             {isDefault ? 'Default Address' : 'Additional Address'}
           </div>
           <div className="text-sm text-muted-foreground">
-            {address.streetName} {address.streetNumber}, {address.postalCode} {address.city}
+            {address.streetName} {address.streetNumber}, {address.postalCode} {address.city},{' '}
+            {address.country}
           </div>
         </div>
         <div
@@ -128,7 +129,7 @@ const AddressCard = ({ address, isDefault, onDelete, onSetDefault }: Props) => {
                 <Pencil className={`w-6 h-6 cursor-pointer`} />
               </Button>
             </DialogTrigger>
-            <DialogContent className="p-6 sm:px-[50px] sm:py-[35px]" aria-describedby={undefined}>
+            <DialogContent className="p-6 sm:px-[50px] sm:py-[35px]">
               <DialogHeader>
                 <DialogTitle className="text-[24px]/[24px]">Adress Information</DialogTitle>
                 <DialogDescription>Update address details below.</DialogDescription>

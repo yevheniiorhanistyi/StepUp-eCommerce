@@ -44,7 +44,7 @@ const UserAddresses = (): JSX.Element => {
   );
 
   return (
-    <div className="flex  min-[975px]:justify-start w-full min-[1180px]:gap-20 gap-8 max-[768px]:gap-4 max-[701px]:flex-col max-[701px]:justify-center max-[701px]:items-center">
+    <div className="flex min-[975px]:justify-center w-full min-[1180px]:gap-20 gap-8 max-[768px]:gap-4 max-[701px]:flex-col max-[701px]:justify-center max-[701px]:items-center">
       <AddressesSection
         type="billing"
         addresses={billingAddresses || []}

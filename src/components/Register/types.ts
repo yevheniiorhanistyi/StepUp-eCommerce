@@ -41,8 +41,8 @@ type CommonFormProps = {
   type?: string;
   placeholder?: string;
   value: string | boolean | undefined;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
-  onBlur: React.FocusEventHandler<HTMLInputElement>;
+  onChange: React.ChangeEventHandler<HTMLElement>;
+  onBlur: React.FocusEventHandler<HTMLElement>;
   error?: string;
   touched?: boolean;
   withToggle?: boolean;
@@ -51,6 +51,8 @@ type CommonFormProps = {
   withDatePicker?: boolean;
   autoComplete?: string;
   onDatePick?: (value: string) => void;
+  asSelect?: boolean;
+  options?: { value: string; label: string }[];
 };
 
 type PersonalInfoFieldsValues = {
