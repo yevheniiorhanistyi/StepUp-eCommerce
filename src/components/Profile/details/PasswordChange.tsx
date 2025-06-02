@@ -65,7 +65,7 @@ const PasswordChange = (): JSX.Element => {
                 const err = await authResponse.json();
                 throw new Error(err.message || 'Failed to reauthenticate');
               }
-
+              await new Promise((resolve) => setTimeout(resolve, 500));
               await refreshUser();
               resetForm();
               toast.success('Password updated successfully!');
