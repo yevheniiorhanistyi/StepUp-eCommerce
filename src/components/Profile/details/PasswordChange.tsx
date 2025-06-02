@@ -51,6 +51,21 @@ const PasswordChange = (): JSX.Element => {
                 version: user.version
               });
 
+              const authResponse = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  email: user.email,
+                  password: values.newPassword
+                }),
+                credentials: 'include'
+              });
+
+              if (!authResponse.ok) {
+                const err = await authResponse.json();
+                throw new Error(err.message || 'Failed to reauthenticate');
+              }
+
               resetForm();
               toast.success('Password updated successfully!');
             } catch (error: unknown) {
