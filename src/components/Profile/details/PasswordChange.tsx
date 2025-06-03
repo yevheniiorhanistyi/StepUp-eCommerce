@@ -8,8 +8,9 @@ import FormField from '@/components/Register/Form/FieldForm';
 import { Button } from '@/components/ui/button';
 import { passwordSchema } from '@/components/Register/RegisterSchema';
 import { handleErrors } from '@/components/Register/registerUtils';
-import updateUserPassword from './updatePassword';
 import { useAuth } from '@/context/AuthContext';
+import updateUserPassword from './updatePassword';
+import reauthenticate from './reauth';
 
 const validationSchema = Yup.object({
   currentPassword: passwordSchema,
@@ -51,20 +52,7 @@ const PasswordChange = (): JSX.Element => {
                 version: user.version
               });
 
-              const authResponse = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  email: user.email,
-                  password: values.newPassword
-                }),
-                credentials: 'include'
-              });
-
-              if (!authResponse.ok) {
-                const err = await authResponse.json();
-                throw new Error(err.message || 'Failed to reauthenticate');
-              }
+              await reauthenticate(user.email, values.newPassword);
 
               await refreshUser();
               resetForm();
