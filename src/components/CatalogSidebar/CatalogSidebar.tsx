@@ -7,6 +7,7 @@ import { ICatalogSidebarProps } from '@/types/types';
 import { IterationCw } from 'lucide-react';
 
 import { INITIAL_SEARCH_PARAMS, BRANDS, SIZES, COLORS } from '@/constants/constants';
+import { useIsMobile } from '@/hooks/useMobile';
 import { cn } from '@/lib/utils';
 
 import {
@@ -34,6 +35,7 @@ const CatalogSidebar = ({
   onCategoryClick
 }: ICatalogSidebarProps) => {
   const router = useRouter();
+  const isMobile = useIsMobile();
   const { setOpen, setOpenMobile } = useSidebar();
 
   const resetFilters = useCallback(() => {
@@ -42,20 +44,11 @@ const CatalogSidebar = ({
   }, [router, setSearchParams]);
 
   useEffect(() => {
-    setOpenMobile(false);
-    setOpen(false);
-
-    const handleResize = () => {
+    if (isMobile) {
       setOpenMobile(false);
       setOpen(false);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [setOpen, setOpenMobile]);
+    }
+  }, [isMobile, setOpen, setOpenMobile]);
 
   return (
     <Sidebar
