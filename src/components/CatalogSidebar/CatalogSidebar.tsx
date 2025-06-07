@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { ICatalogSidebarProps } from '@/types/types';
@@ -34,19 +34,20 @@ const CatalogSidebar = ({
   onCategoryClick
 }: ICatalogSidebarProps) => {
   const router = useRouter();
-  const { open, openMobile, setOpenMobile, toggleSidebar } = useSidebar();
+  const { setOpen, setOpenMobile } = useSidebar();
 
-  const resetFilters = () => {
+  const resetFilters = useCallback(() => {
     router.replace('/catalog');
     setSearchParams({ ...INITIAL_SEARCH_PARAMS });
-  };
+  }, [router, setSearchParams]);
 
   useEffect(() => {
+    setOpenMobile(false);
+    setOpen(false);
+
     const handleResize = () => {
-      if (open || openMobile) {
-        setOpenMobile(false);
-        toggleSidebar();
-      }
+      setOpenMobile(false);
+      setOpen(false);
     };
 
     window.addEventListener('resize', handleResize);
@@ -54,7 +55,7 @@ const CatalogSidebar = ({
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [open, openMobile, setOpenMobile, toggleSidebar]);
+  }, [setOpen, setOpenMobile]);
 
   return (
     <Sidebar
