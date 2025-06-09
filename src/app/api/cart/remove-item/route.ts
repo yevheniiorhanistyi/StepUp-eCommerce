@@ -5,8 +5,9 @@ import { createTokenClient } from '@/services/commercetools/client/createTokenCl
 export async function POST(req: NextRequest) {
   const isAuthenticated = req.cookies.get('is_authenticated')?.value === 'true';
   const accessToken = req.cookies.get('access_token')?.value || null;
-  const customerId = req.cookies.get('customer_id')?.value || null;
   const anonymousId = req.cookies.get('anonymous_id')?.value || null;
+
+  let customerId = req.cookies.get('customer_id')?.value || null;
 
   try {
     const body = await req.json();
@@ -19,6 +20,11 @@ export async function POST(req: NextRequest) {
 
     if (isAuthenticated && accessToken) {
       const client = createTokenClient(accessToken);
+
+      if (!customerId) {
+        const me = await client.me().get().execute();
+        customerId = me.body.id;
+      }
 
       const result = await client
         .carts()
