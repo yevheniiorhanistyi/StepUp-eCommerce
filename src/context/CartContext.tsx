@@ -36,9 +36,9 @@ export const CartDataProvider = ({ children }: { children: ReactNode }) => {
       setCart(updatedCart);
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(error.message || 'Failed to add item to cart');
+        toast.error(error.message || 'Failed to add item to cart!');
       } else {
-        toast.error('Unexpected error. Please try again.');
+        toast.error('Unexpected error. Please try again!');
       }
     }
   };
@@ -49,9 +49,9 @@ export const CartDataProvider = ({ children }: { children: ReactNode }) => {
       setCart(updatedCart);
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(error.message || 'Failed to remove item from cart');
+        toast.error(error.message || 'Failed to remove item from cart!');
       } else {
-        toast.error('Unexpected error. Please try again.');
+        toast.error('Unexpected error. Please try again!');
       }
     }
   };
@@ -62,9 +62,9 @@ export const CartDataProvider = ({ children }: { children: ReactNode }) => {
       setCart(updatedCart);
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(error.message || 'Failed to update item quantity');
+        toast.error(error.message || 'Failed to update item quantity!');
       } else {
-        toast.error('Unexpected error. Please try again.');
+        toast.error('Unexpected error. Please try again!');
       }
     }
   };
