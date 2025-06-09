@@ -1,4 +1,10 @@
-import { ProductProjection, Category, Customer } from '@commercetools/platform-sdk';
+import {
+  ProductProjection,
+  Category,
+  Customer,
+  Cart,
+  LineItemDraft
+} from '@commercetools/platform-sdk';
 
 export interface IAuthContextType {
   isAuthenticated: boolean;
@@ -80,4 +86,11 @@ export interface IAppPaginationProps {
   itemsPerPage: number;
   currentPage: number;
   onPageChange: (page: number) => void;
+}
+
+export interface ICartContextType {
+  cart: Cart | undefined | null;
+  addItem: (item: LineItemDraft) => Promise<void>;
+  removeItem: (lineItemId: string) => Promise<void>;
+  updateItemQuantity: (lineItemId: string, quantity: number) => Promise<void>;
 }
