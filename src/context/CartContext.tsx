@@ -24,10 +24,17 @@ export const useCart = () => {
 export const CartDataProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<Cart | null | undefined>(undefined);
 
+  const refreshCart = async () => {
+    try {
+      const fetchedCart = await fetchCart();
+      setCart(fetchedCart);
+    } catch {
+      setCart(undefined);
+    }
+  };
+
   useEffect(() => {
-    fetchCart()
-      .then(setCart)
-      .catch(() => setCart(undefined));
+    refreshCart();
   }, []);
 
   const addItem = async (item: LineItemDraft) => {
@@ -70,7 +77,7 @@ export const CartDataProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addItem, removeItem, updateItemQuantity }}>
+    <CartContext.Provider value={{ cart, addItem, removeItem, updateItemQuantity, refreshCart }}>
       {children}
     </CartContext.Provider>
   );

@@ -9,6 +9,7 @@ import { defineStepper } from '@/components/ui/stepper';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
+import { useCart } from '@/context/CartContext';
 
 import { RegisterFormFields } from '../types';
 import { registerStep0Schema, registerStep1Schema } from '../RegisterSchema';
@@ -19,6 +20,7 @@ import { checkEmailAvailability, handleErrors } from '../registerUtils';
 
 const RegisterForm = (): JSX.Element => {
   const { setAuthentication, refreshUser } = useAuth();
+  const { refreshCart } = useCart();
   const router = useRouter();
 
   const steps = [
@@ -72,6 +74,7 @@ const RegisterForm = (): JSX.Element => {
                   toast.success(`Registration successful. Logged in as ${values.email}`);
                   router.push('/');
                   await refreshUser();
+                  await refreshCart();
                 } catch (error: unknown) {
                   toast.error(handleErrors(error).message);
                 } finally {

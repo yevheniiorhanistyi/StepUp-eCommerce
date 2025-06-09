@@ -93,4 +93,5 @@ export interface ICartContextType {
   addItem: (item: LineItemDraft) => Promise<void>;
   removeItem: (lineItemId: string) => Promise<void>;
   updateItemQuantity: (lineItemId: string, quantity: number) => Promise<void>;
+  refreshCart: () => Promise<void>;
 }
