@@ -6,12 +6,18 @@ import { createAnonymousClient } from '@/services/commercetools/client/createAno
 export async function GET(req: NextRequest) {
   const accessToken = req.cookies.get('access_token')?.value || null;
   const isAuthenticated = req.cookies.get('is_authenticated')?.value === 'true';
-  const customerId = req.cookies.get('customer_id')?.value || null;
   const anonymousId = req.cookies.get('anonymous_id')?.value || null;
 
+  let customerId = req.cookies.get('customer_id')?.value || null;
+
   try {
-    if (isAuthenticated && accessToken && customerId) {
+    if (isAuthenticated && accessToken) {
       const client = createTokenClient(accessToken);
+
+      if (!customerId) {
+        const me = await client.me().get().execute();
+        customerId = me.body.id;
+      }
 
       const cartResponse = await client
         .carts()
