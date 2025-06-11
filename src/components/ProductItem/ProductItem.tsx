@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { IProductItemParams } from '@/types/types';
 import { Card, CardContent, CardDescription, CardTitle, CardFooter, CardHeader } from '../ui/card';
-import { calculatePrices } from '@/lib/utils';
+import PriceDisplay from '@/lib/PriceDisplay';
 
 const ProductItem = ({ product }: IProductItemParams) => {
   const image = product.masterVariant.images?.[0];
@@ -11,8 +11,6 @@ const ProductItem = ({ product }: IProductItemParams) => {
   const { key } = product;
 
   if (!image || !price || !description || !key) return null;
-
-  const { originalPrice, hasDiscount, discountedPrice } = calculatePrices(price);
 
   return (
     <Link href={`/product/${key}`} key={product.id} className="w-full justify-self-center">
@@ -34,14 +32,7 @@ const ProductItem = ({ product }: IProductItemParams) => {
           <CardDescription className="line-clamp-2">{product.description['en-US']}</CardDescription>
         </CardHeader>
         <CardFooter className="flex items-center gap-3 text-lg">
-          {hasDiscount ? (
-            <>
-              <span>${discountedPrice}</span>
-              <span className="line-through text-muted-foreground">${originalPrice}</span>
-            </>
-          ) : (
-            <span>${originalPrice}</span>
-          )}
+          <PriceDisplay price={price} />
         </CardFooter>
       </Card>
     </Link>
