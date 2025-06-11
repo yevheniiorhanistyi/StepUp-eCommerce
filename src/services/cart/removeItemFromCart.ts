@@ -1,10 +1,14 @@
 import { Cart } from '@commercetools/platform-sdk';
 
-export const removeItemFromCart = async (lineItemId: string): Promise<Cart> => {
+export const removeItemFromCart = async (
+  lineItemId: string,
+  cartId?: string,
+  cartVersion?: number
+): Promise<Cart> => {
   const res = await fetch('/api/cart/remove-item', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ lineItemId })
+    body: JSON.stringify({ lineItemId, cartId, cartVersion })
   });
   if (!res.ok) throw new Error('Failed to remove item from cart');
 
