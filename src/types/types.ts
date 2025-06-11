@@ -3,7 +3,8 @@ import {
   Category,
   Customer,
   Cart,
-  LineItemDraft
+  LineItemDraft,
+  ByProjectKeyRequestBuilder
 } from '@commercetools/platform-sdk';
 
 export interface IAuthContextType {
@@ -94,4 +95,18 @@ export interface ICartContextType {
   removeItem: (lineItemId: string) => Promise<void>;
   updateItemQuantity: (lineItemId: string, quantity: number) => Promise<void>;
   refreshCart: () => Promise<void>;
+}
+
+export interface ICreateCartParams {
+  client: ByProjectKeyRequestBuilder;
+  lineItem: LineItemDraft;
+  customerId?: string;
+  anonymousId?: string;
+}
+
+export interface IAddLineItemParams {
+  client: ByProjectKeyRequestBuilder;
+  cartId: string;
+  cartVersion: number;
+  lineItem: LineItemDraft;
 }
