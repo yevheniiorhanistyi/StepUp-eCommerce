@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createAnonymousClient } from '@/services/commercetools/client/createAnonymousClient';
 import { createTokenClient } from '@/services/commercetools/client/createTokenClient';
 
-import { createCart } from '@/services/cart/createCart';
-import { addLineItem } from '@/services/cart/addLineItem';
+import { createCart } from '@/services/cart/server/createCart';
+import { addLineItem } from '@/services/cart/server/addLineItem';
 import { setCookie } from '@/lib/cookies/setCookie';
 
 export async function POST(req: NextRequest) {
