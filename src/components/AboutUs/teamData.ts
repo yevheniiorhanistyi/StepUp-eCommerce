@@ -2,7 +2,7 @@ const teamMembers = [
   {
     name: 'Yevhenii Orhanistyi',
     role: 'Frontend Developer & Team Lead',
-    bio: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas.',
+    bio: 'Yevhenii Orhanistyi is a passionate frontend developer with practical experience in building modern web applications using React. He pays great attention to architecture, code quality, and user experience. He thrives in a team setting, where he can contribute ideas, support others, and help drive the project forward with clean and scalable solutions.',
     image: '/images/members/Yevhenii-Orhanistyi.jpg',
     github: 'https://github.com/yevheniiorhanistyi',
     linkedin: 'https://www.linkedin.com/in/yevhenii-orhanistyi-819094224/',
@@ -41,7 +41,7 @@ const teamMembers = [
   {
     name: 'Dzmitry Drevich',
     role: 'Frontend Developer & Scrum Master',
-    bio: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas.',
+    bio: 'Dzmitry Drevich is a novice frontend developer with a strong drive to understand how things work and a deep interest in responsive design, semantic structure, and accessibility. He values thoughtful architecture, enjoys working through complex UI logic, and thrives in environments where code clarity and collaboration are key.',
     image: '/images/members/Dzmitry-Drevich.jpg',
     github: 'https://github.com/rasimaru',
     linkedin: 'https://www.linkedin.com/in/dzmitrydrevich',
@@ -69,7 +69,7 @@ const teamMembers = [
   {
     name: 'Marharyta Shyshkavets',
     role: 'Frontend Developer & UI Designer',
-    bio: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas.',
+    bio: 'Marharyta Shyshkavets is an aspiring frontend developer who has been studying web development for about a year. She has a strong eye for detail and a real passion for layout, styling, and building clean, responsive interfaces. She enjoys working in a team environment, values open communication, and finds that collaboration brings out the best in her work.',
     image: '/images/members/Marharyta-Shyshkavets.jpg',
     github: 'https://github.com/margomint',
     linkedin: 'https://www.linkedin.com/in/marharyta-shyshkavets-18b866363/',
