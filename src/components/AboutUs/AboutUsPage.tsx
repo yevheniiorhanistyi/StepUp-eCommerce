@@ -1,36 +1,16 @@
+'use client';
+
 import { Button } from '../ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Github, Linkedin } from 'lucide-react';
-
-const teamMembers = [
-  {
-    name: 'Yevhenii Orhanistyi',
-    role: 'Frontend Developer & Team Lead',
-    bio: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas.',
-    image: '/images/members/Yevhenii-Orhanistyi.jpg',
-    github: 'https://github.com/yevheniiorhanistyi',
-    linkedin: 'https://www.linkedin.com/in/yevhenii-orhanistyi-819094224/'
-  },
-  {
-    name: 'Dzmitry Drevich',
-    role: 'Frontend Developer & Scrum Master',
-    bio: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas.',
-    image: '/images/members/Dzmitry-Drevich.jpg',
-    github: 'https://github.com/rasimaru',
-    linkedin: 'https://www.linkedin.com/in/dzmitrydrevich'
-  },
-  {
-    name: 'Marharyta Shyshkavets',
-    role: 'Frontend Developer & UI Designer',
-    bio: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas.',
-    image: '/images/members/Marharyta-Shyshkavets.jpg',
-    github: 'https://github.com/margomint',
-    linkedin: 'https://www.linkedin.com/in/marharyta-shyshkavets-18b866363/'
-  }
-];
+import teamMembers from './teamData';
+import TeamContributionModal from './TeamContributionModal';
+import { useState } from 'react';
 
 const AboutUsPage = (): JSX.Element => {
+  const [modalOpenIndex, setModalOpenIndex] = useState<number | null>(null);
+
   return (
     <section className="w-full max-w-7xl mx-auto">
       <div className="mb-10">
@@ -77,7 +57,9 @@ const AboutUsPage = (): JSX.Element => {
             </div>
 
             <div>
-              <Button className="cursor-pointer">Contribution</Button>
+              <Button className="cursor-pointer" onClick={() => setModalOpenIndex(index)}>
+                Contribution
+              </Button>
             </div>
           </div>
         ))}
@@ -104,6 +86,15 @@ const AboutUsPage = (): JSX.Element => {
           </Link>
         </p>
       </div>
+
+      {modalOpenIndex !== null && (
+        <TeamContributionModal
+          isOpen={modalOpenIndex !== null}
+          onOpen={() => setModalOpenIndex(null)}
+          onClose={() => setModalOpenIndex(null)}
+          contributions={teamMembers[modalOpenIndex].contributions}
+        />
+      )}
     </section>
   );
 };
