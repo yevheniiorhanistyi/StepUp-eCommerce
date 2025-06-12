@@ -1,4 +1,11 @@
-import { ProductProjection, Category, Customer } from '@commercetools/platform-sdk';
+import {
+  ProductProjection,
+  Category,
+  Customer,
+  Cart,
+  LineItemDraft,
+  ByProjectKeyRequestBuilder
+} from '@commercetools/platform-sdk';
 
 export interface IAuthContextType {
   isAuthenticated: boolean;
@@ -94,4 +101,27 @@ export interface IPriceDisplayProps {
       value: IPrice;
     };
   };
+}
+
+export interface ICartContextType {
+  cart: Cart | undefined | null;
+  addItem: (item: LineItemDraft) => Promise<void>;
+  removeItem: (lineItemId: string) => Promise<void>;
+  updateItemQuantity: (lineItemId: string, quantity: number) => Promise<void>;
+  refreshCart: () => Promise<void>;
+  addPromoCode: (code: string) => Promise<void>;
+}
+
+export interface ICreateCartParams {
+  client: ByProjectKeyRequestBuilder;
+  lineItem: LineItemDraft;
+  customerId?: string;
+  anonymousId?: string;
+}
+
+export interface IAddLineItemParams {
+  client: ByProjectKeyRequestBuilder;
+  cartId: string;
+  cartVersion: number;
+  lineItem: LineItemDraft;
 }
