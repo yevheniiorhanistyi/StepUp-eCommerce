@@ -81,3 +81,17 @@ export interface IAppPaginationProps {
   currentPage: number;
   onPageChange: (page: number) => void;
 }
+
+export interface IPrice {
+  centAmount: number;
+  currencyCode: string;
+}
+
+export interface IPriceDisplayProps {
+  price: {
+    value: IPrice;
+    discounted?: {
+      value: IPrice;
+    };
+  };
+}
