@@ -4,6 +4,7 @@ import {
   Customer,
   Cart,
   LineItemDraft,
+  LineItem,
   ByProjectKeyRequestBuilder
 } from '@commercetools/platform-sdk';
 
@@ -59,6 +60,9 @@ export interface ISearchParamsArrayTypes {
 
 export interface IProductItemParams {
   product: ProductProjection;
+  cartItems: LineItem[];
+  addItem: (item: LineItemDraft) => Promise<void>;
+  removeItem: (lineItemId: string) => Promise<void>;
 }
 
 export interface IProductListParams {
