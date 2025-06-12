@@ -17,9 +17,6 @@ jest.mock('@/components/Register/RegisterSchema', () => ({
   registerStep0Schema: {
     validate: () => Promise.resolve({})
   }
-  // registerStep1Schema: {
-  //   validate: () => Promise.resolve({}),
-  // }
 }));
 
 jest.mock('@/components/Register/registerUtils', () => ({
