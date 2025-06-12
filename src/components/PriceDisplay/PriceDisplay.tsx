@@ -1,4 +1,4 @@
-import { formatPrice } from './price-utils';
+import { formatPrice } from '@/lib/price-utils';
 import { IPriceDisplayProps } from '@/types/types';
 
 const PriceDisplay = ({ price }: IPriceDisplayProps) => {

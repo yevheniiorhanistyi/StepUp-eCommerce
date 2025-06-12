@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { IProductItemParams } from '@/types/types';
 import { Card, CardContent, CardDescription, CardTitle, CardFooter, CardHeader } from '../ui/card';
-import PriceDisplay from '@/lib/PriceDisplay';
+import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
 
 const ProductItem = ({ product }: IProductItemParams) => {
   const image = product.masterVariant.images?.[0];
