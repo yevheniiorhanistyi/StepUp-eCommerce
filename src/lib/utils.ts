@@ -1,4 +1,4 @@
-import { Price, Category } from '@commercetools/platform-sdk';
+import { Category } from '@commercetools/platform-sdk';
 import { ICategoryNode } from '@/types/types';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -19,20 +19,6 @@ export const getCookieValue = (name: string) => {
   );
 
   return matches ? decodeURIComponent(matches[1]) : undefined;
-};
-
-export const calculatePrices = (prices: Price) => {
-  const discountedPrice = prices.discounted?.value
-    ? (prices.discounted.value.centAmount / 10 ** 2).toFixed(2)
-    : '';
-  const originalPrice = prices.value ? (prices.value.centAmount / 10 ** 2).toFixed(2) : '';
-  const hasDiscount = discountedPrice && discountedPrice !== originalPrice;
-
-  return {
-    discountedPrice,
-    originalPrice,
-    hasDiscount
-  };
 };
 
 export const combineStringAndValues = (inputString: string, values: string[]): string => {

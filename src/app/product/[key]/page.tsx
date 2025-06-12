@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { getProductByKey } from '@/services/getProductByKey';
 import { notFound } from 'next/navigation';
-import { formatPrice } from '@/lib/price-utils';
 import {
   Accordion,
   AccordionContent,
@@ -10,6 +9,7 @@ import {
 } from '@/components/ui/accordion';
 import { ProductSizeSelector } from '@/components/ProductSizeSelector/product-size-selector';
 import { ProductSlider } from '@/components/ProductSlider/ProductSlider';
+import PriceDisplay from '@/lib/PriceDisplay';
 
 const ATTRIBUTE_NAME = 'size';
 
@@ -59,16 +59,7 @@ export default async function ProductPage({ params }: { params: Promise<{ key: s
 
           {price && (
             <div className="text-xl font-medium">
-              {price.discounted ? (
-                <div className="flex items-center space-y-3">
-                  <span className="text-primary">{formatPrice(price.discounted.value)}</span>
-                  <span className="text-sm line-through text-gray-500">
-                    {formatPrice(price.value)}
-                  </span>
-                </div>
-              ) : (
-                <span>{formatPrice(price.value)}</span>
-              )}
+              <PriceDisplay price={price} />
             </div>
           )}
 

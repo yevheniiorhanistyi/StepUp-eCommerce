@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '../ui/card';
+import PriceDisplay from '@/lib/PriceDisplay';
 
 const AllTimeFavorites = (): JSX.Element => {
   const [products, setProducts] = useState<ProductProjection[]>([]);
@@ -58,9 +59,7 @@ const AllTimeFavorites = (): JSX.Element => {
                       />
                     </div>
                     <h3 className="font-medium text-lg mb-2">{product.name['en-US']}</h3>
-                    <p className="text-base sm:-tracking-tight mb-2">
-                      {price.value.centAmount / 100}$
-                    </p>
+                    <PriceDisplay price={price} />
                   </CardContent>
                 </Card>
               </Link>
