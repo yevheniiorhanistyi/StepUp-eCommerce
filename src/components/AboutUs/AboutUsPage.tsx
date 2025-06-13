@@ -39,6 +39,7 @@ const AboutUsPage = (): JSX.Element => {
               <div className="mt-2 flex justify-center md:justify-start gap-2 text-gray-600">
                 <a
                   href={member.linkedin}
+                  aria-label={`LinkedIn — ${member.name}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-black hover:text-gray-600 transition"
@@ -47,6 +48,7 @@ const AboutUsPage = (): JSX.Element => {
                 </a>
                 <a
                   href={member.github}
+                  aria-label={`GitHub — ${member.name}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-black hover:text-gray-600 transition"

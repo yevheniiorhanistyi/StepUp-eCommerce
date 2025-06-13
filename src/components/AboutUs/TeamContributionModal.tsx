@@ -45,7 +45,7 @@ const TeamContributionModal = ({
                   <Image
                     src={item.image}
                     sizes="(max-width: 768px) 100vw, 800px"
-                    alt="Contribution Screenshot"
+                    alt={item.title}
                     fill
                     className="object-cover lg:object-contain"
                   />
