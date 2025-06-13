@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/accordion';
 import { ProductSizeSelector } from '@/components/ProductSizeSelector/product-size-selector';
 import { ProductSlider } from '@/components/ProductSlider/ProductSlider';
-import PriceDisplay from '@/lib/PriceDisplay';
+import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
 
 const ATTRIBUTE_NAME = 'size';
 

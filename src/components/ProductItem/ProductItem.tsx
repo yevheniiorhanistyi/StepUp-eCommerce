@@ -3,11 +3,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import PriceDisplay from '@/lib/PriceDisplay';
 
 import { IProductItemParams } from '@/types/types';
 import { Card, CardContent, CardDescription, CardTitle, CardFooter, CardHeader } from '../ui/card';
 import { Button } from '../ui/button';
+
+import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
 
 const ProductItem = ({ product, cartItems, addItem, removeItem }: IProductItemParams) => {
   const router = useRouter();

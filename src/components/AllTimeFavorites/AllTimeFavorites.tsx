@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '../ui/card';
-import PriceDisplay from '@/lib/PriceDisplay';
+import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
 
 const AllTimeFavorites = (): JSX.Element => {
   const [products, setProducts] = useState<ProductProjection[]>([]);
