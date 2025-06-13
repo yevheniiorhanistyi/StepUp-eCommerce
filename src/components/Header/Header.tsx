@@ -1,10 +1,13 @@
 'use client';
 
-import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+
 import { ShoppingBasket } from 'lucide-react';
-import { Button } from '../ui/button';
+
+import { useAuth } from '@/context/AuthContext';
+import { useCart } from '@/context/CartContext';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -12,9 +15,12 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu';
-import { useAuth } from '@/context/AuthContext';
-import UserDropdownMenu from '../UserDropdownMenu/UserDropdownMenu';
+
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+
 import DrawerMenu from '../DrawerMenu/DrawerMenu';
+import UserDropdownMenu from '../UserDropdownMenu/UserDropdownMenu';
 
 const navLinks = [
   { href: '/catalog', label: 'Catalog' },
@@ -23,7 +29,10 @@ const navLinks = [
 
 const Header = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
+  const { cart } = useCart();
   const { isAuthenticated, setAuthentication } = useAuth();
+
+  const cartQuantity = cart?.totalLineItemQuantity ?? 0;
 
   useEffect(() => {
     const handleResize = () => {
@@ -73,11 +82,16 @@ const Header = (): JSX.Element => {
               <Link href={'/cart'}>
                 <Button
                   aria-label="Cart"
-                  className="rounded-full cursor-pointer transition-colors duration-300"
+                  className="rounded-full cursor-pointer transition-colors duration-300 relative"
                   variant="ghost"
                   size="icon"
                 >
                   <ShoppingBasket className="size-6" strokeWidth={1.6} />
+                  {cartQuantity > 0 && (
+                    <Badge className="h-6 w-6 rounded-full absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-xs">
+                      {cartQuantity}
+                    </Badge>
+                  )}
                 </Button>
               </Link>
             </NavigationMenuItem>
