@@ -14,7 +14,7 @@ describe('AllTimeFavorites', () => {
         name: { 'en-US': 'Product 1' },
         masterVariant: {
           images: [{ url: '/image1.jpg' }],
-          prices: [{ value: { centAmount: 1000 } }]
+          prices: [{ value: { centAmount: 1000, currencyCode: 'USD' } }]
         }
       },
       {
@@ -22,7 +22,7 @@ describe('AllTimeFavorites', () => {
         name: { 'en-US': 'Product 2' },
         masterVariant: {
           images: [{ url: '/image2.jpg' }],
-          prices: [{ value: { centAmount: 2000 } }]
+          prices: [{ value: { centAmount: 2000, currencyCode: 'USD' } }]
         }
       }
     ];
@@ -40,8 +40,8 @@ describe('AllTimeFavorites', () => {
 
     expect(await screen.findByText('Product 1')).toBeInTheDocument();
     expect(await screen.findByText('Product 2')).toBeInTheDocument();
-    expect(screen.getByText('10$')).toBeInTheDocument();
-    expect(screen.getByText('20$')).toBeInTheDocument();
+    expect(screen.getByText('$10.00')).toBeInTheDocument();
+    expect(screen.getByText('$20.00')).toBeInTheDocument();
   });
 
   it('should render empty if no products found', async () => {

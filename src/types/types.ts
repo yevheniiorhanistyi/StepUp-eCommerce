@@ -111,3 +111,17 @@ export interface IAddLineItemParams {
   cartVersion: number;
   lineItem: LineItemDraft;
 }
+
+export interface IPrice {
+  centAmount: number;
+  currencyCode: string;
+}
+
+export interface IPriceDisplayProps {
+  price: {
+    value: IPrice;
+    discounted?: {
+      value: IPrice;
+    };
+  };
+}
