@@ -9,6 +9,10 @@ jest.mock('@/context/AuthContext', () => ({
   useAuth: () => ({ setAuthentication: jest.fn() })
 }));
 
+jest.mock('@/context/CartContext', () => ({
+  useCart: () => jest.fn()
+}));
+
 jest.mock('@/components/Register/RegisterSchema', () => ({
   registerStep0Schema: {
     validate: () => Promise.resolve({})
