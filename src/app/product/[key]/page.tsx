@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import { getProductByKey } from '@/services/getProductByKey';
 import { notFound } from 'next/navigation';
 import {
@@ -9,7 +8,9 @@ import {
 } from '@/components/ui/accordion';
 import { ProductSizeSelector } from '@/components/ProductSizeSelector/product-size-selector';
 import { ProductSlider } from '@/components/ProductSlider/ProductSlider';
+
 import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
+import ProductCartButton from '@/components/ProductCartButton/ProductCartButton';
 
 const ATTRIBUTE_NAME = 'size';
 
@@ -69,7 +70,7 @@ export default async function ProductPage({ params }: { params: Promise<{ key: s
           </div>
 
           <div className="md:w-auto md:max-w-[200px]">
-            <Button size="lg">Add to cart</Button>
+            <ProductCartButton product={product.masterData.current} productId={product.id} />
           </div>
         </div>
 
