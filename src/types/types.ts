@@ -95,6 +95,7 @@ export interface ICartContextType {
   removeItem: (lineItemId: string) => Promise<void>;
   updateItemQuantity: (lineItemId: string, quantity: number) => Promise<void>;
   refreshCart: () => Promise<void>;
+  clearCart: () => Promise<void>;
   addPromoCode: (code: string) => Promise<void>;
 }
 
