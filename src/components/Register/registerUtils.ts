@@ -1,13 +1,10 @@
-import { ErrorObject, ErrorResponse } from '@commercetools/platform-sdk';
+import { ErrorObject } from '@commercetools/platform-sdk';
 import { createAnonymousClient } from '@/services/commercetools/client/createAnonymousClient';
-
-interface CommercetoolsError {
-  body: ErrorResponse;
-}
+import { ICommercetoolsError } from '@/types/types';
 
 function handleErrors(error: unknown): Error {
   if (typeof error === 'object' && error !== null && 'body' in error) {
-    const commercetoolsError = error as CommercetoolsError;
+    const commercetoolsError = error as ICommercetoolsError;
     const { statusCode, message, errors } = commercetoolsError.body;
 
     const duplicateEmail = errors?.find(
