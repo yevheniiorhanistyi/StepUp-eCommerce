@@ -88,7 +88,7 @@ const Header = (): JSX.Element => {
                 >
                   <ShoppingBasket className="size-6" strokeWidth={1.6} />
                   {cartQuantity > 0 && (
-                    <Badge className="h-6 w-6 rounded-full absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-xs">
+                    <Badge className="h-6 w-6 rounded-full absolute top-2 right-2 translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-xs">
                       {cartQuantity}
                     </Badge>
                   )}
