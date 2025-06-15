@@ -1,21 +1,49 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import Image from 'next/image';
 
+import { useCart } from '@/context/CartContext';
 import { Card, CardContent, CardDescription, CardTitle, CardFooter, CardHeader } from '../ui/card';
+
+import { ProductProjection } from '@commercetools/platform-sdk';
 
 import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
 import ProductCartButton from '../ProductCartButton/ProductCartButton';
-import { ProductProjection } from '@commercetools/platform-sdk';
 
 const ProductItem = ({ product }: { product: ProductProjection }) => {
   const router = useRouter();
+  const { cart, addItem, removeItemsByProductKey } = useCart();
 
   const image = product.masterVariant.images?.[0];
   const price = product.masterVariant.prices?.[0];
   const description = product?.description?.['en-US'];
   const { key } = product;
+
+  const [isProcessing, setProcessing] = useState(false);
+
+  const lineItemsWithKey = cart?.lineItems?.filter((item) => item.productKey === key) || [];
+  const isInCart = lineItemsWithKey.length > 0;
+
+  const handleClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setProcessing(true);
+
+    if (isInCart && key) {
+      await removeItemsByProductKey(key);
+    } else {
+      await addItem({
+        productId: product.id,
+        variantId: 2,
+        quantity: 1
+      });
+    }
+
+    setProcessing(false);
+  };
 
   const handleCardClick = () => {
     router.push(`/product/${key}`);
@@ -47,7 +75,7 @@ const ProductItem = ({ product }: { product: ProductProjection }) => {
       </CardHeader>
       <CardFooter className="flex flex-col items-start gap-3 text-lg pb-3">
         <PriceDisplay price={price} />
-        <ProductCartButton product={product} productId={product.id} />
+        <ProductCartButton isInCart={isInCart} isProcessing={isProcessing} onClick={handleClick} />
       </CardFooter>
     </Card>
   );
