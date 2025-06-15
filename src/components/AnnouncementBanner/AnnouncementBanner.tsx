@@ -1,14 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { SOCIAL_LOGOS } from '@/constants/constants';
+import { IAnnouncementBannerProps } from '@/types/types';
 
-interface AnnouncementBannerProps {
-  label?: string;
-  text: string[];
-  socials?: boolean;
-}
-
-const AnnouncementBanner = ({ label, text, socials }: AnnouncementBannerProps): JSX.Element => {
+const AnnouncementBanner = ({ label, text, socials }: IAnnouncementBannerProps): JSX.Element => {
   return (
     <div className="flex flex-col items-center justify-center gap-4 text-center text-xs sm:text-sm p-4 bg-neutral-950 text-amber-50">
       {label && <span className="font-bold">{label}</span>}

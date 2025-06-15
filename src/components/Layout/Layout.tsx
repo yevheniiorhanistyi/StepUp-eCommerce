@@ -1,12 +1,8 @@
-import { ReactNode } from 'react';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import { ILayoutProps } from '@/types/types';
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const Layout = ({ children }: LayoutProps): JSX.Element => {
+const Layout = ({ children }: ILayoutProps): JSX.Element => {
   return (
     <div className="flex flex-col min-h-screen scroll-smooth">
       <Header />

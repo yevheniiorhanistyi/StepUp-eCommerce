@@ -7,6 +7,8 @@ import {
   Product,
   ByProjectKeyRequestBuilder
 } from '@commercetools/platform-sdk';
+import { ReactNode } from 'react';
+import { ErrorResponse } from '@commercetools/platform-sdk';
 
 export interface IAuthContextType {
   isAuthenticated: boolean;
@@ -136,4 +138,65 @@ export interface IAddLineItemParams {
 export interface IProductSizePickerProps {
   product: Product;
   variants: Array<{ key: string; size: string }>;
+}
+
+export interface IPrice {
+  centAmount: number;
+  currencyCode: string;
+}
+
+export interface IPriceDisplayProps {
+  price: {
+    value: IPrice;
+    discounted?: {
+      value: IPrice;
+    };
+  };
+}
+
+export interface IAnnouncementBannerProps {
+  label?: string;
+  text: string[];
+  socials?: boolean;
+}
+
+export interface IDrawerMenuProps {
+  navLinks: { href: string; label: string }[];
+  isAuthenticated: boolean;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface ILayoutProps {
+  children: ReactNode;
+}
+
+export interface IProductSliderProps {
+  images: { url: string }[];
+  productName: string;
+}
+
+export interface ICommercetoolsError {
+  body: ErrorResponse;
+}
+
+export interface ICustomerSignInResult {
+  access_token: string;
+  expires_in: number;
+  scope: string;
+  token_type: string;
+  refresh_token?: string;
+}
+
+export interface IUserDropdownMenuProps {
+  isAuthenticated: boolean;
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface IModalSliderProps {
+  isOpen: boolean;
+  onClose: () => void;
+  images: { url: string }[];
+  productName: string;
+  initialIndex: number;
 }
