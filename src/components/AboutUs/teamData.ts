@@ -31,6 +31,12 @@ const teamMembers = [
           'Yevhenii Orhanistyi developed the Catalog Page, a central feature for product discovery in the eCommerce application. His implementation included dynamic product fetching via Commercetools, full-text search, filtering by attributes, sorting options, and intuitive category-based navigation. This contribution established a scalable foundation for product browsing, significantly improving the shopping experience and enabling users to explore the catalog with speed, precision, and ease.'
       },
       {
+        image: '/images/contributions/cart-management-system.png',
+        title: 'Building a Robust Cart Management System',
+        description:
+          'Yevhenii Orhanistyi implemented a scalable and reliable cart infrastructure that became the backbone of the shopping experience in the application. By introducing dedicated API endpoints and a global CartDataProvider, he ensured seamless support for key cart operations — including item management, promo code application, and automatic cart creation for both authenticated and anonymous users.'
+      },
+      {
         image: '/images/contributions/branches.png',
         title: 'Ensuring Repository Hygiene & Git Branch Management',
         description:
@@ -96,6 +102,12 @@ const teamMembers = [
         title: 'Improving Visual Quality and User Experience on the Homepage',
         description:
           'Marharyta Shyshkavets played a key role in elevating the design and usability of the homepage through continuous refinements and attention to visual detail. She ensured better responsiveness and style consistency. Beyond direct contributions, she proactively guided teammates to fix visual issues and maintain design standards, helping shape a polished and cohesive user experience across the application.'
+      },
+      {
+        image: '/images/contributions/improvements-marharyta-shyshkavets.png',
+        title: 'Structural Improvements and Quality Enhancements Across the Project',
+        description:
+          'Marharyta Shyshkavets made a meaningful impact on the overall quality and maintainability of the project by focusing on architectural improvements, code cleanliness, and visual consistency. She proactively identified overlooked details and implemented thoughtful refinements. Marharyta’s meticulous approach and initiative in addressing both technical and design-related nuances played a vital role in polishing the application and supporting the team’s shared standards.'
       }
     ]
   }
