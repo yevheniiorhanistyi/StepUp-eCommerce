@@ -7,7 +7,6 @@ import {
   AccordionTrigger
 } from '@/components/ui/accordion';
 import { ProductSlider } from '@/components/ProductSlider/ProductSlider';
-import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
 
 import ProductSizePicker from '@/components/ProductSizePicker/ProductSizePicker';
 import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
