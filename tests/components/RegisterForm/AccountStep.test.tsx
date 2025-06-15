@@ -8,7 +8,7 @@ const mockValues = {
   confirmPassword: 'Password1'
 } as Partial<RegisterFormFields>;
 
-describe('AccountStrep', () => {
+describe('AccountStep', () => {
   it('render all required fields', () => {
     render(
       <AccountStep

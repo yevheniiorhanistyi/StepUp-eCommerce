@@ -96,7 +96,7 @@ const FormField = ({
         <Button
           type="button"
           onClick={onToggle}
-          aria-label={`${label} visibility switch`}
+          aria-label={`${label || name} visibility switch`}
           className="absolute bottom-0 right-0 hover:cursor-pointer"
         >
           {show ? <Eye /> : <EyeOff />}
