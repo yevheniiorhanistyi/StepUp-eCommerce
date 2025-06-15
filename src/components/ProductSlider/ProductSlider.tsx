@@ -8,12 +8,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import type { Swiper as SwiperType } from 'swiper';
 import { ModalSlider } from './ModalSlider';
-interface ProductSliderProps {
-  images: { url: string }[];
-  productName: string;
-}
+import { IProductSliderProps } from '@/types/types';
 
-export function ProductSlider({ images, productName }: ProductSliderProps) {
+export function ProductSlider({ images, productName }: IProductSliderProps) {
   const [selectedImage, setSelectedImage] = useState(images[0]?.url ?? null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const mainSwiperRef = useRef<SwiperType | null>(null);
