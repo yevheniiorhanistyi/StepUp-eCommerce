@@ -125,7 +125,11 @@ const AddressCard = ({ address, isDefault, onDelete, onSetDefault }: Props) => {
         >
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger className="cursor-pointer" asChild>
-              <Button variant="ghost" className="cursor-pointer min-h-[40px]">
+              <Button
+                aria-label="Edit Address"
+                variant="ghost"
+                className="cursor-pointer min-h-[40px]"
+              >
                 <Pencil className={`w-6 h-6 cursor-pointer`} />
               </Button>
             </DialogTrigger>
@@ -151,13 +155,19 @@ const AddressCard = ({ address, isDefault, onDelete, onSetDefault }: Props) => {
             </DialogContent>
           </Dialog>
 
-          <Button variant="ghost" className="cursor-pointer min-h-[40px]" onClick={onDelete}>
+          <Button
+            aria-label="Delete Address"
+            variant="ghost"
+            className="cursor-pointer min-h-[40px]"
+            onClick={onDelete}
+          >
             <Trash className="w-6 h-6 cursor-pointer" />
           </Button>
         </div>
       </CardContent>
       <CardFooter className="flex items-center gap-2 text-sm px-0">
         <Switch
+          aria-label="Set Default"
           className="cursor-pointer"
           checked={isDefault}
           onCheckedChange={onSetDefault}

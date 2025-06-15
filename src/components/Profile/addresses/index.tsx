@@ -6,10 +6,10 @@ import { updateUserAddresses } from './updateAddress';
 import { Address } from '@commercetools/platform-sdk';
 import { toast } from 'sonner';
 
-const UserAddresses = (): JSX.Element => {
+const UserAddresses = (): JSX.Element | null => {
   const { user, refreshUser } = useAuth();
 
-  if (!user) return <div>Loading...</div>;
+  if (!user) return null;
 
   const handleEdit = async (addressId: string, changes: Partial<Address>) => {
     await updateUserAddresses({

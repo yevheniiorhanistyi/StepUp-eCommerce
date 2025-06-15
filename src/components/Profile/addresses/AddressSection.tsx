@@ -151,7 +151,12 @@ export function AddressesSection({
       </div>
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogTrigger className="w-full cursor-pointer duration-300" asChild>
-          <Button type="button" variant="ghost" className="justify-end cursor-pointer duration-300">
+          <Button
+            aria-label="add new address"
+            type="button"
+            variant="ghost"
+            className="justify-end cursor-pointer duration-300"
+          >
             <Plus className="flex self-center h-4 w-4" /> Add a new address
           </Button>
         </DialogTrigger>
@@ -168,7 +173,11 @@ export function AddressesSection({
             {(formik) => (
               <form onSubmit={formik.handleSubmit} className="space-y-4">
                 <AddressFields {...formik} withSwitch />
-                <Button type="submit" className="w-full cursor-pointer duration-300">
+                <Button
+                  aria-label="add new address"
+                  type="submit"
+                  className="w-full cursor-pointer duration-300"
+                >
                   Add a new address
                 </Button>
               </form>
