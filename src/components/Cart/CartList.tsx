@@ -4,7 +4,6 @@ import { useCart } from '@/context/CartContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '../ui/input';
-import SpinnerFallback from '../SpinnerFallback/SpinnerFallback';
 import Link from 'next/link';
 import { priceFormat } from '@/lib/utils';
 import Image from 'next/image';
@@ -27,19 +26,20 @@ const CartList = (): JSX.Element => {
   const { cart, removeItem, updateItemQuantity, clearCart } = useCart();
   const [isUpdating, setIsUpdating] = useState(false);
 
-  if (!cart) {
-    return <SpinnerFallback />;
-  }
-
   return (
     <div className="flex min-[767.97px]:basis-2/3 max-[768px]:mx-auto w-full flex-col gap-6 pt-5 relative">
       <div className="flex items-center justify-between min-w-full border-b-2 pb-1.5">
         <h1 className="text-2xl font-bold">Your Cart</h1>
-        <Button type="button" className="cursor-pointer duration-300" onClick={() => clearCart()}>
+        <Button
+          type="button"
+          className="cursor-pointer duration-300"
+          onClick={() => clearCart()}
+          disabled={cart?.lineItems.length === 0 || !cart}
+        >
           Clear Cart
         </Button>
       </div>
-      {cart.lineItems.length === 0 && (
+      {(cart?.lineItems.length === 0 || !cart) && (
         <>
           <div className="text-center text-lg text-muted-foreground">
             Your shopping cart is empty.
@@ -52,7 +52,7 @@ const CartList = (): JSX.Element => {
           </Link>
         </>
       )}
-      {cart.lineItems.map((item) => {
+      {cart?.lineItems.map((item) => {
         const productKey = item.productKey || item.productId;
         const imageUrl = item.variant?.images?.[0]?.url || '';
         const productName = item.name?.['en-US'] || '';

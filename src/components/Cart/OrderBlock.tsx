@@ -98,6 +98,7 @@ const OrderBlock = (): JSX.Element => {
         <Button
           className="cursor-pointer duration-300 w-full"
           onClick={() => toast.message('Proceed to Checkout')}
+          disabled={!cart || cart.lineItems.length === 0}
         >
           Proceed to Checkout
         </Button>
