@@ -6,11 +6,10 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '@/components/ui/accordion';
-import { ProductSizeSelector } from '@/components/ProductSizeSelector/ProductSizeSelector';
 import { ProductSlider } from '@/components/ProductSlider/ProductSlider';
 
+import ProductSizePicker from '@/components/ProductSizePicker/ProductSizePicker';
 import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
-import ProductCartButton from '@/components/ProductCartButton/ProductCartButton';
 
 const ATTRIBUTE_NAME = 'size';
 
@@ -64,14 +63,7 @@ export default async function ProductPage({ params }: { params: Promise<{ key: s
             </div>
           )}
 
-          <div>
-            <div className="mb-1">Select Size</div>
-            <ProductSizeSelector variants={sizeVariants} currentKey={key} />
-          </div>
-
-          <div className="md:w-auto md:max-w-[200px]">
-            <ProductCartButton product={product.masterData.current} productId={product.id} />
-          </div>
+          <ProductSizePicker product={product} variants={sizeVariants} />
         </div>
 
         {current.description && (
