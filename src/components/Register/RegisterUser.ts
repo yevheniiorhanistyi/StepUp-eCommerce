@@ -5,12 +5,15 @@ import { toast } from 'sonner';
 import { RegisterFormFields } from './types';
 import mapFormData from './FormUserData';
 import { handleErrors } from './registerUtils';
+import { getCookieValue } from '@/lib/utils';
 
 const registerUser = async (userData: RegisterFormFields): Promise<Customer | undefined> => {
   const apiRoot = createAnonymousClient();
 
   const userDraft = {
-    ...mapFormData(userData)
+    ...mapFormData(userData),
+    anonymousId: getCookieValue('anonymous_id'),
+    activeCartSignInMode: 'MergeWithExistingCustomerCart'
   };
   try {
     await apiRoot.customers().post({ body: userDraft }).execute();
@@ -22,7 +25,8 @@ const registerUser = async (userData: RegisterFormFields): Promise<Customer | un
       },
       body: JSON.stringify({
         email: userDraft.email,
-        password: userDraft.password
+        password: userDraft.password,
+        anonymousId: userDraft.anonymousId
       })
     });
 

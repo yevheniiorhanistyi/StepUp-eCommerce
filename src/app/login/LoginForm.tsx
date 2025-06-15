@@ -8,7 +8,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { cn, getCookieValue } from '@/lib/utils';
 
 import { Eye, EyeOff } from 'lucide-react';
 
@@ -29,12 +29,18 @@ const LoginForm = (): JSX.Element => {
       validationSchema={LoginSchema}
       onSubmit={async (values, { setSubmitting }) => {
         try {
+          const payload = {
+            ...values,
+            anonymousId: getCookieValue('anonymous_id'),
+            activeCartSignInMode: 'MergeWithExistingCustomerCart'
+          };
+
           const response = await fetch('/api/auth/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(values)
+            body: JSON.stringify(payload)
           });
 
           const result = await response.json();
