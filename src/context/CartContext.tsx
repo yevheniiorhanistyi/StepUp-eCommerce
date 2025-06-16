@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { fetchCart } from '@/services/cart/client/fetchCart';
 import { addItemToCart } from '@/services/cart/client/addItemToCart';
 import { removeItemFromCart } from '@/services/cart/client/removeItemFromCart';
+import { removeItemsFromCart } from '@/services/cart/client/removeItemsFromCart';
 import { updateItemQuantity as updateQuantityInCart } from '@/services/cart/client/updateItemQuantity';
 import { addPromoCodeApi } from '@/services/cart/client/addPromoCodeApi';
 
@@ -64,6 +65,29 @@ export const CartDataProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const removeItemsByProductKey = async (productKey: string) => {
+    if (!cart) return;
+
+    const itemsToRemove = cart.lineItems.filter((item) => item.productKey === productKey);
+
+    if (itemsToRemove.length === 0) return;
+
+    try {
+      const updatedCart = await removeItemsFromCart(
+        itemsToRemove.map((i) => i.id),
+        cart.id,
+        cart.version
+      );
+      setCart(updatedCart);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message || 'Failed to remove items from cart!');
+      } else {
+        toast.error('Unexpected error. Please try again!');
+      }
+    }
+  };
+
   const updateItemQuantity = async (lineItemId: string, quantity: number) => {
     try {
       const updatedCart = await updateQuantityInCart(lineItemId, quantity, cart?.id, cart?.version);
@@ -97,6 +121,7 @@ export const CartDataProvider = ({ children }: { children: ReactNode }) => {
         addItem,
         addPromoCode,
         removeItem,
+        removeItemsByProductKey,
         updateItemQuantity,
         refreshCart
       }}
