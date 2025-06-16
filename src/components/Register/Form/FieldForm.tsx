@@ -3,7 +3,7 @@ import { Input } from '../../ui/input';
 import { Button } from '../../ui/button';
 import { Eye, EyeOff, Calendar } from 'lucide-react';
 import { ErrorMessage } from 'formik';
-import { CommonFormProps } from '../types';
+import { CommonFormProps } from '../../../types/register';
 import { useRef } from 'react';
 import {
   Select,

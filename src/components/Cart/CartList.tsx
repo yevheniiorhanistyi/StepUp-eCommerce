@@ -9,11 +9,10 @@ import { priceFormat } from '@/lib/utils';
 import Image from 'next/image';
 import { useState } from 'react';
 
-type Attribute = {
+const extractAttributeValue = (attr: {
   name: string;
   value: string | { key?: string; label?: string };
-};
-const extractAttributeValue = (attr: Attribute): string => {
+}): string => {
   const { value } = attr;
   if (typeof value === 'object' && value !== null) {
     return value.label || value.key || '';

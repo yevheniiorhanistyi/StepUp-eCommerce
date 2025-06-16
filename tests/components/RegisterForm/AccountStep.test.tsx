@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import AccountStep from '@/components/Register/Form/AccountStep';
-import type { RegisterFormFields } from '@/components/Register/types';
+import type { RegisterFormFields } from '@/types/register';
 
 const mockValues = {
   email: 'user@example.com',

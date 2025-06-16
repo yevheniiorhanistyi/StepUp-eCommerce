@@ -2,10 +2,10 @@ import { Customer } from '@commercetools/platform-sdk';
 import { createAnonymousClient } from '@/services/commercetools/client/createAnonymousClient';
 import { toast } from 'sonner';
 
-import { RegisterFormFields } from './types';
-import mapFormData from './FormUserData';
-import { handleErrors } from './registerUtils';
+import { RegisterFormFields } from '../../types/register';
 import { getCookieValue } from '@/lib/utils';
+import handleErrors from './handleErrors';
+import mapFormData from './formUserData';
 
 const registerUser = async (userData: RegisterFormFields): Promise<Customer | undefined> => {
   const apiRoot = createAnonymousClient();

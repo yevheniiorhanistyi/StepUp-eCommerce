@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import FormField from './FieldForm';
-import { RegisterFormProps } from '../types';
+import { RegisterFormProps } from '../../../types/register';
 
 function AccountStep(props: RegisterFormProps): JSX.Element {
   const { values, errors, touched, handleChange, handleBlur } = props;
