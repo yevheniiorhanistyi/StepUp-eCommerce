@@ -1,4 +1,4 @@
-import { PasswordUpdateData } from '../types';
+import { PasswordUpdateData } from '@/types/profile';
 
 async function updateUserPassword(data: PasswordUpdateData) {
   const response = await fetch('/api/user/password', {
