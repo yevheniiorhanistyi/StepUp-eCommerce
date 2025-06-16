@@ -2,14 +2,14 @@
 
 import { useAuth } from '@/context/AuthContext';
 import { AddressesSection } from './AddressSection';
-import { updateUserAddresses } from './updateAddress';
+import { updateUserAddresses } from '../../../services/profile/updateAddress';
 import { Address } from '@commercetools/platform-sdk';
 import { toast } from 'sonner';
 
-const UserAddresses = (): JSX.Element => {
+const UserAddresses = (): JSX.Element | null => {
   const { user, refreshUser } = useAuth();
 
-  if (!user) return <div>Loading...</div>;
+  if (!user) return null;
 
   const handleEdit = async (addressId: string, changes: Partial<Address>) => {
     await updateUserAddresses({

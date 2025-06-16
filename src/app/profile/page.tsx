@@ -6,16 +6,21 @@ import { useEffect } from 'react';
 import UserDetails from '@/components/Profile/details';
 import { useAuth } from '@/context/AuthContext';
 import UserAddresses from '@/components/Profile/addresses';
+import SpinnerFallback from '@/components/SpinnerFallback/SpinnerFallback';
 
 const Profile = (): JSX.Element | null => {
   const router = useRouter();
-  const { isAuthenticated, isAuthChecked } = useAuth();
+  const { isAuthenticated, isAuthChecked, user } = useAuth();
 
   useEffect(() => {
     if (isAuthChecked && !isAuthenticated) {
       router.replace('/');
     }
   }, [isAuthenticated, isAuthChecked, router]);
+
+  if (!user) {
+    return <SpinnerFallback />;
+  }
 
   if (!isAuthChecked) return null;
   if (!isAuthenticated) return null;

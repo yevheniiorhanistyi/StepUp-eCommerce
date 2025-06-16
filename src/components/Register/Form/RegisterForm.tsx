@@ -1,6 +1,6 @@
 'use client';
 
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -9,16 +9,20 @@ import { defineStepper } from '@/components/ui/stepper';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
+import { useCart } from '@/context/CartContext';
 
-import { RegisterFormFields } from '../types';
-import { registerStep0Schema, registerStep1Schema } from '../RegisterSchema';
+import { RegisterFormFields } from '../../../types/register';
+import { registerStep0Schema, registerStep1Schema } from '../../../lib/registerSchema';
 import AccountStep from './AccountStep';
 import PersonalInfoStep from './PersonalInfoStep';
-import registerUser from '../RegisterUser';
-import { checkEmailAvailability, handleErrors } from '../registerUtils';
+
+import handleErrors from '@/services/register/handleErrors';
+import checkEmailAvailability from '@/services/register/checkEmail';
+import registerUser from '@/services/register/registerUser';
 
 const RegisterForm = (): JSX.Element => {
   const { setAuthentication, refreshUser } = useAuth();
+  const { refreshCart } = useCart();
   const router = useRouter();
 
   const steps = [
@@ -53,6 +57,25 @@ const RegisterForm = (): JSX.Element => {
     }
   };
 
+  const handleSubmit = async (
+    values: RegisterFormFields,
+    { setSubmitting }: FormikHelpers<RegisterFormFields>
+  ): Promise<void> => {
+    try {
+      await registerUser(values);
+
+      setAuthentication(true);
+      toast.success(`Registration successful. Logged in as ${values.email}`);
+      router.push('/');
+      await refreshUser();
+      await refreshCart();
+    } catch (error: unknown) {
+      toast.error(handleErrors(error).message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <Card className="flex items-center justify-center p-6 sm:px-[50px] sm:py-[35px] max-w-[512px] w-full shadow-lg rounded-x1 gap-4">
       <CardHeader className="px-0 w-full">
@@ -64,20 +87,7 @@ const RegisterForm = (): JSX.Element => {
             <Formik
               initialValues={initialValues}
               validationSchema={methods.current.validation}
-              onSubmit={async (values: RegisterFormFields, { setSubmitting }) => {
-                try {
-                  await registerUser(values);
-
-                  setAuthentication(true);
-                  toast.success(`Registration successful. Logged in as ${values.email}`);
-                  router.push('/');
-                  await refreshUser();
-                } catch (error: unknown) {
-                  toast.error(handleErrors(error).message);
-                } finally {
-                  setSubmitting(false);
-                }
-              }}
+              onSubmit={handleSubmit}
             >
               {({
                 values,

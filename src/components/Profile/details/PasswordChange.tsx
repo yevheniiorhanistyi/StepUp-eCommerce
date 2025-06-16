@@ -1,25 +1,16 @@
 import { useState } from 'react';
 import { Form, Formik } from 'formik';
 import { toast } from 'sonner';
-import * as Yup from 'yup';
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import FormField from '@/components/Register/Form/FieldForm';
 import { Button } from '@/components/ui/button';
-import { passwordSchema } from '@/components/Register/RegisterSchema';
-import { handleErrors } from '@/components/Register/registerUtils';
 import { useAuth } from '@/context/AuthContext';
-import updateUserPassword from './updatePassword';
-import reauthenticate from './reauth';
 
-const validationSchema = Yup.object({
-  currentPassword: passwordSchema,
-  newPassword: passwordSchema,
-  confirmPassword: Yup.string()
-    .transform((value) => value?.trim())
-    .oneOf([Yup.ref('newPassword')], 'Passwords must match')
-    .required('Password is required')
-});
+import reauthenticate from '../../../services/profile/reauth';
+import updateUserPassword from '@/services/profile/updatePassword';
+import { passwordValidationSchema } from '@/lib/profileSchema';
+import handleErrors from '@/services/register/handleErrors';
 
 const PasswordChange = (): JSX.Element => {
   const { user, refreshUser } = useAuth();
@@ -41,7 +32,7 @@ const PasswordChange = (): JSX.Element => {
             newPassword: '',
             confirmPassword: ''
           }}
-          validationSchema={validationSchema}
+          validationSchema={passwordValidationSchema}
           onSubmit={async (values, { resetForm }) => {
             try {
               if (!user) return;

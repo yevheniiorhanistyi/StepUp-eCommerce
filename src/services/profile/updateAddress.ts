@@ -1,18 +1,5 @@
-import { MyCustomerUpdateAction, Address } from '@commercetools/platform-sdk';
-
-type UpdateUserAddressesParams = {
-  version: number;
-  newAddress?: Address;
-  addressIdToRemove?: string;
-  updatedAddress?: {
-    id: string;
-    changes: Partial<Address>;
-  };
-  shippingAddressIdToAdd?: string;
-  billingAddressIdToAdd?: string;
-  defaultShippingAddressId?: string;
-  defaultBillingAddressId?: string;
-};
+import { MyCustomerUpdateAction } from '@commercetools/platform-sdk';
+import { UpdateUserAddressesParams } from '../../types/profile';
 
 export async function updateUserAddresses(params: UpdateUserAddressesParams) {
   const {

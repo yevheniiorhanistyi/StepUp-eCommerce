@@ -5,9 +5,10 @@ import { useState } from 'react';
 import { Form, Formik, ErrorMessage } from 'formik';
 import { toast } from 'sonner';
 import { useAuth } from '@/context/AuthContext';
+import { useCart } from '@/context/CartContext';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { cn, getCookieValue } from '@/lib/utils';
 
 import { Eye, EyeOff } from 'lucide-react';
 
@@ -16,6 +17,7 @@ import LoginSchema from './LoginSchema';
 const LoginForm = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
   const { setAuthentication, refreshUser } = useAuth();
+  const { refreshCart } = useCart();
   const router = useRouter();
 
   return (
@@ -27,12 +29,18 @@ const LoginForm = (): JSX.Element => {
       validationSchema={LoginSchema}
       onSubmit={async (values, { setSubmitting }) => {
         try {
+          const payload = {
+            ...values,
+            anonymousId: getCookieValue('anonymous_id'),
+            activeCartSignInMode: 'MergeWithExistingCustomerCart'
+          };
+
           const response = await fetch('/api/auth/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(values)
+            body: JSON.stringify(payload)
           });
 
           const result = await response.json();
@@ -43,6 +51,7 @@ const LoginForm = (): JSX.Element => {
           toast.success(`Logged in as ${values.email}`);
           router.push('/');
           await refreshUser();
+          await refreshCart();
         } catch (error) {
           if (error instanceof Error) {
             toast.error(error.message || 'Login failed.');

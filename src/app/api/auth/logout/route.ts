@@ -5,32 +5,27 @@ import { tokenServiceInstance } from '@/services/commercetools/token/TokenServic
 export async function DELETE(_req: NextRequest) {
   const response = NextResponse.json({ success: true });
 
-  response.cookies.set('access_token', '', {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 0,
-    path: '/'
-  });
+  const secure = process.env.NODE_ENV === 'production';
 
-  response.cookies.set('refresh_token', '', {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 0,
-    path: '/'
-  });
+  const cookiesToClear = [
+    { name: 'access_token', httpOnly: true },
+    { name: 'refresh_token', httpOnly: true },
+    { name: 'token_expires_at', httpOnly: false },
+    { name: 'is_authenticated', httpOnly: true },
+    { name: 'user_first_name', httpOnly: false },
+    { name: 'user_last_name', httpOnly: false },
+    { name: 'user_email', httpOnly: false },
+    { name: 'customer_id', httpOnly: true },
+    { name: 'anonymous_id', httpOnly: true }
+  ];
 
-  response.cookies.set('token_expires_at', '', {
-    httpOnly: false,
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 0,
-    path: '/'
-  });
-
-  response.cookies.set('is_authenticated', '', {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 0,
-    path: '/'
+  cookiesToClear.forEach(({ name, httpOnly }) => {
+    response.cookies.set(name, '', {
+      httpOnly,
+      secure,
+      maxAge: 0,
+      path: '/'
+    });
   });
 
   tokenServiceInstance.clear();

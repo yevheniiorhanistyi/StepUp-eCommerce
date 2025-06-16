@@ -1,8 +1,7 @@
 'use client';
 
 import PersonalInfoFields from '@/components/Register/Form/PersonalInfoFields';
-import { registerStep0Schema, registerStep1Schema } from '@/components/Register/RegisterSchema';
-import { PersonalInfoFieldsValues } from '@/components/Register/types';
+import { PersonalInfoFieldsValues } from '@/types/register';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -16,10 +15,11 @@ import {
 import { useAuth } from '@/context/AuthContext';
 import { Formik } from 'formik';
 import { useState } from 'react';
-import updatePersonalInfo from './updateUserInfo';
+import updatePersonalInfo from '../../../services/profile/updateUserInfo';
 import { toast } from 'sonner';
-import * as Yup from 'yup';
-import { handleErrors } from '@/components/Register/registerUtils';
+
+import { userInfoValidationSchema } from '@/lib/profileSchema';
+import handleErrors from '@/services/register/handleErrors';
 
 const UserInfo = (): JSX.Element => {
   const { user, refreshUser } = useAuth();
@@ -32,14 +32,6 @@ const UserInfo = (): JSX.Element => {
     dateOfBirth: user?.dateOfBirth ?? '',
     phoneNumber: user?.custom?.fields?.phoneNumber ?? ''
   };
-
-  const validationSchema = Yup.object({
-    firstName: registerStep1Schema.fields.firstName,
-    lastName: registerStep1Schema.fields.lastName,
-    dateOfBirth: registerStep1Schema.fields.dateOfBirth,
-    phoneNumber: registerStep1Schema.fields.phoneNumber,
-    email: registerStep0Schema.fields.email
-  });
 
   const handleUpdate = async (values: PersonalInfoFieldsValues) => {
     if (!user) {
@@ -108,7 +100,7 @@ const UserInfo = (): JSX.Element => {
             </DialogHeader>
             <Formik<PersonalInfoFieldsValues>
               initialValues={initialValues}
-              validationSchema={validationSchema}
+              validationSchema={userInfoValidationSchema}
               onSubmit={handleUpdate}
             >
               {(formik) => (

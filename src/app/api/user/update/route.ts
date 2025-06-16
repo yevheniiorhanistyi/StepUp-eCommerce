@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createTokenClient } from '@/services/commercetools/client/createTokenClient';
-import { checkEmailAvailability, handleErrors } from '@/components/Register/registerUtils';
+
 import { MyCustomerUpdateAction } from '@commercetools/platform-sdk';
+import checkEmailAvailability from '@/services/register/checkEmail';
+import handleErrors from '@/services/register/handleErrors';
 
 export async function POST(req: NextRequest) {
   try {

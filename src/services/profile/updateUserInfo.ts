@@ -1,11 +1,4 @@
-type UserUpdateData = {
-  version: number;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  dateOfBirth?: string;
-  phoneNumber?: string;
-};
+import { UserUpdateData } from '../../types/profile';
 
 async function updatePersonalInfo(data: UserUpdateData) {
   const response = await fetch('/api/user/update', {

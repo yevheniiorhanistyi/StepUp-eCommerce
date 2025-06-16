@@ -1,4 +1,4 @@
-import { PersonalInfoProps } from '../types';
+import { PersonalInfoProps } from '../../../types/register';
 import FormField from './FieldForm';
 
 function PersonalInfoFields({

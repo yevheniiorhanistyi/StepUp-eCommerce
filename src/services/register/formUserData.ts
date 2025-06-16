@@ -1,5 +1,5 @@
 import { Address, CustomerDraft } from '@commercetools/platform-sdk';
-import { RegisterFormFields, UserAddress } from './types';
+import { RegisterFormFields, UserAddress } from '../../types/register';
 
 const mapFormData = (formData: RegisterFormFields): CustomerDraft => {
   const {

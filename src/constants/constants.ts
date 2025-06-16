@@ -2,7 +2,8 @@ import { ISearchParams } from '@/types/types';
 
 export const ANNOUNCEMENT_TEXTS = {
   seasonalSale: {
-    text: ['Seasonal savings are here! Shop our bestsellers before they are gone!']
+    text: ['Seasonal savings are here! Shop our bestsellers before they are gone!'],
+    promoCode: ['Use code SUMMER25 at checkout and get 25% off!']
   },
   heroPromo: {
     label: 'Your shoes say a lot about you — and at StepUp, we help you say it louder.',

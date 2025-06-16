@@ -1,8 +1,21 @@
+'use client';
+import CartList from '@/components/Cart/CartList';
+import OrderBlock from '@/components/Cart/OrderBlock';
+import SpinnerFallback from '@/components/SpinnerFallback/SpinnerFallback';
+import { useCart } from '@/context/CartContext';
+
 const Cart = (): JSX.Element => {
+  const { cart } = useCart();
+
+  if (!cart && cart !== null) {
+    return <SpinnerFallback />;
+  }
+
   return (
-    <main className="flex items-center justify-center p-8 sm:p-20">
-      <h1 className="text-2xl font-bold">Cart Page</h1>
-    </main>
+    <div className="flex justify-between min-[767.97px]:flex-row flex-col px-5 py-5 sm:px-10 sm:py-10 gap-5 w-full max-w-[1520px] mx-auto relative">
+      <CartList />
+      <OrderBlock />
+    </div>
   );
 };
 

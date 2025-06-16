@@ -1,23 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { tokenServiceInstance } from '@/services/commercetools/token/TokenService';
 import { createAuthenticatedClient } from '@/services/commercetools/client/createAuthenticatedClient';
+import { mergeCarts } from '@/services/cart/server/mergeCarts';
+import { ICustomerSignin } from '@/types/types';
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, password } = await req.json();
+    const { email, password, anonymousId } = await req.json();
     const client = createAuthenticatedClient(email, password);
 
-    await client
-      .me()
-      .login()
-      .post({
-        body: {
-          email,
-          password,
-          activeCartSignInMode: 'MergeWithExistingCustomerCart'
-        }
-      })
-      .execute();
+    const payload: ICustomerSignin = {
+      email,
+      password,
+      anonymousId,
+      activeCartSignInMode: 'MergeWithExistingCustomerCart'
+    };
+
+    await client.me().login().post({ body: payload }).execute();
 
     const tokenStore = tokenServiceInstance.get();
 
@@ -89,6 +88,14 @@ export async function POST(req: NextRequest) {
       maxAge,
       path: '/'
     });
+
+    if (anonymousId) {
+      try {
+        await mergeCarts(client, anonymousId);
+      } catch (mergeError) {
+        console.error('Manual cart merge error:', mergeError);
+      }
+    }
 
     return response;
   } catch {

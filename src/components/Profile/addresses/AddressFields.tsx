@@ -1,7 +1,8 @@
 import { Switch } from '@/components/ui/switch';
 import FormField from '../../Register/Form/FieldForm';
-import { AddressInfoProps } from './AddressSection';
+
 import { countries } from '@/constants/constants';
+import { AddressInfoProps } from '../../../types/profile';
 
 const countryOptions = countries.map((c) => ({ value: c.code, label: c.name }));
 
