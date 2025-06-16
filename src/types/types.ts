@@ -201,3 +201,10 @@ export interface IModalSliderProps {
   productName: string;
   initialIndex: number;
 }
+
+export interface TeamContributionModalProps {
+  isOpen: boolean;
+  onOpen: (isOpen: boolean) => void;
+  onClose: () => void;
+  contributions: { image: string; title: string; description: string }[];
+}
