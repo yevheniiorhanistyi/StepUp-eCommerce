@@ -69,21 +69,21 @@ export const CartDataProvider = ({ children }: { children: ReactNode }) => {
 
   const clearCart = async () => {
     try {
-      let clearedCart = await fetchCart();
-      if (!clearedCart) return;
-      if (clearedCart.lineItems.length === 0) {
+      const cart = await fetchCart();
+      if (!cart) return;
+      if (cart.lineItems.length === 0) {
         toast.info('Cart is already empty!');
 
         return;
       }
-      for (const item of clearedCart.lineItems) {
-        clearedCart = await removeItemFromCart(item.id, clearedCart.id, clearedCart.version);
-      }
-      setCart(clearedCart);
+
+      const lineItemIds = cart.lineItems.map((item) => item.id);
+      const updatedCart = await removeItemsFromCart(lineItemIds, cart.id, cart.version);
+      setCart(updatedCart);
       toast.success('Cart cleared successfully!');
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(error instanceof Error ? error.message : 'Unexpected error. Please try again!');
+        toast.error(error.message || 'Unexpected error. Please try again!');
       }
     }
   };

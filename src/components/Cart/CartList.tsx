@@ -23,7 +23,12 @@ const extractAttributeValue = (attr: {
 
 const CartList = (): JSX.Element => {
   const { cart, removeItem, updateItemQuantity, clearCart } = useCart();
-  const [isUpdating, setIsUpdating] = useState(false);
+  const [isClearingCart, setIsClearingCart] = useState(false);
+  const [processingItems, setProcessingItems] = useState<Record<string, boolean>>({});
+
+  const setProcessingForItem = (id: string, value: boolean) => {
+    setProcessingItems((prev) => ({ ...prev, [id]: value }));
+  };
 
   return (
     <div className="flex min-[767.97px]:basis-2/3 max-[768px]:mx-auto w-full flex-col gap-6 pt-5 relative">
@@ -32,10 +37,22 @@ const CartList = (): JSX.Element => {
         <Button
           type="button"
           className="cursor-pointer duration-300"
-          onClick={() => clearCart()}
-          disabled={cart?.lineItems.length === 0 || !cart}
+          onClick={async () => {
+            if (isClearingCart) return;
+            try {
+              setIsClearingCart(true);
+              await clearCart();
+            } finally {
+              setIsClearingCart(false);
+            }
+          }}
+          disabled={isClearingCart || cart?.lineItems.length === 0 || !cart}
         >
-          Clear Cart
+          {isClearingCart ? (
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+          ) : (
+            'Clear Cart'
+          )}
         </Button>
       </div>
       {(cart?.lineItems.length === 0 || !cart) && (
@@ -125,23 +142,40 @@ const CartList = (): JSX.Element => {
                   max={99}
                   value={item.quantity}
                   onChange={async (e) => {
+                    if (processingItems[item.id]) return;
                     const value = Number(e.target.value);
-                    if (!Number.isNaN(value) && value >= 1 && !isUpdating) {
-                      setIsUpdating(true);
-                      await updateItemQuantity(item.id, value);
-                      setIsUpdating(false);
+                    if (!Number.isNaN(value) && value >= 1) {
+                      try {
+                        setProcessingForItem(item.id, true);
+                        await updateItemQuantity(item.id, value);
+                      } finally {
+                        setProcessingForItem(item.id, false);
+                      }
                     }
                   }}
-                  disabled={isUpdating}
+                  disabled={!!processingItems[item.id]}
                   className="w-20 appearance-auto number-visible cursor-pointer"
                 />
 
                 <Button
                   type="button"
-                  className="cursor-pointer duration-300"
-                  onClick={() => removeItem(item.id)}
+                  className="cursor-pointer duration-300 min-w-[90px]"
+                  onClick={async () => {
+                    if (processingItems[item.id]) return;
+                    try {
+                      setProcessingForItem(item.id, true);
+                      await removeItem(item.id);
+                    } finally {
+                      setProcessingForItem(item.id, false);
+                    }
+                  }}
+                  disabled={!!processingItems[item.id]}
                 >
-                  Remove
+                  {processingItems[item.id] ? (
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                  ) : (
+                    'Remove'
+                  )}
                 </Button>
               </div>
             </CardContent>
