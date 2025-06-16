@@ -21,7 +21,7 @@ const TeamContributionModal = ({
 }: TeamContributionModalProps): JSX.Element => {
   return (
     <Dialog open={isOpen} onOpenChange={onOpen}>
-      <DialogContent className="w-[calc(100%-1rem)] max-w-[95rem] sm:max-w-[85vw] md:max-w-[70vw] space-y-4 pt-9 pb-0 px-4 overflow-y-auto overflow-x-hidden">
+      <DialogContent className="w-[calc(100%-1rem)] max-w-[1440px] sm:max-w-[85vw] md:max-w-[70vw] space-y-4 pt-6 pb-0 px-6 overflow-y-auto overflow-x-hidden">
         <DialogClose asChild>
           <button
             className="absolute top-2 right-2 z-50 cursor-pointer rounded-xl hover:bg-muted active:scale-90"
@@ -40,7 +40,7 @@ const TeamContributionModal = ({
         >
           {contributions.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="space-y-4">
+              <div className="space-y-4 pb-9">
                 <div className="relative w-full h-[40vh] hidden sm:block">
                   <Image
                     src={item.image}

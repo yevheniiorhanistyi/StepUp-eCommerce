@@ -1,10 +1,6 @@
-import { Button } from '@/components/ui/button';
+import { IProductCartButtonProps } from '@/types/types';
 
-interface IProductCartButtonProps {
-  isInCart: boolean;
-  isProcessing: boolean;
-  onClick: (e: React.MouseEvent) => void;
-}
+import { Button } from '@/components/ui/button';
 
 const ProductCartButton = ({ isInCart, isProcessing, onClick }: IProductCartButtonProps) => {
   return (

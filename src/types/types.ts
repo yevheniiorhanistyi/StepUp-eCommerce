@@ -69,11 +69,6 @@ export interface IProductListParams {
   isLoading: boolean;
 }
 
-export interface IProductCartButtonProps {
-  product: ProductProjection | Product['masterData']['current'];
-  productId: string;
-}
-
 export interface ICommonCatalogProps {
   searchParams: ISearchParams;
   setSearchParams: React.Dispatch<React.SetStateAction<ISearchParams>>;
@@ -95,6 +90,13 @@ export interface IAppPaginationProps {
   itemsPerPage: number;
   currentPage: number;
   onPageChange: (page: number) => void;
+}
+
+export interface TeamContributionModalProps {
+  isOpen: boolean;
+  onOpen: (isOpen: boolean) => void;
+  onClose: () => void;
+  contributions: { image: string; title: string; description: string }[];
 }
 
 export interface IPrice {
@@ -170,6 +172,12 @@ export interface IDrawerMenuProps {
 
 export interface ILayoutProps {
   children: ReactNode;
+}
+
+export interface IProductCartButtonProps {
+  isInCart: boolean;
+  isProcessing: boolean;
+  onClick: (e: React.MouseEvent) => void;
 }
 
 export interface IProductSliderProps {
