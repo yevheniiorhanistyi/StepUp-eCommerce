@@ -4,6 +4,7 @@ import {
   Customer,
   Cart,
   LineItemDraft,
+  Product,
   ByProjectKeyRequestBuilder
 } from '@commercetools/platform-sdk';
 import { ReactNode } from 'react';
@@ -98,10 +99,25 @@ export interface TeamContributionModalProps {
   contributions: { image: string; title: string; description: string }[];
 }
 
+export interface IPrice {
+  centAmount: number;
+  currencyCode: string;
+}
+
+export interface IPriceDisplayProps {
+  price: {
+    value: IPrice;
+    discounted?: {
+      value: IPrice;
+    };
+  };
+}
+
 export interface ICartContextType {
   cart: Cart | undefined | null;
   addItem: (item: LineItemDraft) => Promise<void>;
   removeItem: (lineItemId: string) => Promise<void>;
+  removeItemsByProductKey: (productKey: string) => Promise<void>;
   updateItemQuantity: (lineItemId: string, quantity: number) => Promise<void>;
   refreshCart: () => Promise<void>;
   addPromoCode: (code: string) => Promise<void>;
@@ -119,6 +135,11 @@ export interface IAddLineItemParams {
   cartId: string;
   cartVersion: number;
   lineItem: LineItemDraft;
+}
+
+export interface IProductSizePickerProps {
+  product: Product;
+  variants: Array<{ key: string; size: string }>;
 }
 
 export interface IPrice {
@@ -150,6 +171,12 @@ export interface IDrawerMenuProps {
 
 export interface ILayoutProps {
   children: ReactNode;
+}
+
+export interface IProductCartButtonProps {
+  isInCart: boolean;
+  isProcessing: boolean;
+  onClick: (e: React.MouseEvent) => void;
 }
 
 export interface IProductSliderProps {

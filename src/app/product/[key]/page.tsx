@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import { getProductByKey } from '@/services/getProductByKey';
 import { notFound } from 'next/navigation';
 import {
@@ -7,8 +6,9 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '@/components/ui/accordion';
-import { ProductSizeSelector } from '@/components/ProductSizeSelector/product-size-selector';
 import { ProductSlider } from '@/components/ProductSlider/ProductSlider';
+
+import ProductSizePicker from '@/components/ProductSizePicker/ProductSizePicker';
 import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
 
 const ATTRIBUTE_NAME = 'size';
@@ -63,14 +63,7 @@ export default async function ProductPage({ params }: { params: Promise<{ key: s
             </div>
           )}
 
-          <div>
-            <div className="mb-1">Select Size</div>
-            <ProductSizeSelector variants={sizeVariants} currentKey={key} />
-          </div>
-
-          <div className="md:w-auto md:max-w-[200px]">
-            <Button size="lg">Add to cart</Button>
-          </div>
+          <ProductSizePicker product={product} variants={sizeVariants} />
         </div>
 
         {current.description && (
