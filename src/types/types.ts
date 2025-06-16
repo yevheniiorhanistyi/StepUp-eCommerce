@@ -92,6 +92,13 @@ export interface IAppPaginationProps {
   onPageChange: (page: number) => void;
 }
 
+export interface TeamContributionModalProps {
+  isOpen: boolean;
+  onOpen: (isOpen: boolean) => void;
+  onClose: () => void;
+  contributions: { image: string; title: string; description: string }[];
+}
+
 export interface IPrice {
   centAmount: number;
   currencyCode: string;
