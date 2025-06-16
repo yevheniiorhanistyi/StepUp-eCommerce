@@ -69,6 +69,12 @@ const teamMembers = [
         title: 'Developing the User Profile Page',
         description:
           'Dzmitry Drevich implemented the User Profile page, enabling users to view and manage their personal information in a clear and intuitive interface. The page supports seamless transitions between view and edit modes, real-time validation, and full address management. This contribution played a vital role in empowering users with greater control over their data and improving overall trust in the application.'
+      },
+      {
+        image: '/images/contributions/basket-page.png',
+        title: 'Implementing Basket Page with Full Cart Management Functionality',
+        description:
+          'Dzmitry Drevich implemented the Basket page, enabling users to manage their cart with real-time updates, quantity editing, promo code support, and dynamic price calculations. Building on the cart infrastructure by Yevhenii Orhanistyi, he brought the cart UI to life and ensured a smooth, interactive shopping experience.'
       }
     ]
   },
