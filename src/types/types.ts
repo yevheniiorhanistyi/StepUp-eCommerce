@@ -1,4 +1,13 @@
-import { ProductProjection, Category, Customer } from '@commercetools/platform-sdk';
+import {
+  ProductProjection,
+  Category,
+  Customer,
+  Cart,
+  LineItemDraft,
+  ByProjectKeyRequestBuilder
+} from '@commercetools/platform-sdk';
+import { ReactNode } from 'react';
+import { ErrorResponse } from '@commercetools/platform-sdk';
 
 export interface IAuthContextType {
   isAuthenticated: boolean;
@@ -87,4 +96,88 @@ export interface TeamContributionModalProps {
   onOpen: (isOpen: boolean) => void;
   onClose: () => void;
   contributions: { image: string; title: string; description: string }[];
+}
+
+export interface ICartContextType {
+  cart: Cart | undefined | null;
+  addItem: (item: LineItemDraft) => Promise<void>;
+  removeItem: (lineItemId: string) => Promise<void>;
+  updateItemQuantity: (lineItemId: string, quantity: number) => Promise<void>;
+  refreshCart: () => Promise<void>;
+  addPromoCode: (code: string) => Promise<void>;
+}
+
+export interface ICreateCartParams {
+  client: ByProjectKeyRequestBuilder;
+  lineItem: LineItemDraft;
+  customerId?: string;
+  anonymousId?: string;
+}
+
+export interface IAddLineItemParams {
+  client: ByProjectKeyRequestBuilder;
+  cartId: string;
+  cartVersion: number;
+  lineItem: LineItemDraft;
+}
+
+export interface IPrice {
+  centAmount: number;
+  currencyCode: string;
+}
+
+export interface IPriceDisplayProps {
+  price: {
+    value: IPrice;
+    discounted?: {
+      value: IPrice;
+    };
+  };
+}
+
+export interface IAnnouncementBannerProps {
+  label?: string;
+  text: string[];
+  socials?: boolean;
+}
+
+export interface IDrawerMenuProps {
+  navLinks: { href: string; label: string }[];
+  isAuthenticated: boolean;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface ILayoutProps {
+  children: ReactNode;
+}
+
+export interface IProductSliderProps {
+  images: { url: string }[];
+  productName: string;
+}
+
+export interface ICommercetoolsError {
+  body: ErrorResponse;
+}
+
+export interface ICustomerSignInResult {
+  access_token: string;
+  expires_in: number;
+  scope: string;
+  token_type: string;
+  refresh_token?: string;
+}
+
+export interface IUserDropdownMenuProps {
+  isAuthenticated: boolean;
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface IModalSliderProps {
+  isOpen: boolean;
+  onClose: () => void;
+  images: { url: string }[];
+  productName: string;
+  initialIndex: number;
 }

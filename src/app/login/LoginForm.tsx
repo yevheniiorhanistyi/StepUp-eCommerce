@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Form, Formik, ErrorMessage } from 'formik';
 import { toast } from 'sonner';
 import { useAuth } from '@/context/AuthContext';
+import { useCart } from '@/context/CartContext';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -16,6 +17,7 @@ import LoginSchema from './LoginSchema';
 const LoginForm = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
   const { setAuthentication, refreshUser } = useAuth();
+  const { refreshCart } = useCart();
   const router = useRouter();
 
   return (
@@ -43,6 +45,7 @@ const LoginForm = (): JSX.Element => {
           toast.success(`Logged in as ${values.email}`);
           router.push('/');
           await refreshUser();
+          await refreshCart();
         } catch (error) {
           if (error instanceof Error) {
             toast.error(error.message || 'Login failed.');

@@ -15,14 +15,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useAuth } from '@/context/AuthContext';
+import { useCart } from '@/context/CartContext';
+import { IUserDropdownMenuProps } from '@/types/types';
 
-interface UserDropdownMenuProps {
-  isAuthenticated: boolean;
-  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const UserDropdownMenu = ({ isAuthenticated, setIsAuthenticated }: UserDropdownMenuProps) => {
+const UserDropdownMenu = ({ isAuthenticated, setIsAuthenticated }: IUserDropdownMenuProps) => {
   const { user } = useAuth();
+  const { refreshCart } = useCart();
 
   const firstName = user?.firstName || '';
   const lastName = user?.lastName || '';
@@ -30,6 +28,7 @@ const UserDropdownMenu = ({ isAuthenticated, setIsAuthenticated }: UserDropdownM
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'DELETE' });
+    await refreshCart();
     setIsAuthenticated(false);
   };
 

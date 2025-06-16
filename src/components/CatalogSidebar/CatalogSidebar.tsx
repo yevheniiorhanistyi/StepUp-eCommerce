@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { ICatalogSidebarProps } from '@/types/types';
 import { IterationCw } from 'lucide-react';
 
 import { INITIAL_SEARCH_PARAMS, BRANDS, SIZES, COLORS } from '@/constants/constants';
+import { useIsMobile } from '@/hooks/useMobile';
 import { cn } from '@/lib/utils';
 
 import {
@@ -34,27 +35,20 @@ const CatalogSidebar = ({
   onCategoryClick
 }: ICatalogSidebarProps) => {
   const router = useRouter();
-  const { open, openMobile, setOpenMobile, toggleSidebar } = useSidebar();
+  const isMobile = useIsMobile();
+  const { setOpen, setOpenMobile } = useSidebar();
 
-  const resetFilters = () => {
+  const resetFilters = useCallback(() => {
     router.replace('/catalog');
     setSearchParams({ ...INITIAL_SEARCH_PARAMS });
-  };
+  }, [router, setSearchParams]);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (open || openMobile) {
-        setOpenMobile(false);
-        toggleSidebar();
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [open, openMobile, setOpenMobile, toggleSidebar]);
+    if (isMobile) {
+      setOpenMobile(false);
+      setOpen(false);
+    }
+  }, [isMobile, setOpen, setOpenMobile]);
 
   return (
     <Sidebar

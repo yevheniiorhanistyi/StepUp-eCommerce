@@ -4,6 +4,7 @@ import { Toaster } from '@/components/ui/sonner';
 import Layout from '@/components/Layout/Layout';
 import { AuthContextProvider } from '@/context/AuthContext';
 import { CategoryDataProvider } from '@/context/CategoryContext';
+import { CartDataProvider } from '@/context/CartContext';
 import '@/styles/globals.css';
 
 const montserrat = Montserrat({
@@ -32,14 +33,17 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no, email=no, address=no" />
         <link rel="icon" href="/favicon.png" type="image/x-icon" />
       </head>
       <body className={`${montserrat.variable} ${mrDafoe.variable} antialiased`}>
-        <CategoryDataProvider>
-          <AuthContextProvider>
-            <Layout>{children}</Layout>
-          </AuthContextProvider>
-        </CategoryDataProvider>
+        <CartDataProvider>
+          <CategoryDataProvider>
+            <AuthContextProvider>
+              <Layout>{children}</Layout>
+            </AuthContextProvider>
+          </CategoryDataProvider>
+        </CartDataProvider>
         <Toaster position="bottom-left" />
       </body>
     </html>
