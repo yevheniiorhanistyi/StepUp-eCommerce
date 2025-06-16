@@ -4,8 +4,9 @@ import {
   Customer,
   Cart,
   LineItemDraft,
-  ByProjectKeyRequestBuilder,
-  ErrorResponse
+  ErrorResponse,
+  Product,
+  ByProjectKeyRequestBuilder
 } from '@commercetools/platform-sdk';
 import { ReactNode } from 'react';
 
@@ -68,6 +69,11 @@ export interface IProductListParams {
   isLoading: boolean;
 }
 
+export interface IProductCartButtonProps {
+  product: ProductProjection | Product['masterData']['current'];
+  productId: string;
+}
+
 export interface ICommonCatalogProps {
   searchParams: ISearchParams;
   setSearchParams: React.Dispatch<React.SetStateAction<ISearchParams>>;
@@ -91,10 +97,25 @@ export interface IAppPaginationProps {
   onPageChange: (page: number) => void;
 }
 
+export interface IPrice {
+  centAmount: number;
+  currencyCode: string;
+}
+
+export interface IPriceDisplayProps {
+  price: {
+    value: IPrice;
+    discounted?: {
+      value: IPrice;
+    };
+  };
+}
+
 export interface ICartContextType {
   cart: Cart | undefined | null;
   addItem: (item: LineItemDraft) => Promise<void>;
   removeItem: (lineItemId: string) => Promise<void>;
+  removeItemsByProductKey: (productKey: string) => Promise<void>;
   updateItemQuantity: (lineItemId: string, quantity: number) => Promise<void>;
   refreshCart: () => Promise<void>;
   clearCart: () => Promise<void>;
@@ -113,6 +134,11 @@ export interface IAddLineItemParams {
   cartId: string;
   cartVersion: number;
   lineItem: LineItemDraft;
+}
+
+export interface IProductSizePickerProps {
+  product: Product;
+  variants: Array<{ key: string; size: string }>;
 }
 
 export interface IPrice {

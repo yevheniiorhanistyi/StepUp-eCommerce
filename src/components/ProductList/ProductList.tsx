@@ -1,4 +1,5 @@
 import { IProductListParams } from '@/types/types';
+
 import ProductItem from '@/components/ProductItem/ProductItem';
 
 const ProductList = ({ products, isLoading }: IProductListParams): JSX.Element => {
