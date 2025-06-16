@@ -171,6 +171,12 @@ export interface ILayoutProps {
   children: ReactNode;
 }
 
+export interface IProductCartButtonProps {
+  isInCart: boolean;
+  isProcessing: boolean;
+  onClick: (e: React.MouseEvent) => void;
+}
+
 export interface IProductSliderProps {
   images: { url: string }[];
   productName: string;
