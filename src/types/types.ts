@@ -69,11 +69,6 @@ export interface IProductListParams {
   isLoading: boolean;
 }
 
-export interface IProductCartButtonProps {
-  product: ProductProjection | Product['masterData']['current'];
-  productId: string;
-}
-
 export interface ICommonCatalogProps {
   searchParams: ISearchParams;
   setSearchParams: React.Dispatch<React.SetStateAction<ISearchParams>>;
