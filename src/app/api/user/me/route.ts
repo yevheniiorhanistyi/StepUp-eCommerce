@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createTokenClient } from '@/services/commercetools/client/createTokenClient';
-import { handleErrors } from '@/components/Register/registerUtils';
+import handleErrors from '@/services/register/handleErrors';
 
 export async function GET(req: NextRequest) {
   try {

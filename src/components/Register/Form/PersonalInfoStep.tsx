@@ -1,5 +1,5 @@
 import { Switch } from '@/components/ui/switch';
-import { RegisterFormProps } from '../types';
+import { RegisterFormProps } from '../../../types/register';
 import FormField from './FieldForm';
 import PersonalInfoFields from './PersonalInfoFields';
 import { countries } from '@/constants/constants';

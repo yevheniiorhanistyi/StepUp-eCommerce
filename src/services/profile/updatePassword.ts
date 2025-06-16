@@ -1,8 +1,4 @@
-type PasswordUpdateData = {
-  currentPassword: string;
-  newPassword: string;
-  version: number;
-};
+import { PasswordUpdateData } from '@/types/profile';
 
 async function updateUserPassword(data: PasswordUpdateData) {
   const response = await fetch('/api/user/password', {

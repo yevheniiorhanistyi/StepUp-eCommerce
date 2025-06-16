@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import PersonalInfoStep from '@/components/Register/Form/PersonalInfoStep';
-import type { RegisterFormFields } from '@/components/Register/types';
+import type { RegisterFormFields } from '@/types/register';
 import React from 'react';
 
 const mockValues = {

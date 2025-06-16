@@ -4,11 +4,12 @@ import {
   Customer,
   Cart,
   LineItemDraft,
+  ErrorResponse,
   Product,
-  ByProjectKeyRequestBuilder
+  ByProjectKeyRequestBuilder,
+  MyCustomerSignin
 } from '@commercetools/platform-sdk';
 import { ReactNode } from 'react';
-import { ErrorResponse } from '@commercetools/platform-sdk';
 
 export interface IAuthContextType {
   isAuthenticated: boolean;
@@ -92,7 +93,7 @@ export interface IAppPaginationProps {
   onPageChange: (page: number) => void;
 }
 
-export interface TeamContributionModalProps {
+export interface ITeamContributionModalProps {
   isOpen: boolean;
   onOpen: (isOpen: boolean) => void;
   onClose: () => void;
@@ -120,6 +121,7 @@ export interface ICartContextType {
   removeItemsByProductKey: (productKey: string) => Promise<void>;
   updateItemQuantity: (lineItemId: string, quantity: number) => Promise<void>;
   refreshCart: () => Promise<void>;
+  clearCart: () => Promise<void>;
   addPromoCode: (code: string) => Promise<void>;
 }
 
@@ -140,20 +142,6 @@ export interface IAddLineItemParams {
 export interface IProductSizePickerProps {
   product: Product;
   variants: Array<{ key: string; size: string }>;
-}
-
-export interface IPrice {
-  centAmount: number;
-  currencyCode: string;
-}
-
-export interface IPriceDisplayProps {
-  price: {
-    value: IPrice;
-    discounted?: {
-      value: IPrice;
-    };
-  };
 }
 
 export interface IAnnouncementBannerProps {
@@ -207,4 +195,11 @@ export interface IModalSliderProps {
   images: { url: string }[];
   productName: string;
   initialIndex: number;
+}
+
+export interface ICustomerSignin extends MyCustomerSignin {
+  email: string;
+  password: string;
+  anonymousId?: string;
+  activeCartSignInMode?: 'MergeWithExistingCustomerCart' | 'ReplaceWithEmptyCustomerCart';
 }

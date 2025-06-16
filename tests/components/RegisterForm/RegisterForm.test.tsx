@@ -13,16 +13,13 @@ jest.mock('@/context/CartContext', () => ({
   useCart: () => jest.fn()
 }));
 
-jest.mock('@/components/Register/RegisterSchema', () => ({
+jest.mock('@/lib/registerSchema', () => ({
   registerStep0Schema: {
     validate: () => Promise.resolve({})
   }
-  // registerStep1Schema: {
-  //   validate: () => Promise.resolve({}),
-  // }
 }));
 
-jest.mock('@/components/Register/registerUtils', () => ({
+jest.mock('@/services/register/checkEmail', () => ({
   checkEmailAvailability: jest.fn()
 }));
 

@@ -1,4 +1,4 @@
-import { TeamContributionModalProps } from '@/types/types';
+import { ITeamContributionModalProps } from '@/types/types';
 import Image from 'next/image';
 import {
   Dialog,
@@ -18,10 +18,10 @@ const TeamContributionModal = ({
   onOpen,
   onClose,
   contributions
-}: TeamContributionModalProps): JSX.Element => {
+}: ITeamContributionModalProps): JSX.Element => {
   return (
     <Dialog open={isOpen} onOpenChange={onOpen}>
-      <DialogContent className="w-[calc(100%-1rem)] max-w-[1440px] sm:max-w-[85vw] md:max-w-[70vw] space-y-4 pt-6 pb-0 px-6 overflow-y-auto overflow-x-hidden">
+      <DialogContent className="w-[calc(100%-1rem)] md:max-w-[900px] md:w-[85vw] max-[769px]:min-w-[85vw] flex pt-10 pb-0 px-6 overflow-clip">
         <DialogClose asChild>
           <button
             className="absolute top-2 right-2 z-50 cursor-pointer rounded-xl hover:bg-muted active:scale-90"
@@ -40,20 +40,23 @@ const TeamContributionModal = ({
         >
           {contributions.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="space-y-4 pb-9">
-                <div className="relative w-full h-[40vh] hidden sm:block">
+              <div className="pb-9 flex flex-col gap-4">
+                <div className="relative w-full md:h-[45vh] max-md:h-[35vh] max-sm:h-[20vh] overflow-clip flex grow shrink">
                   <Image
                     src={item.image}
                     sizes="(max-width: 768px) 100vw, 800px"
                     alt={item.title}
-                    fill
-                    className="object-cover lg:object-contain"
+                    width={600}
+                    height={200}
+                    className="object-contain min-w-full min-h-full relative"
                   />
                 </div>
-                <DialogTitle>{item.title}</DialogTitle>
-                <DialogDescription className="text-gray-700 text-sm">
-                  {item.description}
-                </DialogDescription>
+                <div className="flex flex-col gap-4 grow shrink">
+                  <DialogTitle>{item.title}</DialogTitle>
+                  <DialogDescription className="text-gray-700 text-sm">
+                    {item.description}
+                  </DialogDescription>
+                </div>
               </div>
             </SwiperSlide>
           ))}

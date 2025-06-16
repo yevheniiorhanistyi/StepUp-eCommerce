@@ -85,3 +85,6 @@ export function getCategoryBreadcrumb(slug: string, categories: Category[]) {
 
 export const getInitials = (firstName: string, lastName: string) =>
   `${(firstName?.[0] ?? '').toUpperCase()}${(lastName?.[0] ?? '').toUpperCase()}`;
+
+export const priceFormat = (value: number | string = 0): string =>
+  typeof value === 'string' ? value : value.toFixed(2);

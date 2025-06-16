@@ -3,7 +3,7 @@ import { Input } from '../../ui/input';
 import { Button } from '../../ui/button';
 import { Eye, EyeOff, Calendar } from 'lucide-react';
 import { ErrorMessage } from 'formik';
-import { CommonFormProps } from '../types';
+import { CommonFormProps } from '../../../types/register';
 import { useRef } from 'react';
 import {
   Select,
@@ -96,7 +96,7 @@ const FormField = ({
         <Button
           type="button"
           onClick={onToggle}
-          aria-label={`${label} visibility switch`}
+          aria-label={`${label || name} visibility switch`}
           className="absolute bottom-0 right-0 hover:cursor-pointer"
         >
           {show ? <Eye /> : <EyeOff />}

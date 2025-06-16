@@ -5,6 +5,7 @@ import { createTokenClient } from '@/services/commercetools/client/createTokenCl
 import { createCart } from '@/services/cart/server/createCart';
 import { addLineItem } from '@/services/cart/server/addLineItem';
 import { setCookie } from '@/lib/cookies/setCookie';
+import { cookieOptions } from '@/lib/cookies/cookieOptions';
 
 export async function POST(req: NextRequest) {
   const isAuthenticated = req.cookies.get('is_authenticated')?.value === 'true';
@@ -49,6 +50,8 @@ export async function POST(req: NextRequest) {
     } else {
       const client = createAnonymousClient();
 
+      const anonymousId = req.cookies.get('anonymous_id')?.value || crypto.randomUUID();
+
       if (isCartUpdatePossible) {
         const updatedCart = await addLineItem({
           client,
@@ -59,8 +62,6 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json(updatedCart);
       } else {
-        const anonymousId = crypto.randomUUID();
-
         const anonymousCart = await createCart({
           client,
           lineItem: { productId, variantId, quantity },
@@ -69,7 +70,9 @@ export async function POST(req: NextRequest) {
 
         const response = NextResponse.json(anonymousCart);
 
-        setCookie(response, 'anonymous_id', anonymousId);
+        if (!req.cookies.get('anonymous_id')?.value) {
+          setCookie(response, 'anonymous_id', anonymousId, { ...cookieOptions, httpOnly: false });
+        }
 
         return response;
       }
