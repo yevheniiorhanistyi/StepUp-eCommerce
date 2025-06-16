@@ -4,7 +4,7 @@ import UserAddresses from '@/components/Profile/addresses';
 import { useAuth } from '@/context/AuthContext';
 import { toast } from 'sonner';
 import { AddressesSection } from '@/components/Profile/addresses/AddressSection';
-import { updateUserAddresses } from '@/components/Profile/addresses/updateAddress';
+import { updateUserAddresses } from '@/services/profile/updateAddress';
 import SpinnerFallback from '@/components/SpinnerFallback/SpinnerFallback';
 
 jest.mock('@/components/Profile/addresses/AddressSection', () => ({
@@ -19,7 +19,7 @@ jest.mock('@/context/AuthContext', () => ({
   }))
 }));
 
-jest.mock('@/components/Profile/addresses/updateAddress');
+jest.mock('@/services/profile/updateAddress');
 jest.mock('sonner');
 
 describe('UserAddresses', () => {

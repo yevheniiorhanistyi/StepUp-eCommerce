@@ -4,7 +4,8 @@ import {
   Customer,
   Cart,
   LineItemDraft,
-  ByProjectKeyRequestBuilder
+  ByProjectKeyRequestBuilder,
+  ErrorResponse
 } from '@commercetools/platform-sdk';
 
 export interface IAuthContextType {
@@ -111,4 +112,8 @@ export interface IAddLineItemParams {
   cartId: string;
   cartVersion: number;
   lineItem: LineItemDraft;
+}
+
+export interface CommercetoolsError {
+  body: ErrorResponse;
 }

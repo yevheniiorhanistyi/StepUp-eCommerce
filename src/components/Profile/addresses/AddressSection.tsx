@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button';
-import { Address } from '@commercetools/platform-sdk';
 import { Plus } from 'lucide-react';
 import AddressCard from './AddressCard';
 import {
@@ -10,40 +9,16 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog';
-import { Formik, FormikProps } from 'formik';
+import { Formik } from 'formik';
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
-import { UserAddress } from '@/components/Register/types';
+
 import AddressFields from './AddressFields';
-import { updateUserAddresses } from './updateAddress';
+import { updateUserAddresses } from '../../../services/profile/updateAddress';
 import { toast } from 'sonner';
-import * as Yup from 'yup';
 
-type Props = {
-  type: 'billing' | 'shipping';
-  addresses: Address[];
-  defaultAddressId?: string;
-  onEdit: (addressId: string, changes: Partial<Address>) => Promise<void>;
-  onDelete: (addressId: string) => Promise<void>;
-  onSetDefault: (addressId: string) => Promise<void>;
-};
-
-export type AddressInfoProps = Pick<
-  FormikProps<UserAddress>,
-  'values' | 'errors' | 'touched' | 'handleChange' | 'handleBlur'
-> & {
-  setFieldValue: (field: string, value: unknown) => void;
-  withSwitch?: boolean;
-};
-
-export type AddressFieldsValues = {
-  country: string;
-  city: string;
-  streetName: string;
-  postalCode: string;
-  isDefault: boolean;
-  type: 'billing' | 'shipping';
-};
+import { AddressFieldsValues, AddressSectionProps } from '../../../types/profile';
+import { addressValidationSchema } from '@/lib/profileSchema';
 
 export function AddressesSection({
   type,
@@ -51,7 +26,7 @@ export function AddressesSection({
   defaultAddressId,
   onDelete,
   onSetDefault
-}: Props) {
+}: AddressSectionProps) {
   const { user, refreshUser } = useAuth();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -65,21 +40,6 @@ export function AddressesSection({
     isDefault: false,
     type
   };
-
-  const adressValidationSchema = Yup.object({
-    country: Yup.string()
-      .matches(/^[A-Za-zÀ-ÿ' -]+$/, 'Field must only contain letters')
-      .required('Country is required'),
-    city: Yup.string()
-      .matches(/^[A-Za-zÀ-ÿ' -]+$/, 'Field must only contain letters')
-      .required('City is required'),
-    streetName: Yup.string()
-      .matches(/^[A-Za-zÀ-ÿ0-9\s,'/.-]{2,}$/, 'Field must contain letters & numbers')
-      .required('Street is required'),
-    postalCode: Yup.string()
-      .matches(/^[A-Za-z0-9\s-]{3,10}$/, 'Invalid postal code format')
-      .required('Postal code is required')
-  });
 
   const addAddress = async (values: AddressFieldsValues) => {
     if (!user) {
@@ -167,7 +127,7 @@ export function AddressesSection({
           </DialogHeader>
           <Formik<AddressFieldsValues>
             initialValues={initialValues}
-            validationSchema={adressValidationSchema}
+            validationSchema={addressValidationSchema}
             onSubmit={addAddress}
           >
             {(formik) => (

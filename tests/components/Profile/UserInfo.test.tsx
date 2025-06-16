@@ -1,6 +1,6 @@
-import updatePersonalInfo from '@/components/Profile/details/updateUserInfo';
 import UserInfo from '@/components/Profile/details/UserInfo';
 import { useAuth } from '@/context/AuthContext';
+import updatePersonalInfo from '@/services/profile/updateUserInfo';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import * as sonner from 'sonner';
 
@@ -16,7 +16,7 @@ jest.mock('@/services/commercetools/client/createAnonymousClient', () => ({
   createAnonymousClient: jest.fn(() => ({}))
 }));
 
-jest.mock('@/components/Profile/details/updateUserInfo', () => jest.fn(() => Promise.resolve()));
+jest.mock('@/services/profile/updateUserInfo', () => jest.fn(() => Promise.resolve()));
 
 jest.mock('sonner', () => ({
   toast: { error: jest.fn(), success: jest.fn(), message: jest.fn() }

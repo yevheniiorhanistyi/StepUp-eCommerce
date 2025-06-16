@@ -1,7 +1,6 @@
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Pencil, Trash, Home } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
-import { Address } from '@commercetools/platform-sdk';
 import { Button } from '@/components/ui/button';
 
 import {
@@ -13,29 +12,21 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog';
 import { Formik } from 'formik';
-import { AddressFieldsValues } from './AddressSection';
 import AddressFields from './AddressFields';
 import { useAuth } from '@/context/AuthContext';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { updateUserAddresses } from './updateAddress';
-import { handleErrors } from '@/components/Register/registerUtils';
-import * as Yup from 'yup';
+import { updateUserAddresses } from '../../../services/profile/updateAddress';
 
-type Props = {
-  address: Address;
-  isDefault: boolean;
-  onDelete: () => void;
-  onSetDefault: () => void;
-};
-
-type AddresFields = Omit<AddressFieldsValues, 'type'>;
+import { AddresFields, AddressFieldsValues, Props } from '../../../types/profile';
+import { addressValidationSchema } from '@/lib/profileSchema';
+import handleErrors from '@/services/register/handleErrors';
 
 const AddressCard = ({ address, isDefault, onDelete, onSetDefault }: Props) => {
   const { user, refreshUser } = useAuth();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   if (!address.id) {
-    toast.error('No address to change.');
+    toast.message('No address to change.');
 
     return;
   }
@@ -49,24 +40,9 @@ const AddressCard = ({ address, isDefault, onDelete, onSetDefault }: Props) => {
     isDefault: false
   };
 
-  const adressValidationSchema = Yup.object({
-    country: Yup.string()
-      .matches(/^[A-Za-zÀ-ÿ' -]+$/, 'Field must only contain letters')
-      .required('Country is required'),
-    city: Yup.string()
-      .matches(/^[A-Za-zÀ-ÿ' -]+$/, 'Field must only contain letters')
-      .required('City is required'),
-    streetName: Yup.string()
-      .matches(/^[A-Za-zÀ-ÿ0-9\s,'/.-]{2,}$/, 'Field must contain letters & numbers')
-      .required('Street is required'),
-    postalCode: Yup.string()
-      .matches(/^[A-Za-z0-9\s-]{3,10}$/, 'Invalid postal code format')
-      .required('Postal code is required')
-  });
-
   const handleEdit = async (values: Partial<AddressFieldsValues>) => {
     if (!user) {
-      toast.error('User info is missing.');
+      toast.message('User info is missing.');
 
       return;
     }
@@ -140,7 +116,7 @@ const AddressCard = ({ address, isDefault, onDelete, onSetDefault }: Props) => {
               </DialogHeader>
               <Formik
                 initialValues={initialValues}
-                validationSchema={adressValidationSchema}
+                validationSchema={addressValidationSchema}
                 onSubmit={handleEdit}
               >
                 {(formik) => (

@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/context/AuthContext';
 import { AddressesSection } from './AddressSection';
-import { updateUserAddresses } from './updateAddress';
+import { updateUserAddresses } from '../../../services/profile/updateAddress';
 import { Address } from '@commercetools/platform-sdk';
 import { toast } from 'sonner';
 
