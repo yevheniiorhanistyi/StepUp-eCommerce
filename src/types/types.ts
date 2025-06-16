@@ -93,7 +93,7 @@ export interface IAppPaginationProps {
   onPageChange: (page: number) => void;
 }
 
-export interface TeamContributionModalProps {
+export interface ITeamContributionModalProps {
   isOpen: boolean;
   onOpen: (isOpen: boolean) => void;
   onClose: () => void;
