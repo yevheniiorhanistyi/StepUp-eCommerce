@@ -6,7 +6,8 @@ import {
   LineItemDraft,
   ErrorResponse,
   Product,
-  ByProjectKeyRequestBuilder
+  ByProjectKeyRequestBuilder,
+  MyCustomerSignin
 } from '@commercetools/platform-sdk';
 import { ReactNode } from 'react';
 
@@ -143,20 +144,6 @@ export interface IProductSizePickerProps {
   variants: Array<{ key: string; size: string }>;
 }
 
-export interface IPrice {
-  centAmount: number;
-  currencyCode: string;
-}
-
-export interface IPriceDisplayProps {
-  price: {
-    value: IPrice;
-    discounted?: {
-      value: IPrice;
-    };
-  };
-}
-
 export interface IAnnouncementBannerProps {
   label?: string;
   text: string[];
@@ -210,9 +197,9 @@ export interface IModalSliderProps {
   initialIndex: number;
 }
 
-export interface TeamContributionModalProps {
-  isOpen: boolean;
-  onOpen: (isOpen: boolean) => void;
-  onClose: () => void;
-  contributions: { image: string; title: string; description: string }[];
+export interface ICustomerSignin extends MyCustomerSignin {
+  email: string;
+  password: string;
+  anonymousId?: string;
+  activeCartSignInMode?: 'MergeWithExistingCustomerCart' | 'ReplaceWithEmptyCustomerCart';
 }

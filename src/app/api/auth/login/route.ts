@@ -1,21 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { tokenServiceInstance } from '@/services/commercetools/token/TokenService';
 import { createAuthenticatedClient } from '@/services/commercetools/client/createAuthenticatedClient';
-import { MyCustomerSignin } from '@commercetools/platform-sdk';
 import { mergeCarts } from '@/services/cart/server/mergeCarts';
+import { ICustomerSignin } from '@/types/types';
 
-interface CustomerSignin extends MyCustomerSignin {
-  email: string;
-  password: string;
-  anonymousId?: string;
-  activeCartSignInMode?: 'MergeWithExistingCustomerCart' | 'ReplaceWithEmptyCustomerCart';
-}
 export async function POST(req: NextRequest) {
   try {
     const { email, password, anonymousId } = await req.json();
     const client = createAuthenticatedClient(email, password);
 
-    const payload: CustomerSignin = {
+    const payload: ICustomerSignin = {
       email,
       password,
       anonymousId,
