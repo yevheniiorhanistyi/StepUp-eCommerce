@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-
 import {
   Drawer,
   DrawerClose,
@@ -10,19 +9,11 @@ import {
   DrawerTitle,
   DrawerTrigger
 } from '@/components/ui/drawer';
-
 import { Button } from '../ui/button';
-
 import { Menu, X, ChevronRight } from 'lucide-react';
+import { IDrawerMenuProps } from '@/types/types';
 
-interface DrawerMenuProps {
-  navLinks: { href: string; label: string }[];
-  isAuthenticated: boolean;
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const DrawerMenu = ({ navLinks, isAuthenticated, isOpen, setIsOpen }: DrawerMenuProps) => {
+const DrawerMenu = ({ navLinks, isAuthenticated, isOpen, setIsOpen }: IDrawerMenuProps) => {
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen} direction="right">
       <DrawerTrigger asChild>

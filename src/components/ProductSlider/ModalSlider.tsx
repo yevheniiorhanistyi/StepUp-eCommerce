@@ -16,14 +16,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import type { Swiper as SwiperType } from 'swiper';
 import { useRef } from 'react';
-
-type ModalSliderProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  images: { url: string }[];
-  productName: string;
-  initialIndex: number;
-};
+import { IModalSliderProps } from '@/types/types';
 
 export function ModalSlider({
   isOpen,
@@ -31,7 +24,7 @@ export function ModalSlider({
   images,
   productName,
   initialIndex
-}: ModalSliderProps) {
+}: IModalSliderProps) {
   const swiperRef = useRef<SwiperType | null>(null);
 
   return (

@@ -1,9 +1,9 @@
 import { ErrorObject } from '@commercetools/platform-sdk';
-import { CommercetoolsError } from '@/types/types';
+import { ICommercetoolsError } from '@/types/types';
 
 function handleErrors(error: unknown): Error {
   if (typeof error === 'object' && error !== null && 'body' in error) {
-    const commercetoolsError = error as CommercetoolsError;
+    const commercetoolsError = error as ICommercetoolsError;
     const { statusCode, message, errors } = commercetoolsError.body;
 
     const duplicateEmail = errors?.find(

@@ -1,10 +1,4 @@
-export interface CustomerSignInResult {
-  access_token: string;
-  expires_in: number;
-  scope: string;
-  token_type: string;
-  refresh_token?: string;
-}
+import { ICustomerSignInResult } from '@/types/types';
 
 const projectKey = process.env.NEXT_PUBLIC_PROJECT_KEY;
 const authUrl = process.env.NEXT_PUBLIC_AUTH_URL;
@@ -15,7 +9,7 @@ const scopes = process.env.NEXT_PUBLIC_SCOPES ?? '';
 const getBasicAuthHeader = (): string =>
   'Basic ' + Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
-const loginUser = async (email: string, password: string): Promise<CustomerSignInResult> => {
+const loginUser = async (email: string, password: string): Promise<ICustomerSignInResult> => {
   const response = await fetch(`${authUrl}/oauth/${projectKey}/customers/token`, {
     method: 'POST',
     headers: {

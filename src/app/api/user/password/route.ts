@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createTokenClient } from '@/services/commercetools/client/createTokenClient';
-import { handleErrors } from '@/services/register/handleErrors';
+import handleErrors from '@/services/register/handleErrors';
 
 export async function POST(req: NextRequest) {
   try {

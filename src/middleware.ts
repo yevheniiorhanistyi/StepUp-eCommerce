@@ -18,5 +18,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [Routes.Login, Routes.Register, Routes.Profile]
+  matcher: ['/login', '/register', '/profile']
 };
