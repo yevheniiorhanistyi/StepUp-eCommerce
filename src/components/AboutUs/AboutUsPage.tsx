@@ -12,7 +12,7 @@ const AboutUsPage = (): JSX.Element => {
   const [modalOpenIndex, setModalOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="w-full max-w-7xl mx-auto">
+    <section className="w-full max-w-[1440px] mx-auto">
       <div className="mb-10">
         <h1 className="uppercase text-left text-md text-gray-500">Our team</h1>
         <h2 className="text-3xl font-bold capitalize text-left">Get to know us</h2>
