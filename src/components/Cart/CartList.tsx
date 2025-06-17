@@ -8,6 +8,14 @@ import Link from 'next/link';
 import { priceFormat } from '@/lib/utils';
 import Image from 'next/image';
 import { useState } from 'react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from '../ui/dialog';
 
 const extractAttributeValue = (attr: {
   name: string;
@@ -25,6 +33,7 @@ const CartList = (): JSX.Element => {
   const { cart, removeItem, updateItemQuantity, clearCart } = useCart();
   const [isClearingCart, setIsClearingCart] = useState(false);
   const [processingItems, setProcessingItems] = useState<Record<string, boolean>>({});
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const setProcessingForItem = (id: string, value: boolean) => {
     setProcessingItems((prev) => ({ ...prev, [id]: value }));
@@ -37,15 +46,7 @@ const CartList = (): JSX.Element => {
         <Button
           type="button"
           className="cursor-pointer duration-300"
-          onClick={async () => {
-            if (isClearingCart) return;
-            try {
-              setIsClearingCart(true);
-              await clearCart();
-            } finally {
-              setIsClearingCart(false);
-            }
-          }}
+          onClick={() => setIsDialogOpen(true)}
           disabled={isClearingCart || cart?.lineItems.length === 0 || !cart}
         >
           {isClearingCart ? (
@@ -55,6 +56,50 @@ const CartList = (): JSX.Element => {
           )}
         </Button>
       </div>
+
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="text-2xl">Clear Shopping Cart</DialogTitle>
+            <DialogDescription>This will remove all items from your cart.</DialogDescription>
+          </DialogHeader>
+          <p>
+            Are you sure you want to remove all items from your cart? This action cannot be undone.
+          </p>
+          <DialogFooter className="flex justify-end gap-2 pt-4">
+            <Button
+              type="button"
+              className="cursor-pointer duration-300 min-w-[90px]"
+              variant="outline"
+              onClick={() => setIsDialogOpen(false)}
+              disabled={isClearingCart}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="button"
+              className="cursor-pointer duration-300 min-w-[90px]"
+              onClick={async () => {
+                try {
+                  setIsClearingCart(true);
+                  await clearCart();
+                  setIsDialogOpen(false);
+                } finally {
+                  setIsClearingCart(false);
+                }
+              }}
+              disabled={isClearingCart}
+            >
+              {isClearingCart ? (
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+              ) : (
+                'Confirm'
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       {(cart?.lineItems.length === 0 || !cart) && (
         <>
           <div className="text-center text-lg text-muted-foreground">
