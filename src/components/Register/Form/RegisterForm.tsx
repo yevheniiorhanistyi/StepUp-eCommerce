@@ -17,7 +17,7 @@ import { useCart } from '@/context/CartContext';
 
 import { RegisterFormFields } from '@/types/register';
 
-import { registerStep0Schema, registerStep1Schema } from '@/lib/registerSchema';
+import { registerStepSchema, registerStep1Schema } from '@/lib/registerSchema';
 
 import AccountStep from './AccountStep';
 import PersonalInfoStep from './PersonalInfoStep';
@@ -32,7 +32,7 @@ const RegisterForm = (): JSX.Element => {
   const router = useRouter();
 
   const steps = [
-    { id: '0', title: 'Email & password', validation: registerStep0Schema },
+    { id: '0', title: 'Email & password', validation: registerStepSchema },
     { id: '1', title: 'Personal info', validation: registerStep1Schema }
   ];
 
