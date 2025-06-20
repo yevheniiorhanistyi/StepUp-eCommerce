@@ -1,17 +1,17 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { Routes } from './constants/routes';
+import { ROUTES } from './constants/constants';
 
 export function middleware(request: NextRequest) {
   const isAuthenticated = request.cookies.get('is_authenticated')?.value === 'true';
   const { pathname } = request.nextUrl;
 
-  if (isAuthenticated && (pathname === Routes.Login || pathname === Routes.Register)) {
-    return NextResponse.redirect(new URL(Routes.Home, request.url));
+  if (isAuthenticated && (pathname === ROUTES.Login || pathname === ROUTES.Register)) {
+    return NextResponse.redirect(new URL(ROUTES.Home, request.url));
   }
 
-  if (!isAuthenticated && pathname === Routes.Profile) {
-    return NextResponse.redirect(new URL(Routes.Login, request.url));
+  if (!isAuthenticated && pathname === ROUTES.Profile) {
+    return NextResponse.redirect(new URL(ROUTES.Login, request.url));
   }
 
   return NextResponse.next();

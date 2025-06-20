@@ -1,5 +1,12 @@
 import { ISearchParams } from '@/types/types';
 
+export enum ROUTES {
+  Home = '/',
+  Login = '/login',
+  Register = '/register',
+  Profile = '/profile'
+}
+
 export const ANNOUNCEMENT_TEXTS = {
   seasonalSale: {
     text: ['Seasonal savings are here! Shop our bestsellers before they are gone!'],
