@@ -4,16 +4,19 @@ import { Form, Formik, FormikHelpers } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import * as Stepperize from '@stepperize/react';
 
 import { defineStepper } from '@/components/ui/stepper';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 
-import * as Stepperize from '@stepperize/react';
 import { RegisterFormFields } from '../../../types/register';
+
 import { registerStep0Schema, registerStep1Schema } from '../../../lib/registerSchema';
+
 import AccountStep from './AccountStep';
 import PersonalInfoStep from './PersonalInfoStep';
 
