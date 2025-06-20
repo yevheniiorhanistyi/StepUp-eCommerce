@@ -1,3 +1,4 @@
+import { RegisterFormFields } from '@/types/register';
 import { ISearchParams } from '@/types/types';
 
 export enum ROUTES {
@@ -15,6 +16,31 @@ export const enum ENV_KEY {
   CLIENT_SECRET = 'NEXT_PUBLIC_CLIENT_SECRET',
   SCOPES = 'NEXT_PUBLIC_SCOPES'
 }
+
+export const REGISTER_INITIAL_VALUES: RegisterFormFields = {
+  email: '',
+  password: '',
+  confirmPassword: '',
+  firstName: '',
+  lastName: '',
+  dateOfBirth: '',
+  phoneNumber: '',
+  billingAddress: {
+    country: '',
+    city: '',
+    streetName: '',
+    postalCode: '',
+    isDefault: true
+  },
+  shippingAddress: {
+    country: '',
+    city: '',
+    streetName: '',
+    postalCode: '',
+    isDefault: true,
+    useSame: true
+  }
+};
 
 export const ANNOUNCEMENT_TEXTS = {
   seasonalSale: {

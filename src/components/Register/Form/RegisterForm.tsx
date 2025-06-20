@@ -10,12 +10,14 @@ import { defineStepper } from '@/components/ui/stepper';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
+import { REGISTER_INITIAL_VALUES } from '@/constants/constants';
+
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 
-import { RegisterFormFields } from '../../../types/register';
+import { RegisterFormFields } from '@/types/register';
 
-import { registerStep0Schema, registerStep1Schema } from '../../../lib/registerSchema';
+import { registerStep0Schema, registerStep1Schema } from '@/lib/registerSchema';
 
 import AccountStep from './AccountStep';
 import PersonalInfoStep from './PersonalInfoStep';
@@ -35,31 +37,6 @@ const RegisterForm = (): JSX.Element => {
   ];
 
   const { Stepper } = defineStepper(...steps);
-
-  const initialValues: RegisterFormFields = {
-    email: '',
-    password: '',
-    confirmPassword: '',
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
-    phoneNumber: '',
-    billingAddress: {
-      country: '',
-      city: '',
-      streetName: '',
-      postalCode: '',
-      isDefault: true
-    },
-    shippingAddress: {
-      country: '',
-      city: '',
-      streetName: '',
-      postalCode: '',
-      isDefault: true,
-      useSame: true
-    }
-  };
 
   const handleSubmit = async (
     values: RegisterFormFields,
@@ -129,7 +106,7 @@ const RegisterForm = (): JSX.Element => {
         <Stepper.Provider>
           {({ methods }) => (
             <Formik
-              initialValues={initialValues}
+              initialValues={REGISTER_INITIAL_VALUES}
               validationSchema={methods.current.validation}
               onSubmit={handleSubmit}
             >
