@@ -7,6 +7,15 @@ export enum ROUTES {
   Profile = '/profile'
 }
 
+export const enum ENV_KEY {
+  API_URL = 'NEXT_PUBLIC_API_URL',
+  AUTH_URL = 'NEXT_PUBLIC_AUTH_URL',
+  PROJECT_KEY = 'NEXT_PUBLIC_PROJECT_KEY',
+  CLIENT_ID = 'NEXT_PUBLIC_CLIENT_ID',
+  CLIENT_SECRET = 'NEXT_PUBLIC_CLIENT_SECRET',
+  SCOPES = 'NEXT_PUBLIC_SCOPES'
+}
+
 export const ANNOUNCEMENT_TEXTS = {
   seasonalSale: {
     text: ['Seasonal savings are here! Shop our bestsellers before they are gone!'],

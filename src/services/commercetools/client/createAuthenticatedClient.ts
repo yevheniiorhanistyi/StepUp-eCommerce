@@ -1,4 +1,5 @@
 import { Client, ClientBuilder } from '@commercetools/sdk-client-v2';
+import { ENV_KEY } from '@/constants/constants';
 import { getEnvVar } from '@/lib/utils';
 import {
   createApiBuilderFromCtpClient,
@@ -9,7 +10,7 @@ import {
   getPasswordAuthMiddlewareOptions
 } from '@/services/commercetools/options/options';
 
-const projectKey = getEnvVar(process.env.NEXT_PUBLIC_PROJECT_KEY, 'NEXT_PUBLIC_PROJECT_KEY');
+const projectKey = getEnvVar(process.env.NEXT_PUBLIC_PROJECT_KEY, ENV_KEY.PROJECT_KEY);
 
 export const createAuthenticatedClient = (
   username: string,
