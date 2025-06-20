@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 
+import * as Stepperize from '@stepperize/react';
 import { RegisterFormFields } from '../../../types/register';
 import { registerStep0Schema, registerStep1Schema } from '../../../lib/registerSchema';
 import AccountStep from './AccountStep';
@@ -73,6 +74,46 @@ const RegisterForm = (): JSX.Element => {
       toast.error(handleErrors(error).message);
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const handleStepContinue = async ({
+    methods,
+    values,
+    validateForm,
+    setFieldError,
+    setFieldTouched,
+    submitForm
+  }: {
+    methods: Stepperize.Stepper<typeof steps>;
+    values: RegisterFormFields;
+    validateForm: () => Promise<Record<string, unknown>>;
+    setFieldError: (field: string, message: string) => void;
+    setFieldTouched: (field: string, touched: boolean) => void;
+    submitForm: () => void;
+  }) => {
+    const isValid = await validateForm();
+    if (Object.keys(isValid).length === 0) {
+      if (methods.isFirst) {
+        try {
+          const isEmailAvailable = await checkEmailAvailability(values.email);
+          if (!isEmailAvailable) {
+            setFieldError('email', 'User with this email already exists!');
+            toast.error(
+              'User with this email already exists, try to use another email or Sign In!'
+            );
+
+            return;
+          }
+          methods.next();
+        } catch (error) {
+          toast.message(handleErrors(error).message);
+        }
+      } else {
+        submitForm();
+      }
+    } else {
+      markFieldsTouched(isValid, setFieldTouched);
     }
   };
 
@@ -157,31 +198,16 @@ const RegisterForm = (): JSX.Element => {
                       className="flex-1/3 sm:flex-initial sm:min-w-[100px] cursor-pointer"
                       type="button"
                       disabled={!isValid || !dirty}
-                      onClick={async () => {
-                        const isValid = await validateForm();
-                        if (Object.keys(isValid).length === 0) {
-                          if (methods.isFirst) {
-                            try {
-                              const isEmailAvailable = await checkEmailAvailability(values.email);
-                              if (!isEmailAvailable) {
-                                setFieldError('email', 'User with this email already exists');
-                                toast.message(
-                                  'User with this email already exists, try to use another email or Sign In'
-                                );
-
-                                return;
-                              }
-                              methods.next();
-                            } catch (error) {
-                              toast.message(handleErrors(error).message);
-                            }
-                          } else {
-                            submitForm();
-                          }
-                        } else {
-                          markFieldsTouched(isValid, setFieldTouched);
-                        }
-                      }}
+                      onClick={() =>
+                        handleStepContinue({
+                          methods,
+                          values,
+                          validateForm,
+                          setFieldError,
+                          setFieldTouched,
+                          submitForm
+                        })
+                      }
                     >
                       {methods.isFirst ? 'Next' : 'Register'}
                     </Button>
