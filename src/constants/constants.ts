@@ -33,7 +33,9 @@ export enum ErrorCode {
   ApplyDiscountCodeFailed = 'APPLY_DISCOUNT_CODE_FAILED',
   RemoveProductFromCartFailed = 'REMOVE_PRODUCT_FROM_CART_FAILED',
   FailedToFetchCart = 'FAILED_TO_FETCH_CART',
-  FailedToFetchProducts = 'FAILED_TO_FETCH_PRODUCTS'
+  FailedToFetchProducts = 'FAILED_TO_FETCH_PRODUCTS',
+  MissingOrInvalidRequiredFields = 'MISSING_OR_INVALID_REQUIRED_FIELDS',
+  UpdateItemQuantityFailed = 'UPDATE_ITEM_QUANTITY_FAILED'
 }
 
 export const ERROR_MESSAGES = {
@@ -47,7 +49,9 @@ export const ERROR_MESSAGES = {
   [ErrorCode.ApplyDiscountCodeFailed]: 'Failed to apply discount code!',
   [ErrorCode.RemoveProductFromCartFailed]: 'Failed to remove product from cart',
   [ErrorCode.FailedToFetchCart]: 'Failed to fetch cart',
-  [ErrorCode.FailedToFetchProducts]: 'Failed to fetch products'
+  [ErrorCode.FailedToFetchProducts]: 'Failed to fetch products',
+  [ErrorCode.UpdateItemQuantityFailed]: 'Failed to update item quantity:',
+  [ErrorCode.MissingOrInvalidRequiredFields]: 'Missing or invalid required fields'
 };
 
 export const REGISTER_INITIAL_VALUES: RegisterFormFields = {
