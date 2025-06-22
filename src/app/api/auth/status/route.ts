@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { COOKIES } from '@/constants/constants';
+
 export async function GET(req: NextRequest) {
   const TOKEN_EXPIRY_BUFFER_MS = 2 * 60 * 60 * 1000;
-  const accessToken = req.cookies.get('access_token')?.value || null;
-  const refreshToken = req.cookies.get('refresh_token')?.value || null;
-  const isAuthenticated = req.cookies.get('is_authenticated')?.value === 'true';
-  const tokenExpiresAtRaw = req.cookies.get('token_expires_at')?.value || null;
+  const accessToken = req.cookies.get(COOKIES.AccessToken)?.value || null;
+  const refreshToken = req.cookies.get(COOKIES.RefreshToken)?.value || null;
+  const isAuthenticated = req.cookies.get(COOKIES.IsAuthenticated)?.value === 'true';
+  const tokenExpiresAtRaw = req.cookies.get(COOKIES.TokenExpiresAt)?.value || null;
 
   const tokenExpiresAt = tokenExpiresAtRaw ? Number(tokenExpiresAtRaw) : null;
   const currentTime = Date.now();

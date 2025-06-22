@@ -5,15 +5,15 @@ import { MyCustomerUpdateAction } from '@commercetools/platform-sdk';
 import checkEmailAvailability from '@/services/register/checkEmail';
 import handleErrors from '@/services/register/handleErrors';
 
-import { ErrorCode, ERROR_MESSAGES } from '@/constants/constants';
+import { COOKIES, ERROR_CODE, ERROR_MESSAGES } from '@/constants/constants';
 
 export async function POST(req: NextRequest) {
   try {
-    const accessToken = req.cookies.get('access_token')?.value;
+    const accessToken = req.cookies.get(COOKIES.AccessToken)?.value;
 
     if (!accessToken) {
       return NextResponse.json(
-        { error: ERROR_MESSAGES[ErrorCode.NotAuthenticated] },
+        { error: ERROR_MESSAGES[ERROR_CODE.NotAuthenticated] },
         { status: 401 }
       );
     }
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
 
     if (typeof version !== 'number') {
       return NextResponse.json(
-        { error: ERROR_MESSAGES[ErrorCode.MissingVersion] },
+        { error: ERROR_MESSAGES[ERROR_CODE.MissingVersion] },
         { status: 400 }
       );
     }
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     if (email !== undefined) {
       const isAvailable = await checkEmailAvailability(email);
       if (!isAvailable) {
-        return NextResponse.json({ error: ERROR_MESSAGES[ErrorCode.EmailTaken] }, { status: 400 });
+        return NextResponse.json({ error: ERROR_MESSAGES[ERROR_CODE.EmailTaken] }, { status: 400 });
       }
     }
 
@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
 
     if (actions.length === 0) {
       return NextResponse.json(
-        { error: ERROR_MESSAGES[ErrorCode.MissingOrInvalidRequiredFields] },
+        { error: ERROR_MESSAGES[ERROR_CODE.MissingOrInvalidRequiredFields] },
         { status: 400 }
       );
     }

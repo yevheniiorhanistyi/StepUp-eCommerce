@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createCredentialsClient } from '@/services/commercetools/client/createCredentialsClient';
 
-import { ErrorCode, ERROR_MESSAGES } from '@/constants/constants';
+import { ERROR_CODE, ERROR_MESSAGES } from '@/constants/constants';
 
 export async function GET() {
   try {
@@ -29,7 +29,7 @@ export async function GET() {
     return NextResponse.json(productsResponse.body.results);
   } catch {
     return NextResponse.json(
-      { error: ERROR_MESSAGES[ErrorCode.FailedToFetchProducts] },
+      { error: ERROR_MESSAGES[ERROR_CODE.FailedToFetchProducts] },
       { status: 500 }
     );
   }

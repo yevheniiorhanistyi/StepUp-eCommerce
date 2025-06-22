@@ -6,11 +6,11 @@ import { createCart } from '@/services/cart/server/createCart';
 import { addLineItem } from '@/services/cart/server/addLineItem';
 import { setCookie } from '@/lib/cookies/setCookie';
 import { cookieOptions } from '@/lib/cookies/cookieOptions';
-import { ErrorCode, ERROR_MESSAGES } from '@/constants/constants';
+import { COOKIES, ERROR_CODE, ERROR_MESSAGES } from '@/constants/constants';
 
 export async function POST(req: NextRequest) {
-  const isAuthenticated = req.cookies.get('is_authenticated')?.value === 'true';
-  const accessToken = req.cookies.get('access_token')?.value || null;
+  const isAuthenticated = req.cookies.get(COOKIES.IsAuthenticated)?.value === 'true';
+  const accessToken = req.cookies.get(COOKIES.AccessToken)?.value || null;
 
   try {
     const body = await req.json();
@@ -44,14 +44,14 @@ export async function POST(req: NextRequest) {
 
         const response = NextResponse.json(cart);
 
-        setCookie(response, 'customer_id', customerId);
+        setCookie(response, COOKIES.CustomerId, customerId);
 
         return response;
       }
     } else {
       const client = createAnonymousClient();
 
-      const anonymousId = req.cookies.get('anonymous_id')?.value || crypto.randomUUID();
+      const anonymousId = req.cookies.get(COOKIES.AnonymousId)?.value || crypto.randomUUID();
 
       if (isCartUpdatePossible) {
         const updatedCart = await addLineItem({
@@ -71,18 +71,21 @@ export async function POST(req: NextRequest) {
 
         const response = NextResponse.json(anonymousCart);
 
-        if (!req.cookies.get('anonymous_id')?.value) {
-          setCookie(response, 'anonymous_id', anonymousId, { ...cookieOptions, httpOnly: false });
+        if (!req.cookies.get(COOKIES.AnonymousId)?.value) {
+          setCookie(response, COOKIES.AnonymousId, anonymousId, {
+            ...cookieOptions,
+            httpOnly: false
+          });
         }
 
         return response;
       }
     }
   } catch (error: unknown) {
-    console.error(ERROR_MESSAGES[ErrorCode.AddProductToCartFailed], error);
+    console.error(ERROR_MESSAGES[ERROR_CODE.AddProductToCartFailed], error);
 
     return NextResponse.json(
-      { error: ERROR_MESSAGES[ErrorCode.AddProductToCartFailed] },
+      { error: ERROR_MESSAGES[ERROR_CODE.AddProductToCartFailed] },
       { status: 500 }
     );
   }

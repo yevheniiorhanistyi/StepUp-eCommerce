@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createTokenClient } from '@/services/commercetools/client/createTokenClient';
 import handleErrors from '@/services/register/handleErrors';
-import { ErrorCode, ERROR_MESSAGES } from '@/constants/constants';
+import { COOKIES, ERROR_CODE, ERROR_MESSAGES } from '@/constants/constants';
 
 export async function POST(req: NextRequest) {
   try {
-    const accessToken = req.cookies.get('access_token')?.value;
+    const accessToken = req.cookies.get(COOKIES.AccessToken)?.value;
 
     if (!accessToken) {
       return NextResponse.json(
-        { error: ERROR_MESSAGES[ErrorCode.NotAuthenticated] },
+        { error: ERROR_MESSAGES[ERROR_CODE.NotAuthenticated] },
         { status: 401 }
       );
     }
@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
 
     if (!currentPassword || !newPassword || typeof version !== 'number') {
       return NextResponse.json(
-        { error: ERROR_MESSAGES[ErrorCode.MissingOrInvalidRequiredFields] },
+        { error: ERROR_MESSAGES[ERROR_CODE.MissingOrInvalidRequiredFields] },
         { status: 400 }
       );
     }

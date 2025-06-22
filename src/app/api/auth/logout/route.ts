@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 import { tokenServiceInstance } from '@/services/commercetools/token/TokenService';
-import { ROUTES } from '@/constants/constants';
+import { COOKIES, ROUTES } from '@/constants/constants';
 
 export async function DELETE(_req: NextRequest) {
   const response = NextResponse.json({ success: true });
@@ -10,15 +10,15 @@ export async function DELETE(_req: NextRequest) {
   const secure = process.env.NODE_ENV === 'production';
 
   const cookiesToClear = [
-    { name: 'access_token', httpOnly: true },
-    { name: 'refresh_token', httpOnly: true },
-    { name: 'token_expires_at', httpOnly: false },
-    { name: 'is_authenticated', httpOnly: true },
-    { name: 'user_first_name', httpOnly: false },
-    { name: 'user_last_name', httpOnly: false },
-    { name: 'user_email', httpOnly: false },
-    { name: 'customer_id', httpOnly: true },
-    { name: 'anonymous_id', httpOnly: true }
+    { name: COOKIES.AccessToken, httpOnly: true },
+    { name: COOKIES.RefreshToken, httpOnly: true },
+    { name: COOKIES.TokenExpiresAt, httpOnly: false },
+    { name: COOKIES.IsAuthenticated, httpOnly: true },
+    { name: COOKIES.UserFirstName, httpOnly: false },
+    { name: COOKIES.UserLastName, httpOnly: false },
+    { name: COOKIES.UserEmail, httpOnly: false },
+    { name: COOKIES.CustomerId, httpOnly: true },
+    { name: COOKIES.AnonymousId, httpOnly: true }
   ];
 
   cookiesToClear.forEach(({ name, httpOnly }) => {

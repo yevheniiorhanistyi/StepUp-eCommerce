@@ -5,7 +5,7 @@ import { createRefreshTokenClient } from '@/services/commercetools/client/create
 
 import { setCookie } from '@/lib/cookies/setCookie';
 
-import { COOKIE_MAX_AGE, ERROR_MESSAGES, ErrorCode } from '@/constants/constants';
+import { COOKIES, COOKIE_MAX_AGE, ERROR_MESSAGES, ERROR_CODE } from '@/constants/constants';
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
 
     if (!refreshToken) {
       return NextResponse.json(
-        { success: false, message: ERROR_MESSAGES[ErrorCode.RefreshTokenMissing] },
+        { success: false, message: ERROR_MESSAGES[ERROR_CODE.RefreshTokenMissing] },
         { status: 401 }
       );
     }
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
 
     if (!token || !expirationTime) {
       return NextResponse.json(
-        { success: false, message: ERROR_MESSAGES[ErrorCode.RefreshFailed] },
+        { success: false, message: ERROR_MESSAGES[ERROR_CODE.RefreshFailed] },
         { status: 500 }
       );
     }
@@ -36,12 +36,12 @@ export async function POST(req: NextRequest) {
 
     const response = NextResponse.json({ success: true });
 
-    setCookie(response, 'access_token', token, {
+    setCookie(response, COOKIES.AccessToken, token, {
       httpOnly: true,
       maxAge
     });
 
-    setCookie(response, 'token_expires_at', String(expirationTime), {
+    setCookie(response, COOKIES.TokenExpiresAt, String(expirationTime), {
       httpOnly: false,
       maxAge: COOKIE_MAX_AGE.ThirtyDays
     });
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
     console.error('Refresh error:', error);
 
     return NextResponse.json(
-      { success: false, message: ERROR_MESSAGES[ErrorCode.RefreshFailed] },
+      { success: false, message: ERROR_MESSAGES[ERROR_CODE.RefreshFailed] },
       { status: 401 }
     );
   }

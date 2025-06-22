@@ -8,7 +8,7 @@ import { setCookie } from '@/lib/cookies/setCookie';
 
 import { ICustomerSignin } from '@/types/types';
 
-import { ErrorCode, ERROR_MESSAGES, COOKIE_MAX_AGE } from '@/constants/constants';
+import { COOKIES, ERROR_CODE, ERROR_MESSAGES, COOKIE_MAX_AGE } from '@/constants/constants';
 
 export async function POST(req: NextRequest) {
   try {
@@ -31,8 +31,8 @@ export async function POST(req: NextRequest) {
         {
           success: false,
           error: {
-            code: ErrorCode.TokenStoreInvalid,
-            message: ERROR_MESSAGES[ErrorCode.TokenStoreInvalid]
+            code: ERROR_CODE.TokenStoreInvalid,
+            message: ERROR_MESSAGES[ERROR_CODE.TokenStoreInvalid]
           }
         },
         { status: 500 }
@@ -47,28 +47,28 @@ export async function POST(req: NextRequest) {
     const response = NextResponse.json({ success: true });
 
     const cookiesToSet = [
-      { name: 'access_token', value: token, httpOnly: true, maxAge },
+      { name: COOKIES.AccessToken, value: token, httpOnly: true, maxAge },
       {
-        name: 'refresh_token',
+        name: COOKIES.RefreshToken,
         value: refreshToken,
         httpOnly: true,
         maxAge: COOKIE_MAX_AGE.ThirtyDays
       },
       {
-        name: 'token_expires_at',
+        name: COOKIES.TokenExpiresAt,
         value: String(expirationTime),
         httpOnly: false,
         maxAge
       },
       {
-        name: 'is_authenticated',
+        name: COOKIES.IsAuthenticated,
         value: 'true',
         httpOnly: false,
         maxAge: COOKIE_MAX_AGE.ThirtyDays
       },
-      { name: 'user_first_name', value: firstName ?? '', httpOnly: false, maxAge },
-      { name: 'user_last_name', value: lastName ?? '', httpOnly: false, maxAge },
-      { name: 'user_email', value: email, httpOnly: false, maxAge }
+      { name: COOKIES.UserFirstName, value: firstName ?? '', httpOnly: false, maxAge },
+      { name: COOKIES.UserLastName, value: lastName ?? '', httpOnly: false, maxAge },
+      { name: COOKIES.UserEmail, value: email, httpOnly: false, maxAge }
     ];
 
     cookiesToSet.forEach(({ name, value, httpOnly, maxAge }) => {
@@ -89,8 +89,8 @@ export async function POST(req: NextRequest) {
       {
         success: false,
         error: {
-          code: ErrorCode.InvalidCredentials,
-          message: ERROR_MESSAGES[ErrorCode.InvalidCredentials]
+          code: ERROR_CODE.InvalidCredentials,
+          message: ERROR_MESSAGES[ERROR_CODE.InvalidCredentials]
         }
       },
       { status: 401 }

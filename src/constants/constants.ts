@@ -17,12 +17,24 @@ export const enum ENV_KEY {
   SCOPES = 'NEXT_PUBLIC_SCOPES'
 }
 
+export enum COOKIES {
+  AccessToken = 'access_token',
+  RefreshToken = 'refresh_token',
+  TokenExpiresAt = 'token_expires_at',
+  IsAuthenticated = 'is_authenticated',
+  UserFirstName = 'user_first_name',
+  UserLastName = 'user_last_name',
+  UserEmail = 'user_email',
+  CustomerId = 'customer_id',
+  AnonymousId = 'anonymous_id'
+}
+
 export const COOKIE_MAX_AGE = {
   ThirtyDays: 60 * 60 * 24 * 30,
   OneHour: 60 * 60
 };
 
-export enum ErrorCode {
+export enum ERROR_CODE {
   InvalidCredentials = 'INVALID_CREDENTIALS',
   TokenStoreInvalid = 'TOKEN_STORE_INVALID',
   RefreshTokenMissing = 'REFRESH_TOKEN_MISSING',
@@ -42,22 +54,22 @@ export enum ErrorCode {
 }
 
 export const ERROR_MESSAGES = {
-  [ErrorCode.InvalidCredentials]: 'Incorrect email or password.',
-  [ErrorCode.TokenStoreInvalid]: 'Authentication token could not be retrieved.',
-  [ErrorCode.RefreshTokenMissing]: 'Refresh token not found.',
-  [ErrorCode.RefreshFailed]: 'Failed to refresh token.',
-  [ErrorCode.AddProductToCartFailed]: 'Failed to add product to cart',
-  [ErrorCode.InvalidCartIdOrCartVersion]: 'Invalid cartId or cartVersion',
-  [ErrorCode.DiscountCodeRequired]: 'Discount code is required',
-  [ErrorCode.ApplyDiscountCodeFailed]: 'Failed to apply discount code!',
-  [ErrorCode.RemoveProductFromCartFailed]: 'Failed to remove product from cart',
-  [ErrorCode.FailedToFetchCart]: 'Failed to fetch cart',
-  [ErrorCode.FailedToFetchProducts]: 'Failed to fetch products',
-  [ErrorCode.UpdateItemQuantityFailed]: 'Failed to update item quantity:',
-  [ErrorCode.MissingOrInvalidRequiredFields]: 'Missing or invalid required fields',
-  [ErrorCode.NotAuthenticated]: 'Not authenticated',
-  [ErrorCode.MissingVersion]: 'Missing version',
-  [ErrorCode.EmailTaken]: 'Email is already taken'
+  [ERROR_CODE.InvalidCredentials]: 'Incorrect email or password.',
+  [ERROR_CODE.TokenStoreInvalid]: 'Authentication token could not be retrieved.',
+  [ERROR_CODE.RefreshTokenMissing]: 'Refresh token not found.',
+  [ERROR_CODE.RefreshFailed]: 'Failed to refresh token.',
+  [ERROR_CODE.AddProductToCartFailed]: 'Failed to add product to cart',
+  [ERROR_CODE.InvalidCartIdOrCartVersion]: 'Invalid cartId or cartVersion',
+  [ERROR_CODE.DiscountCodeRequired]: 'Discount code is required',
+  [ERROR_CODE.ApplyDiscountCodeFailed]: 'Failed to apply discount code!',
+  [ERROR_CODE.RemoveProductFromCartFailed]: 'Failed to remove product from cart',
+  [ERROR_CODE.FailedToFetchCart]: 'Failed to fetch cart',
+  [ERROR_CODE.FailedToFetchProducts]: 'Failed to fetch products',
+  [ERROR_CODE.UpdateItemQuantityFailed]: 'Failed to update item quantity:',
+  [ERROR_CODE.MissingOrInvalidRequiredFields]: 'Missing or invalid required fields',
+  [ERROR_CODE.NotAuthenticated]: 'Not authenticated',
+  [ERROR_CODE.MissingVersion]: 'Missing version',
+  [ERROR_CODE.EmailTaken]: 'Email is already taken'
 };
 
 export const REGISTER_INITIAL_VALUES: RegisterFormFields = {
