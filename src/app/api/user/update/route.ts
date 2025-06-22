@@ -5,12 +5,17 @@ import { MyCustomerUpdateAction } from '@commercetools/platform-sdk';
 import checkEmailAvailability from '@/services/register/checkEmail';
 import handleErrors from '@/services/register/handleErrors';
 
+import { ErrorCode, ERROR_MESSAGES } from '@/constants/constants';
+
 export async function POST(req: NextRequest) {
   try {
     const accessToken = req.cookies.get('access_token')?.value;
 
     if (!accessToken) {
-      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
+      return NextResponse.json(
+        { error: ERROR_MESSAGES[ErrorCode.NotAuthenticated] },
+        { status: 401 }
+      );
     }
 
     const {
@@ -24,13 +29,16 @@ export async function POST(req: NextRequest) {
     } = await req.json();
 
     if (typeof version !== 'number') {
-      return NextResponse.json({ error: 'Missing version' }, { status: 400 });
+      return NextResponse.json(
+        { error: ERROR_MESSAGES[ErrorCode.MissingVersion] },
+        { status: 400 }
+      );
     }
 
     if (email !== undefined) {
       const isAvailable = await checkEmailAvailability(email);
       if (!isAvailable) {
-        return NextResponse.json({ error: 'Email is already taken' }, { status: 400 });
+        return NextResponse.json({ error: ERROR_MESSAGES[ErrorCode.EmailTaken] }, { status: 400 });
       }
     }
 
@@ -56,7 +64,10 @@ export async function POST(req: NextRequest) {
     }
 
     if (actions.length === 0) {
-      return NextResponse.json({ error: 'No update fields provided' }, { status: 400 });
+      return NextResponse.json(
+        { error: ERROR_MESSAGES[ErrorCode.MissingOrInvalidRequiredFields] },
+        { status: 400 }
+      );
     }
 
     const client = createTokenClient(accessToken);

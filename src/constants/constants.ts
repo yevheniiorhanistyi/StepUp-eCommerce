@@ -36,7 +36,9 @@ export enum ErrorCode {
   FailedToFetchProducts = 'FAILED_TO_FETCH_PRODUCTS',
   MissingOrInvalidRequiredFields = 'MISSING_OR_INVALID_REQUIRED_FIELDS',
   UpdateItemQuantityFailed = 'UPDATE_ITEM_QUANTITY_FAILED',
-  NotAuthenticated = 'NOT_AUTHENTICATED'
+  NotAuthenticated = 'NOT_AUTHENTICATED',
+  MissingVersion = 'MISSING_VERSION',
+  EmailTaken = 'EMAIL_TAKEN'
 }
 
 export const ERROR_MESSAGES = {
@@ -53,7 +55,9 @@ export const ERROR_MESSAGES = {
   [ErrorCode.FailedToFetchProducts]: 'Failed to fetch products',
   [ErrorCode.UpdateItemQuantityFailed]: 'Failed to update item quantity:',
   [ErrorCode.MissingOrInvalidRequiredFields]: 'Missing or invalid required fields',
-  [ErrorCode.NotAuthenticated]: 'Not authenticated'
+  [ErrorCode.NotAuthenticated]: 'Not authenticated',
+  [ErrorCode.MissingVersion]: 'Missing version',
+  [ErrorCode.EmailTaken]: 'Email is already taken'
 };
 
 export const REGISTER_INITIAL_VALUES: RegisterFormFields = {
