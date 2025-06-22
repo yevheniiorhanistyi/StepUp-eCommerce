@@ -39,6 +39,16 @@ const CartList = (): JSX.Element => {
     setProcessingItems((prev) => ({ ...prev, [id]: value }));
   };
 
+  const handleRemove = async (id: string) => {
+    if (processingItems[id]) return;
+    try {
+      setProcessingForItem(id, true);
+      await removeItem(id);
+    } finally {
+      setProcessingForItem(id, false);
+    }
+  };
+
   return (
     <div className="flex min-[767.97px]:basis-2/3 max-[768px]:mx-auto w-full flex-col gap-6 pt-5 relative">
       <div className="flex items-center justify-between min-w-full border-b-2 pb-1.5">
@@ -205,15 +215,7 @@ const CartList = (): JSX.Element => {
                 <Button
                   type="button"
                   className="cursor-pointer duration-300 min-w-[90px]"
-                  onClick={async () => {
-                    if (processingItems[item.id]) return;
-                    try {
-                      setProcessingForItem(item.id, true);
-                      await removeItem(item.id);
-                    } finally {
-                      setProcessingForItem(item.id, false);
-                    }
-                  }}
+                  onClick={() => handleRemove(item.id)}
                   disabled={!!processingItems[item.id]}
                 >
                   {processingItems[item.id] ? (
