@@ -6,6 +6,7 @@ import { createCart } from '@/services/cart/server/createCart';
 import { addLineItem } from '@/services/cart/server/addLineItem';
 import { setCookie } from '@/lib/cookies/setCookie';
 import { cookieOptions } from '@/lib/cookies/cookieOptions';
+import { ErrorCode, ERROR_MESSAGES } from '@/constants/constants';
 
 export async function POST(req: NextRequest) {
   const isAuthenticated = req.cookies.get('is_authenticated')?.value === 'true';
@@ -78,8 +79,11 @@ export async function POST(req: NextRequest) {
       }
     }
   } catch (error: unknown) {
-    console.error('Failed to add product to cart:', error);
+    console.error(ERROR_MESSAGES[ErrorCode.AddProductToCartFailed], error);
 
-    return NextResponse.json({ error: 'Failed to add product to cart' }, { status: 500 });
+    return NextResponse.json(
+      { error: ERROR_MESSAGES[ErrorCode.AddProductToCartFailed] },
+      { status: 500 }
+    );
   }
 }

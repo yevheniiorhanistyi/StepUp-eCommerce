@@ -3,6 +3,8 @@ import { CartRemoveLineItemAction } from '@commercetools/platform-sdk';
 import { createAnonymousClient } from '@/services/commercetools/client/createAnonymousClient';
 import { createTokenClient } from '@/services/commercetools/client/createTokenClient';
 
+import { ErrorCode, ERROR_MESSAGES } from '@/constants/constants';
+
 export async function POST(req: NextRequest) {
   const isAuthenticated = req.cookies.get('is_authenticated')?.value === 'true';
   const accessToken = req.cookies.get('access_token')?.value || null;
@@ -18,7 +20,10 @@ export async function POST(req: NextRequest) {
       typeof cartId === 'string' && cartId.trim() !== '' && typeof cartVersion === 'number';
 
     if (!isCartUpdatePossible) {
-      return NextResponse.json({ error: 'Invalid cartId or cartVersion' }, { status: 400 });
+      return NextResponse.json(
+        { error: ERROR_MESSAGES[ErrorCode.InvalidCartIdOrCartVersion] },
+        { status: 400 }
+      );
     }
 
     const client =
@@ -42,8 +47,11 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(updateRes.body);
   } catch (error) {
-    console.error('Failed to remove multiple products from cart:', error);
+    console.error(ERROR_MESSAGES[ErrorCode.RemoveProductFromCartFailed], error);
 
-    return NextResponse.json({ error: 'Failed to remove products from cart' }, { status: 500 });
+    return NextResponse.json(
+      { error: ERROR_MESSAGES[ErrorCode.RemoveProductFromCartFailed] },
+      { status: 500 }
+    );
   }
 }

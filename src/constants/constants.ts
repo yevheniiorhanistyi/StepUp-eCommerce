@@ -26,14 +26,28 @@ export enum ErrorCode {
   InvalidCredentials = 'INVALID_CREDENTIALS',
   TokenStoreInvalid = 'TOKEN_STORE_INVALID',
   RefreshTokenMissing = 'REFRESH_TOKEN_MISSING',
-  RefreshFailed = 'REFRESH_FAILED'
+  RefreshFailed = 'REFRESH_FAILED',
+  AddProductToCartFailed = 'ADD_PRODUCT_TO_CART_FAILED',
+  InvalidCartIdOrCartVersion = 'INVALID_CART_ID_OR_CART_VERSION',
+  DiscountCodeRequired = 'DISCOUNT_CODE_REQUIRED',
+  ApplyDiscountCodeFailed = 'APPLY_DISCOUNT_CODE_FAILED',
+  RemoveProductFromCartFailed = 'REMOVE_PRODUCT_FROM_CART_FAILED',
+  FailedToFetchCart = 'FAILED_TO_FETCH_CART',
+  FailedToFetchProducts = 'FAILED_TO_FETCH_PRODUCTS'
 }
 
 export const ERROR_MESSAGES = {
   [ErrorCode.InvalidCredentials]: 'Incorrect email or password.',
   [ErrorCode.TokenStoreInvalid]: 'Authentication token could not be retrieved.',
   [ErrorCode.RefreshTokenMissing]: 'Refresh token not found.',
-  [ErrorCode.RefreshFailed]: 'Failed to refresh token.'
+  [ErrorCode.RefreshFailed]: 'Failed to refresh token.',
+  [ErrorCode.AddProductToCartFailed]: 'Failed to add product to cart',
+  [ErrorCode.InvalidCartIdOrCartVersion]: 'Invalid cartId or cartVersion',
+  [ErrorCode.DiscountCodeRequired]: 'Discount code is required',
+  [ErrorCode.ApplyDiscountCodeFailed]: 'Failed to apply discount code!',
+  [ErrorCode.RemoveProductFromCartFailed]: 'Failed to remove product from cart',
+  [ErrorCode.FailedToFetchCart]: 'Failed to fetch cart',
+  [ErrorCode.FailedToFetchProducts]: 'Failed to fetch products'
 };
 
 export const REGISTER_INITIAL_VALUES: RegisterFormFields = {

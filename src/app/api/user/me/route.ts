@@ -17,7 +17,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(response.body);
   } catch (error: unknown) {
     const handled = handleErrors(error);
-    console.error('Failed to fetch user data:', error);
 
     return NextResponse.json({ error: handled.message }, { status: 500 });
   }

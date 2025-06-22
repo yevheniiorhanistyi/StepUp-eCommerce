@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createTokenClient } from '@/services/commercetools/client/createTokenClient';
 import { createAnonymousClient } from '@/services/commercetools/client/createAnonymousClient';
 
+import { ErrorCode, ERROR_MESSAGES } from '@/constants/constants';
+
 export async function GET(req: NextRequest) {
   const accessToken = req.cookies.get('access_token')?.value || null;
   const isAuthenticated = req.cookies.get('is_authenticated')?.value === 'true';
@@ -50,8 +52,11 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(null);
     }
   } catch (error) {
-    console.error('Failed to fetch cart', error);
+    console.error(ERROR_MESSAGES[ErrorCode.FailedToFetchCart], error);
 
-    return NextResponse.json({ error: 'Failed to fetch cart' }, { status: 500 });
+    return NextResponse.json(
+      { error: ERROR_MESSAGES[ErrorCode.FailedToFetchCart] },
+      { status: 500 }
+    );
   }
 }
