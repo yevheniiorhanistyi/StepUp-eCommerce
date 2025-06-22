@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { tokenServiceInstance } from '@/services/commercetools/token/TokenService';
 import { createRefreshTokenClient } from '@/services/commercetools/client/createRefreshTokenClient';
+
+import { setCookie } from '@/lib/cookies/setCookie';
+
+import { COOKIE_MAX_AGE, ERROR_MESSAGES, ErrorCode } from '@/constants/constants';
 
 export async function POST(req: NextRequest) {
   try {
@@ -8,7 +13,7 @@ export async function POST(req: NextRequest) {
 
     if (!refreshToken) {
       return NextResponse.json(
-        { success: false, message: 'Refresh token not found' },
+        { success: false, message: ERROR_MESSAGES[ErrorCode.RefreshTokenMissing] },
         { status: 401 }
       );
     }
@@ -18,35 +23,36 @@ export async function POST(req: NextRequest) {
     const client = createRefreshTokenClient(refreshToken);
     await client.me().get().execute();
 
-    const tokenStore = tokenServiceInstance.get();
+    const { token, expirationTime } = tokenServiceInstance.get() || {};
 
-    if (!tokenStore?.token || !tokenStore?.expirationTime) {
+    if (!token || !expirationTime) {
       return NextResponse.json(
-        { success: false, message: 'Failed to refresh token' },
+        { success: false, message: ERROR_MESSAGES[ErrorCode.RefreshFailed] },
         { status: 500 }
       );
     }
 
+    const maxAge = Math.floor((expirationTime - Date.now()) / 1000);
+
     const response = NextResponse.json({ success: true });
 
-    response.cookies.set('access_token', tokenStore.token, {
+    setCookie(response, 'access_token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: Math.floor((tokenStore.expirationTime - Date.now()) / 1000),
-      path: '/'
+      maxAge
     });
 
-    response.cookies.set('token_expires_at', tokenStore.expirationTime.toString(), {
+    setCookie(response, 'token_expires_at', String(expirationTime), {
       httpOnly: false,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 60 * 60 * 24 * 30,
-      path: '/'
+      maxAge: COOKIE_MAX_AGE.ThirtyDays
     });
 
     return response;
   } catch (error) {
     console.error('Refresh error:', error);
 
-    return NextResponse.json({ success: false, message: 'Refresh failed' }, { status: 401 });
+    return NextResponse.json(
+      { success: false, message: ERROR_MESSAGES[ErrorCode.RefreshFailed] },
+      { status: 401 }
+    );
   }
 }

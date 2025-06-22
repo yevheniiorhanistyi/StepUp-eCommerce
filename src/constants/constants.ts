@@ -17,6 +17,25 @@ export const enum ENV_KEY {
   SCOPES = 'NEXT_PUBLIC_SCOPES'
 }
 
+export const COOKIE_MAX_AGE = {
+  ThirtyDays: 60 * 60 * 24 * 30,
+  OneHour: 60 * 60
+};
+
+export enum ErrorCode {
+  InvalidCredentials = 'INVALID_CREDENTIALS',
+  TokenStoreInvalid = 'TOKEN_STORE_INVALID',
+  RefreshTokenMissing = 'REFRESH_TOKEN_MISSING',
+  RefreshFailed = 'REFRESH_FAILED'
+}
+
+export const ERROR_MESSAGES = {
+  [ErrorCode.InvalidCredentials]: 'Incorrect email or password.',
+  [ErrorCode.TokenStoreInvalid]: 'Authentication token could not be retrieved.',
+  [ErrorCode.RefreshTokenMissing]: 'Refresh token not found.',
+  [ErrorCode.RefreshFailed]: 'Failed to refresh token.'
+};
+
 export const REGISTER_INITIAL_VALUES: RegisterFormFields = {
   email: '',
   password: '',

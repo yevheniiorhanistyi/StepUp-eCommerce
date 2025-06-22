@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { tokenServiceInstance } from '@/services/commercetools/token/TokenService';
 import { createAuthenticatedClient } from '@/services/commercetools/client/createAuthenticatedClient';
 import { mergeCarts } from '@/services/cart/server/mergeCarts';
+
+import { setCookie } from '@/lib/cookies/setCookie';
+
 import { ICustomerSignin } from '@/types/types';
+
+import { ErrorCode, ERROR_MESSAGES, COOKIE_MAX_AGE } from '@/constants/constants';
 
 export async function POST(req: NextRequest) {
   try {
@@ -18,15 +24,15 @@ export async function POST(req: NextRequest) {
 
     await client.me().login().post({ body: payload }).execute();
 
-    const tokenStore = tokenServiceInstance.get();
+    const { token, refreshToken, expirationTime } = tokenServiceInstance.get() || {};
 
-    if (!tokenStore?.token || !tokenStore?.refreshToken || !tokenStore?.expirationTime) {
+    if (!token || !refreshToken || !expirationTime) {
       return NextResponse.json(
         {
           success: false,
           error: {
-            code: 'TOKEN_STORE_INVALID',
-            message: 'Authentication token could not be retrieved.'
+            code: ErrorCode.TokenStoreInvalid,
+            message: ERROR_MESSAGES[ErrorCode.TokenStoreInvalid]
           }
         },
         { status: 500 }
@@ -36,57 +42,37 @@ export async function POST(req: NextRequest) {
     const userResponse = await client.me().get().execute();
     const { firstName, lastName } = userResponse.body;
 
-    const maxAge = Math.floor((tokenStore.expirationTime - Date.now()) / 1000);
+    const maxAge = Math.floor((expirationTime - Date.now()) / 1000);
 
     const response = NextResponse.json({ success: true });
 
-    response.cookies.set('access_token', tokenStore.token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: Math.floor((tokenStore.expirationTime - Date.now()) / 1000),
-      path: '/'
-    });
+    const cookiesToSet = [
+      { name: 'access_token', value: token, httpOnly: true, maxAge },
+      {
+        name: 'refresh_token',
+        value: refreshToken,
+        httpOnly: true,
+        maxAge: COOKIE_MAX_AGE.ThirtyDays
+      },
+      {
+        name: 'token_expires_at',
+        value: String(expirationTime),
+        httpOnly: false,
+        maxAge
+      },
+      {
+        name: 'is_authenticated',
+        value: 'true',
+        httpOnly: false,
+        maxAge: COOKIE_MAX_AGE.ThirtyDays
+      },
+      { name: 'user_first_name', value: firstName ?? '', httpOnly: false, maxAge },
+      { name: 'user_last_name', value: lastName ?? '', httpOnly: false, maxAge },
+      { name: 'user_email', value: email, httpOnly: false, maxAge }
+    ];
 
-    response.cookies.set('refresh_token', tokenStore.refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 60 * 60 * 24 * 30,
-      path: '/'
-    });
-
-    response.cookies.set('token_expires_at', String(tokenStore.expirationTime), {
-      httpOnly: false,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: Math.floor((tokenStore.expirationTime - Date.now()) / 1000),
-      path: '/'
-    });
-
-    response.cookies.set('is_authenticated', 'true', {
-      httpOnly: false,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 60 * 60 * 24 * 30,
-      path: '/'
-    });
-
-    response.cookies.set('user_first_name', firstName ?? '', {
-      httpOnly: false,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge,
-      path: '/'
-    });
-
-    response.cookies.set('user_last_name', lastName ?? '', {
-      httpOnly: false,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge,
-      path: '/'
-    });
-
-    response.cookies.set('user_email', email, {
-      httpOnly: false,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge,
-      path: '/'
+    cookiesToSet.forEach(({ name, value, httpOnly, maxAge }) => {
+      setCookie(response, name, value, { httpOnly, maxAge });
     });
 
     if (anonymousId) {
@@ -103,8 +89,8 @@ export async function POST(req: NextRequest) {
       {
         success: false,
         error: {
-          code: 'INVALID_CREDENTIALS',
-          message: 'Incorrect email or password.'
+          code: ErrorCode.InvalidCredentials,
+          message: ERROR_MESSAGES[ErrorCode.InvalidCredentials]
         }
       },
       { status: 401 }

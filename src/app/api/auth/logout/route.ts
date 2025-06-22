@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+
 import { tokenServiceInstance } from '@/services/commercetools/token/TokenService';
+import { ROUTES } from '@/constants/constants';
 
 export async function DELETE(_req: NextRequest) {
   const response = NextResponse.json({ success: true });
@@ -24,7 +26,7 @@ export async function DELETE(_req: NextRequest) {
       httpOnly,
       secure,
       maxAge: 0,
-      path: '/'
+      path: ROUTES.Home
     });
   });
 
