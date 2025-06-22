@@ -10,7 +10,7 @@ import { defineStepper } from '@/components/ui/stepper';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
-import { REGISTER_INITIAL_VALUES } from '@/constants/constants';
+import { ERROR_CODE, ERROR_MESSAGES, REGISTER_INITIAL_VALUES } from '@/constants/constants';
 
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
@@ -78,7 +78,7 @@ const RegisterForm = (): JSX.Element => {
         try {
           const isEmailAvailable = await checkEmailAvailability(values.email);
           if (!isEmailAvailable) {
-            setFieldError('email', 'User with this email already exists!');
+            setFieldError('email', ERROR_MESSAGES[ERROR_CODE.EmailAlreadyExists]);
             toast.error(
               'User with this email already exists, try to use another email or Sign In!'
             );

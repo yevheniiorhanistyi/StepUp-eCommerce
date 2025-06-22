@@ -46,6 +46,7 @@ export enum ERROR_CODE {
   RemoveProductFromCartFailed = 'REMOVE_PRODUCT_FROM_CART_FAILED',
   FailedToFetchCart = 'FAILED_TO_FETCH_CART',
   FailedToFetchProducts = 'FAILED_TO_FETCH_PRODUCTS',
+  EmailAlreadyExists = 'USER_WITH_THIS_EMAIL_ALREADY_EXISTS',
   MissingOrInvalidRequiredFields = 'MISSING_OR_INVALID_REQUIRED_FIELDS',
   UpdateItemQuantityFailed = 'UPDATE_ITEM_QUANTITY_FAILED',
   NotAuthenticated = 'NOT_AUTHENTICATED',
@@ -67,6 +68,7 @@ export const ERROR_MESSAGES = {
   [ERROR_CODE.FailedToFetchProducts]: 'Failed to fetch products',
   [ERROR_CODE.UpdateItemQuantityFailed]: 'Failed to update item quantity:',
   [ERROR_CODE.MissingOrInvalidRequiredFields]: 'Missing or invalid required fields',
+  [ERROR_CODE.EmailAlreadyExists]: 'User with this email already exists!',
   [ERROR_CODE.NotAuthenticated]: 'Not authenticated',
   [ERROR_CODE.MissingVersion]: 'Missing version',
   [ERROR_CODE.EmailTaken]: 'Email is already taken'
