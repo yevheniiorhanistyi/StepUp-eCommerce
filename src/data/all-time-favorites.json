@@ -1,0 +1,394 @@
+[
+  {
+    "id": 1,
+    "key": "grand-court-alpha",
+    "name": "adidas Grand Court Alpha",
+    "description": "Sleek, sporty and so easy to style. The adidas® Grand Court Alpha 00s won't spend much time in your shoe rack. A Cloudfoam midsole cushions your step while the soft lining hugs the foot in place. A classic rubber outsole keeps you grounded day to day. Whether you're trekking across the city or taking it easy with friends, the adidas heritage shines through.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "Gray",
+          "label": "Gray"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "Addidas",
+          "label": "Addidas"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "41",
+            "label": "41"
+          },
+          {
+            "key": "42",
+            "label": "42"
+          },
+          {
+            "key": "43",
+            "label": "43"
+          },
+          {
+            "key": "44",
+            "label": "44"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "/images/all-time-favorites/grand-court-alpha/image-1.jpg",
+      "/images/all-time-favorites/grand-court-alpha/image-2.jpg",
+      "/images/all-time-favorites/grand-court-alpha/image-3.jpg",
+      "/images/all-time-favorites/grand-court-alpha/image-4.jpg",
+      "/images/all-time-favorites/grand-court-alpha/image-5.jpg"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 8000,
+          "fractionDigits": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "key": "classics-530",
+    "name": "New Balance Classics 530",
+    "description": "The New Balance® Classics 530 sneakers merge throwback style with modern comfort. They are made of a mesh upper with a lace-up closure for everyday style. The rubber insole and cotton lining add to their comfort. These running shoes feature an ABZORB midsole that delivers superior cushioning in these classic kicks.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "White",
+          "label": "White"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "New Balance",
+          "label": "New Balance"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "42",
+            "label": "42"
+          },
+          {
+            "key": "43",
+            "label": "43"
+          },
+          {
+            "key": "44",
+            "label": "44"
+          },
+          {
+            "key": "45",
+            "label": "45"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "/images/all-time-favorites/classics-530/image-1.jpg",
+      "/images/all-time-favorites/classics-530/image-2.jpg",
+      "/images/all-time-favorites/classics-530/image-3.jpg",
+      "/images/all-time-favorites/classics-530/image-4.jpg",
+      "/images/all-time-favorites/classics-530/image-5.jpg"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 10000,
+          "fractionDigits": 2
+        },
+        "discounted": {
+          "value": {
+            "type": "centPrecision",
+            "currencyCode": "USD",
+            "centAmount": 9500,
+            "fractionDigits": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "key": "omega-trainer",
+    "name": "Converse Omega Trainer",
+    "description": "Created a smart look wearing the Converse® Converse Omega Trainer. 80s-inspired suede and mesh upper with that signature Converse look and feel. The low-top sneakers feature Converse Comfort sockliner and a lightweight, EVA foam midsole to help provide optimal comfort. Star Chevron reps the Converse legacy of sport and street style.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "Gray",
+          "label": "Gray"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "Converse",
+          "label": "Converse"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "39",
+            "label": "39"
+          },
+          {
+            "key": "40",
+            "label": "40"
+          },
+          {
+            "key": "41",
+            "label": "41"
+          },
+          {
+            "key": "42",
+            "label": "42"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "/images/all-time-favorites/omega-trainer/image-1.jpg",
+      "/images/all-time-favorites/omega-trainer/image-2.jpg",
+      "/images/all-time-favorites/omega-trainer/image-3.jpg",
+      "/images/all-time-favorites/omega-trainer/image-4.jpg",
+      "/images/all-time-favorites/omega-trainer/image-5.jpg"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 7500,
+          "fractionDigits": 2
+        },
+        "discounted": {
+          "value": {
+            "type": "centPrecision",
+            "currencyCode": "USD",
+            "centAmount": 7125,
+            "fractionDigits": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "key": "run-star-trainer",
+    "name": "Converse Run Star Trainer",
+    "description": "A celebration of sports, style, and heritage, the Converse® Run Star Trainer blends sleek details with luxe cushioning to complement your favorite outfits, day or night. A durable nylon upper with suede overlays and leather accents is added for a luxe look and feel, while the responsive memory foam cushioning helps provide next-level comfort. These low-top sneakers come with a traction rubber outsole that helps provide grip. These feature punched eyelets and waxed laces, add a premium touch and offer a customized fit.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "White",
+          "label": "White"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "Converse",
+          "label": "Converse"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "39",
+            "label": "39"
+          },
+          {
+            "key": "40",
+            "label": "40"
+          },
+          {
+            "key": "41",
+            "label": "41"
+          },
+          {
+            "key": "42",
+            "label": "42"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "/images/all-time-favorites/run-star-trainer/image-1.jpg",
+      "/images/all-time-favorites/run-star-trainer/image-2.jpg",
+      "/images/all-time-favorites/run-star-trainer/image-3.jpg",
+      "/images/all-time-favorites/run-star-trainer/image-4.jpg",
+      "/images/all-time-favorites/run-star-trainer/image-5.jpg"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 9000,
+          "fractionDigits": 2
+        },
+        "discounted": {
+          "value": {
+            "type": "centPrecision",
+            "currencyCode": "USD",
+            "centAmount": 8550,
+            "fractionDigits": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "key": "disruptor-2-woven",
+    "name": "Fila Disruptor 2 Woven",
+    "description": "Elevate your everyday style with the iconic Fila® Disruptor 2 Woven sneakers — a bold blend of fashion-forward design and lasting comfort. Featuring unique woven textural details, these sneakers add a chic, modern twist to a classic silhouette. The lace-up construction ensures a secure, adjustable fit, while the durable faux leather upper brings a sleek, polished finish. Inside, a soft, breathable textile lining enhances comfort, making them perfect for all-day wear.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "Yellow",
+          "label": "Yellow"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "Fila",
+          "label": "Fila"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "37",
+            "label": "37"
+          },
+          {
+            "key": "38",
+            "label": "38"
+          },
+          {
+            "key": "41",
+            "label": "41"
+          },
+          {
+            "key": "42",
+            "label": "42"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "/images/all-time-favorites/disruptor-2-woven/image-1.jpg",
+      "/images/all-time-favorites/disruptor-2-woven/image-2.jpg",
+      "/images/all-time-favorites/disruptor-2-woven/image-3.jpg",
+      "/images/all-time-favorites/disruptor-2-woven/image-4.jpg",
+      "/images/all-time-favorites/disruptor-2-woven/image-5.jpg"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 7500,
+          "fractionDigits": 2
+        },
+        "discounted": {
+          "value": {
+            "type": "centPrecision",
+            "currencyCode": "USD",
+            "centAmount": 7125,
+            "fractionDigits": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "key": "memory-decimus",
+    "name": "Fila Memory Decimus",
+    "description": "Never choose between fashion and comfort as you get the best of both by opting for Fila® Memory Decimus Sneakers. The sneakers feature a leather or synthetic upper for durable comfort, breathable textile lining, a comfortable textile insole, and sculpted EVA midsole for cushioning & comfort. The metal reinforced ghillies combine a secure fit with a fashionable twist.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "White",
+          "label": "White"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "Fila",
+          "label": "Fila"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "37",
+            "label": "37"
+          },
+          {
+            "key": "38",
+            "label": "38"
+          },
+          {
+            "key": "41",
+            "label": "41"
+          },
+          {
+            "key": "42",
+            "label": "42"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "/images/all-time-favorites/memory-decimus/image-1.jpg",
+      "/images/all-time-favorites/memory-decimus/image-2.jpg",
+      "/images/all-time-favorites/memory-decimus/image-3.jpg",
+      "/images/all-time-favorites/memory-decimus/image-4.jpg",
+      "/images/all-time-favorites/memory-decimus/image-5.jpg"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 6000,
+          "fractionDigits": 2
+        }
+      }
+    ]
+  }
+]
