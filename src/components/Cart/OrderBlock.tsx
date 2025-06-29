@@ -19,14 +19,16 @@ const OrderBlock = (): JSX.Element => {
   const applyPromo = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!promoCode.trim()) {
+    const trimmedCode = promoCode.trim();
+
+    if (!trimmedCode) {
       toast.error('Promo code is empty');
 
       return;
     }
 
     setIsApplying(true);
-    await addPromoCode(promoCode);
+    await addPromoCode(trimmedCode);
     setPromoCode('');
     setIsApplying(false);
   };
