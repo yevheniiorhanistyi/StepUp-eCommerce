@@ -22,8 +22,8 @@ const LoginForm = (): JSX.Element => {
   return (
     <Formik
       initialValues={{
-        email: '',
-        password: ''
+        email: 'john@example.com',
+        password: 'Password123!'
       }}
       validationSchema={LoginSchema}
       onSubmit={async (values, { setSubmitting }) => {

@@ -55,7 +55,7 @@ export interface IAuthStatus {
 }
 
 export interface ISearchParams {
-  category: string;
+  gender: string[];
   offset: number;
   limit: number;
   term: string;

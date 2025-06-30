@@ -97,3 +97,38 @@ export const getPrice = (product: Product): number => {
 
   return hasDiscount ? rawPrice.discounted.value.centAmount : rawPrice.value.centAmount;
 };
+
+export function initializeDemoUser() {
+  const existingUser = localStorage.getItem('user');
+  if (existingUser) return;
+
+  const demoUser = {
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john@example.com',
+    password: 'Password123!',
+    phoneNumber: '+48123456789',
+    confirmPassword: 'Password123!',
+    dateOfBirth: '1990-01-01',
+    billingAddress: {
+      id: crypto.randomUUID(),
+      country: 'PL',
+      city: 'Warsaw',
+      streetName: 'Demo Street 1',
+      postalCode: '00-001',
+      isDefault: true
+    },
+    shippingAddress: {
+      id: crypto.randomUUID(),
+      country: 'PL',
+      city: 'Warsaw',
+      streetName: 'Demo Street 1',
+      postalCode: '00-001',
+      isDefault: true,
+      useSame: true
+    },
+    version: 1
+  };
+
+  localStorage.setItem('user', JSON.stringify(demoUser));
+}
