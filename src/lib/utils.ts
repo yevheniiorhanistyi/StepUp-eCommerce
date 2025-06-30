@@ -1,5 +1,5 @@
 import { Category } from '@commercetools/platform-sdk';
-import { ICategoryNode } from '@/types/types';
+import { ICategoryNode, Product } from '@/types/types';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -88,3 +88,12 @@ export const getInitials = (firstName: string, lastName: string) =>
 
 export const priceFormat = (value: number | string = 0): string =>
   typeof value === 'string' ? value : value.toFixed(2);
+
+export const getPrice = (product: Product): number => {
+  const rawPrice = product.prices?.[0];
+  if (!rawPrice) return Infinity;
+
+  const hasDiscount = 'discounted' in rawPrice;
+
+  return hasDiscount ? rawPrice.discounted.value.centAmount : rawPrice.value.centAmount;
+};

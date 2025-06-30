@@ -13,7 +13,6 @@ import { Button } from '@/components/ui/button';
 import { ERROR_CODE, ERROR_MESSAGES, REGISTER_INITIAL_VALUES } from '@/constants/constants';
 
 import { useAuth } from '@/context/AuthContext';
-import { useCart } from '@/context/CartContext';
 
 import { RegisterFormFields } from '@/types/register';
 
@@ -22,13 +21,10 @@ import { registerStepSchema, registerStep1Schema } from '@/lib/registerSchema';
 import AccountStep from './AccountStep';
 import PersonalInfoStep from './PersonalInfoStep';
 
-import handleErrors from '@/services/register/handleErrors';
 import checkEmailAvailability from '@/services/register/checkEmail';
-import registerUser from '@/services/register/registerUser';
 
 const RegisterForm = (): JSX.Element => {
   const { setAuthentication, refreshUser } = useAuth();
-  const { refreshCart } = useCart();
   const router = useRouter();
 
   const steps = [
@@ -43,15 +39,23 @@ const RegisterForm = (): JSX.Element => {
     { setSubmitting }: FormikHelpers<RegisterFormFields>
   ): Promise<void> => {
     try {
-      await registerUser(values);
+      localStorage.setItem('user', JSON.stringify(values));
+
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
       setAuthentication(true);
-      toast.success(`Registration successful. Logged in as ${values.email}`);
+      toast.success(`Registration successful!`);
+      refreshUser();
       router.push('/');
-      await refreshUser();
-      await refreshCart();
-    } catch (error: unknown) {
-      toast.error(handleErrors(error).message);
+    } catch {
+      toast.error('Failed to register!');
     } finally {
       setSubmitting(false);
     }
@@ -75,20 +79,14 @@ const RegisterForm = (): JSX.Element => {
     const isValid = await validateForm();
     if (Object.keys(isValid).length === 0) {
       if (methods.isFirst) {
-        try {
-          const isEmailAvailable = await checkEmailAvailability(values.email);
-          if (!isEmailAvailable) {
-            setFieldError('email', ERROR_MESSAGES[ERROR_CODE.EmailAlreadyExists]);
-            toast.error(
-              'User with this email already exists, try to use another email or Sign In!'
-            );
+        const isEmailAvailable = checkEmailAvailability(values.email);
+        if (!isEmailAvailable) {
+          setFieldError('email', ERROR_MESSAGES[ERROR_CODE.EmailAlreadyExists]);
+          toast.error('User with this email already exists!');
 
-            return;
-          }
-          methods.next();
-        } catch (error) {
-          toast.message(handleErrors(error).message);
+          return;
         }
+        methods.next();
       } else {
         submitForm();
       }

@@ -12,50 +12,53 @@ import { priceFormat } from '@/lib/utils';
 const CENTS_IN_DOLLAR = 100;
 
 const OrderBlock = (): JSX.Element => {
-  const { cart, addPromoCode } = useCart();
+  const { cart, cartTotalQuantity, cartTotalPrice } = useCart();
   const [promoCode, setPromoCode] = useState('');
   const [isApplying, setIsApplying] = useState(false);
+
+  const shipping = cartTotalQuantity > 0 ? 1000 : 0;
+  const originalTotalPrice = cart.reduce((sum, item) => {
+    return sum + (item.originalPrice ?? item.price) * item.quantity;
+  }, 0);
+
+  const discount = originalTotalPrice - cartTotalPrice;
+  const hasDiscount = discount > 0;
+
+  const formattedShipping = priceFormat(shipping / CENTS_IN_DOLLAR);
+  const formattedDiscount = priceFormat(discount / CENTS_IN_DOLLAR);
+  const formattedOriginalTotal = priceFormat(originalTotalPrice / CENTS_IN_DOLLAR);
+  const formattedTotal = priceFormat((cartTotalPrice + shipping) / CENTS_IN_DOLLAR);
 
   const applyPromo = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!promoCode.trim()) {
-      toast.error('Promo code is empty');
+      toast.error('Promo code is empty!');
 
       return;
     }
 
     setIsApplying(true);
-    await addPromoCode(promoCode);
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    toast.success('Promo applied!');
     setPromoCode('');
     setIsApplying(false);
   };
 
-  const shipping = cart?.shippingInfo?.price?.centAmount || 0;
-  const discount = cart?.discountOnTotalPrice?.discountedAmount?.centAmount || 0;
-  const total = cart?.totalPrice?.centAmount || 0;
-  const originalCartTotal = total + discount;
-
-  const shippingPrice = priceFormat(shipping / CENTS_IN_DOLLAR);
-  const promoValue = priceFormat(discount / CENTS_IN_DOLLAR);
-  const cartOriginalTotal = priceFormat(originalCartTotal / CENTS_IN_DOLLAR);
-  const totalPrice = priceFormat((originalCartTotal + shipping - discount) / CENTS_IN_DOLLAR);
-
-  const hasDiscount = discount > 0;
-
   return (
-    <Card className="flex flex-col bg-transparent gap-4 self-start  max-[767.97px]:mx-auto max-[600px]:w-full">
+    <Card className="flex flex-col bg-transparent gap-4 self-start max-[767.97px]:mx-auto max-[600px]:w-full">
       <CardHeader className="text-2xl font-bold border-b-2">Order Summary</CardHeader>
+
       <CardContent className="flex flex-col gap-1 text-[16px] font-semibold border-b-2 pb-4">
         <p className="flex justify-between">
-          Cart Total: <span>${cartOriginalTotal}</span>
+          Cart Total: <span>${formattedOriginalTotal}</span>
         </p>
         <p className="flex justify-between">
-          Shipping: <span>${shippingPrice}</span>
+          Shipping: <span>${formattedShipping}</span>
         </p>
         {hasDiscount && (
           <p className="flex justify-between">
-            Promo: <span>- ${promoValue}</span>
+            Promo: <span>- ${formattedDiscount}</span>
           </p>
         )}
         <p className="flex justify-between text-[18px] border-t-2 pt-4">
@@ -63,19 +66,20 @@ const OrderBlock = (): JSX.Element => {
           <span className="flex items-end gap-1">
             {hasDiscount ? (
               <>
-                <span className="text-primary font-bold">${totalPrice}</span>
+                <span className="text-primary font-bold">${formattedTotal}</span>
                 <span className="line-through text-muted-foreground text-base">
-                  ${cartOriginalTotal}
+                  ${formattedOriginalTotal}
                 </span>
               </>
             ) : (
-              <span>${totalPrice}</span>
+              <span>${formattedTotal}</span>
             )}
           </span>
         </p>
       </CardContent>
+
       <CardFooter className="flex flex-col items-start border-b-2 pb-4">
-        <Accordion type="single" collapsible className="w-full ">
+        <Accordion type="single" collapsible className="w-full">
           <AccordionItem className="flex flex-col gap-2" value="promo-code">
             <AccordionTrigger className="text-base font-medium cursor-pointer duration-300 py-0 hover:no-underline">
               Have a promo code?
@@ -96,12 +100,9 @@ const OrderBlock = (): JSX.Element => {
           </AccordionItem>
         </Accordion>
       </CardFooter>
+
       <CardAction className="flex flex-col gap-2 px-6 w-full">
-        <Button
-          className="cursor-pointer duration-300 w-full"
-          onClick={() => toast.message('Proceed to Checkout')}
-          disabled={!cart || cart.lineItems.length === 0}
-        >
+        <Button className="cursor-pointer duration-300 w-full" disabled={cartTotalQuantity === 0}>
           Proceed to Checkout
         </Button>
         <p className="text-sm text-muted-foreground">* Taxes and shipping calculated at checkout</p>

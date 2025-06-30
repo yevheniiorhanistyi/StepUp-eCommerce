@@ -1,20 +1,17 @@
-import { createAnonymousClient } from '@/services/commercetools/client/createAnonymousClient';
-import handleErrors from './handleErrors';
-
-async function checkEmailAvailability(email: string): Promise<boolean> {
-  const apiRoot = createAnonymousClient();
-
+const checkEmailAvailability = (email: string) => {
   try {
-    const response = await apiRoot
-      .customers()
-      .get({ queryArgs: { where: `email="${email}"` } })
-      .execute();
+    const userData = localStorage.getItem('user');
 
-    return response.body.total === 0;
+    if (!userData) return true;
+
+    const user = JSON.parse(userData);
+
+    return user.email !== email;
   } catch (error) {
-    const handledError = handleErrors(error);
-    throw handledError;
+    console.error('Failed to parse localStorage user:', error);
+
+    return true;
   }
-}
+};
 
 export default checkEmailAvailability;

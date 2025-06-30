@@ -11,12 +11,12 @@ import { ModalSlider } from './ModalSlider';
 import { IProductSliderProps } from '@/types/types';
 
 export function ProductSlider({ images, productName }: IProductSliderProps) {
-  const [selectedImage, setSelectedImage] = useState(images[0]?.url ?? null);
+  const [selectedImage, setSelectedImage] = useState(images[0] ?? null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const mainSwiperRef = useRef<SwiperType | null>(null);
 
   const handleSlideChange = (index: number) => {
-    setSelectedImage(images[index].url);
+    setSelectedImage(images[index]);
     mainSwiperRef.current?.slideTo(index);
   };
 
@@ -24,7 +24,7 @@ export function ProductSlider({ images, productName }: IProductSliderProps) {
     setIsModalOpen(true);
   };
 
-  const selectedIndex = images.findIndex((img) => img.url === selectedImage);
+  const selectedIndex = images.findIndex((img) => img === selectedImage);
 
   return (
     <>
@@ -38,7 +38,7 @@ export function ProductSlider({ images, productName }: IProductSliderProps) {
               className="h-[450px]"
             >
               {images.map((image, index) => {
-                const isSelected = image.url === selectedImage;
+                const isSelected = image === selectedImage;
                 if (isSelected) return null;
 
                 return (
@@ -48,7 +48,7 @@ export function ProductSlider({ images, productName }: IProductSliderProps) {
                       onClick={() => handleSlideChange(index)}
                     >
                       <Image
-                        src={image.url}
+                        src={image}
                         alt={`${productName} - ${index + 1}`}
                         fill
                         sizes="80px"
@@ -71,7 +71,7 @@ export function ProductSlider({ images, productName }: IProductSliderProps) {
             }}
             onSlideChange={(swiper) => {
               const newIndex = swiper.activeIndex;
-              setSelectedImage(images[newIndex].url);
+              setSelectedImage(images[newIndex]);
             }}
             initialSlide={selectedIndex >= 0 ? selectedIndex : 0}
             className="h-full w-full"
@@ -86,7 +86,7 @@ export function ProductSlider({ images, productName }: IProductSliderProps) {
                   onClick={handleImageClick}
                 >
                   <Image
-                    src={image.url}
+                    src={image}
                     alt={`${productName} - ${index + 1}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"

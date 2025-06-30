@@ -3,7 +3,6 @@ import { Montserrat, Mr_Dafoe } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
 import Layout from '@/components/Layout/Layout';
 import { AuthContextProvider } from '@/context/AuthContext';
-import { CategoryDataProvider } from '@/context/CategoryContext';
 import { CartDataProvider } from '@/context/CartContext';
 import '@/styles/globals.css';
 
@@ -38,11 +37,9 @@ export default function RootLayout({
       </head>
       <body className={`${montserrat.variable} ${mrDafoe.variable} antialiased`}>
         <CartDataProvider>
-          <CategoryDataProvider>
-            <AuthContextProvider>
-              <Layout>{children}</Layout>
-            </AuthContextProvider>
-          </CategoryDataProvider>
+          <AuthContextProvider>
+            <Layout>{children}</Layout>
+          </AuthContextProvider>
         </CartDataProvider>
         <Toaster position="bottom-left" />
       </body>

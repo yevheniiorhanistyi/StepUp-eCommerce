@@ -7,7 +7,6 @@ import FormField from '@/components/Register/Form/FieldForm';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
 
-import reauthenticate from '../../../services/profile/reauth';
 import updateUserPassword from '@/services/profile/updatePassword';
 import { passwordValidationSchema } from '@/lib/profileSchema';
 import handleErrors from '@/services/register/handleErrors';
@@ -37,16 +36,16 @@ const PasswordChange = (): JSX.Element => {
             try {
               if (!user) return;
 
-              await updateUserPassword({
+              await new Promise((resolve) => setTimeout(resolve, 500));
+
+              updateUserPassword({
                 currentPassword: values.currentPassword,
                 newPassword: values.newPassword,
                 version: user.version
               });
 
-              await reauthenticate(user.email, values.newPassword);
-
-              await refreshUser();
               resetForm();
+              refreshUser();
               toast.success('Password updated successfully!');
             } catch (error: unknown) {
               toast.error(handleErrors(error).message);

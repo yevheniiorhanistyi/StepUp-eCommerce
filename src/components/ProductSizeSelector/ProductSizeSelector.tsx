@@ -1,4 +1,4 @@
-import { LineItem } from '@commercetools/platform-sdk';
+import { ICartItem } from '@/types/types';
 
 const ProductSizeSelector = ({
   variants,
@@ -9,13 +9,13 @@ const ProductSizeSelector = ({
   variants: Array<{ key: string; size: string }>;
   currentKey: string;
   onChange: (key: string) => void;
-  cartLineItems: LineItem[];
+  cartLineItems: ICartItem[];
 }) => {
   return (
     <div className="flex flex-wrap gap-2">
       {variants.map(({ key, size }) => {
         const isActive = key === currentKey;
-        const isInCart = cartLineItems.some((item) => item.variant.key === key);
+        const isInCart = cartLineItems.some((item) => item.key === key);
 
         const buttonClasses = [
           'px-3 py-2 rounded-md text-sm border transition cursor-pointer',

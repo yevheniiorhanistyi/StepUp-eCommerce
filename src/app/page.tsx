@@ -9,7 +9,7 @@ import Benefits from '@/components/Benefits/Benefits';
 const Main = (): JSX.Element => {
   return (
     <div className="w-full">
-      <AnnouncementBanner text={ANNOUNCEMENT_TEXTS.seasonalSale.promoCode} />
+      <AnnouncementBanner text={ANNOUNCEMENT_TEXTS.seasonalSale.text} />
       <HeroSection />
       <AnnouncementBanner
         label={ANNOUNCEMENT_TEXTS.heroPromo.label}

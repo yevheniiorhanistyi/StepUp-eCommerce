@@ -62,7 +62,7 @@ export function ModalSlider({
               <SwiperSlide key={index}>
                 <div className="relative w-full h-full">
                   <Image
-                    src={image.url}
+                    src={image}
                     alt={`${productName} ${index + 1}`}
                     fill
                     sizes="(max-width: 1024px) 100vw, 800px"

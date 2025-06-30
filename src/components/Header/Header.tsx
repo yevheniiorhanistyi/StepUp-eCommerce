@@ -29,10 +29,8 @@ const navLinks = [
 
 const Header = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
-  const { cart } = useCart();
+  const { cartTotalQuantity } = useCart();
   const { isAuthenticated, setAuthentication } = useAuth();
-
-  const cartQuantity = cart?.totalLineItemQuantity ?? 0;
 
   useEffect(() => {
     const handleResize = () => {
@@ -87,9 +85,9 @@ const Header = (): JSX.Element => {
                   size="icon"
                 >
                   <ShoppingBasket className="size-6" strokeWidth={1.6} />
-                  {cartQuantity > 0 && (
+                  {cartTotalQuantity > 0 && (
                     <Badge className="h-6 w-6 rounded-full absolute top-2 right-2 translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-xs">
-                      {cartQuantity}
+                      {cartTotalQuantity}
                     </Badge>
                   )}
                 </Button>

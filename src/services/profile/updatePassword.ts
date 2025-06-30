@@ -1,19 +1,18 @@
+import { Customer } from '@/types/types';
 import { PasswordUpdateData } from '@/types/profile';
 
-async function updateUserPassword(data: PasswordUpdateData) {
-  const response = await fetch('/api/user/password', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-    credentials: 'include'
-  });
+const updateUserPassword = (data: PasswordUpdateData) => {
+  const user = localStorage.getItem('user');
+  const userData: Customer = user ? JSON.parse(user) : null;
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.error || 'Something went wrong');
+  if (userData && userData.confirmPassword !== data.currentPassword) {
+    throw new Error('Invalid current password!');
   }
 
-  return response.json();
-}
+  if (userData) {
+    userData.password = data.newPassword;
+    localStorage.setItem('user', JSON.stringify(userData));
+  }
+};
 
 export default updateUserPassword;

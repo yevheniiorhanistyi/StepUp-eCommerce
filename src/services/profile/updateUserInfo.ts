@@ -1,19 +1,29 @@
 import { UserUpdateData } from '../../types/profile';
 
-async function updatePersonalInfo(data: UserUpdateData) {
-  const response = await fetch('/api/user/update', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-    credentials: 'include'
+function updatePersonalInfo(data: UserUpdateData): Promise<UserUpdateData> {
+  return new Promise((resolve, reject) => {
+    try {
+      const storedUser = localStorage.getItem('user');
+
+      if (!storedUser) {
+        throw new Error('User not found!');
+      }
+
+      const user = JSON.parse(storedUser);
+
+      const updatedUser = {
+        ...user,
+        ...data,
+        version: (user.version || 0) + 1
+      };
+
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+
+      resolve(updatedUser);
+    } catch (error) {
+      reject(error instanceof Error ? error : new Error('Failed to update profile'));
+    }
   });
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.error || 'Failed to update profile');
-  }
-
-  return response.json();
 }
 
 export default updatePersonalInfo;

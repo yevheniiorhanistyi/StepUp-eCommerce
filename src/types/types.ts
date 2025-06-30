@@ -1,24 +1,48 @@
 import {
   ProductProjection,
   Category,
-  Customer,
   Cart,
   LineItemDraft,
   ErrorResponse,
-  Product,
   ByProjectKeyRequestBuilder,
   MyCustomerSignin
 } from '@commercetools/platform-sdk';
+import type products from '@/data/all-time-favorites.json';
 import { ReactNode } from 'react';
+
+export interface BillingAddress {
+  city: string;
+  country: string;
+  isDefault: boolean;
+  postalCode: string;
+  streetName: string;
+}
+
+export interface ShippingAddress extends BillingAddress {
+  useSame?: boolean;
+}
+
+export interface Customer {
+  confirmPassword: string;
+  dateOfBirth: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  phoneNumber: string;
+  billingAddress: BillingAddress;
+  shippingAddress: ShippingAddress;
+  version: number;
+}
 
 export interface IAuthContextType {
   isAuthenticated: boolean;
   setAuthentication: React.Dispatch<React.SetStateAction<boolean>>;
   user: Customer | null;
   setUser: (data: Customer | null) => void;
+  refreshUser: () => void;
   isUserLoading: boolean;
   setUserLoading: (value: boolean) => void;
-  refreshUser: () => Promise<void>;
   isAuthChecked: boolean;
   setIsAuthChecked: (value: boolean) => void;
 }
@@ -31,6 +55,7 @@ export interface IAuthStatus {
 }
 
 export interface ISearchParams {
+  category: string;
   offset: number;
   limit: number;
   term: string;
@@ -56,6 +81,7 @@ export interface ICategoryNode extends Category {
 }
 
 export interface ISearchParamsArrayTypes {
+  gender: string;
   colors: string;
   sizes: string;
   brands: string;
@@ -66,7 +92,7 @@ export interface IProductItemParams {
 }
 
 export interface IProductListParams {
-  products: ProductProjection[];
+  products: typeof products;
   isLoading: boolean;
 }
 
@@ -79,11 +105,6 @@ export interface ISidebarFilterGroupProps extends ICommonCatalogProps {
   label: string;
   labelList: ICategoryItem[];
   propertyToChange: keyof ISearchParamsArrayTypes;
-}
-
-export interface ICatalogSidebarProps extends ICommonCatalogProps {
-  categorySlug: string;
-  onCategoryClick: (slug: string) => void;
 }
 
 export interface IAppPaginationProps {
@@ -139,6 +160,16 @@ export interface IAddLineItemParams {
   lineItem: LineItemDraft;
 }
 
+export interface ICartItem {
+  price: number;
+  originalPrice: number;
+  key: string;
+  name: string;
+  image: string;
+  size: string;
+  quantity: number;
+}
+
 export interface IProductSizePickerProps {
   product: Product;
   variants: Array<{ key: string; size: string }>;
@@ -168,7 +199,7 @@ export interface IProductCartButtonProps {
 }
 
 export interface IProductSliderProps {
-  images: { url: string }[];
+  images: string[];
   productName: string;
 }
 
@@ -192,7 +223,7 @@ export interface IUserDropdownMenuProps {
 export interface IModalSliderProps {
   isOpen: boolean;
   onClose: () => void;
-  images: { url: string }[];
+  images: string[];
   productName: string;
   initialIndex: number;
 }
@@ -203,3 +234,5 @@ export interface ICustomerSignin extends MyCustomerSignin {
   anonymousId?: string;
   activeCartSignInMode?: 'MergeWithExistingCustomerCart' | 'ReplaceWithEmptyCustomerCart';
 }
+
+export type Product = (typeof products)[number];

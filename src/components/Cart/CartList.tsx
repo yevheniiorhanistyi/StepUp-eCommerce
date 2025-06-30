@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { priceFormat } from '@/lib/utils';
 
+import { ICartItem } from '@/types/types';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -19,23 +21,12 @@ import {
   DialogTitle
 } from '@/components/ui/dialog';
 
-const extractAttributeValue = (attr: {
-  name: string;
-  value: string | { key?: string; label?: string };
-}): string => {
-  const { value } = attr;
-  if (typeof value === 'object' && value !== null) {
-    return value.label || value.key || '';
-  }
-
-  return value;
-};
-
 const MIN_QUANTITY = 1;
 const MAX_QUANTITY = 99;
 
 const CartList = (): JSX.Element => {
-  const { cart, removeItem, updateItemQuantity, clearCart } = useCart();
+  const { cart, removeItem, updateItemQuantity, clearCart, cartTotalQuantity } = useCart();
+
   const [isClearingCart, setIsClearingCart] = useState(false);
   const [processingItems, setProcessingItems] = useState<Record<string, boolean>>({});
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -44,23 +35,21 @@ const CartList = (): JSX.Element => {
     setProcessingItems((prev) => ({ ...prev, [id]: value }));
   };
 
-  const isClearCartDisabled = (): boolean => {
-    return isClearingCart || !cart || cart.lineItems.length === 0;
-  };
-
-  const handleRemove = async (id: string) => {
-    if (processingItems[id]) return;
+  const handleRemove = async (key: string) => {
+    if (processingItems[key]) return;
     try {
-      setProcessingForItem(id, true);
-      await removeItem(id);
+      setProcessingForItem(key, true);
+      await new Promise((resolve) => setTimeout(resolve, 600));
+      removeItem(key);
     } finally {
-      setProcessingForItem(id, false);
+      setProcessingForItem(key, false);
     }
   };
 
   const handleClearCart = async () => {
     try {
       setIsClearingCart(true);
+      await new Promise((resolve) => setTimeout(resolve, 800));
       await clearCart();
       setIsDialogOpen(false);
     } finally {
@@ -68,18 +57,16 @@ const CartList = (): JSX.Element => {
     }
   };
 
-  const handleUpdateQuantity = async (
-    item: { id: string; quantity: number },
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (processingItems[item.id]) return;
+  const handleUpdateQuantity = async (item: ICartItem, e: React.ChangeEvent<HTMLInputElement>) => {
+    if (processingItems[item.key]) return;
     const value = Number(e.target.value);
-    if (!Number.isNaN(value) && value >= 1) {
+    if (!Number.isNaN(value) && value >= MIN_QUANTITY) {
       try {
-        setProcessingForItem(item.id, true);
-        await updateItemQuantity(item.id, value);
+        setProcessingForItem(item.key, true);
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        updateItemQuantity(item.key, value);
       } finally {
-        setProcessingForItem(item.id, false);
+        setProcessingForItem(item.key, false);
       }
     }
   };
@@ -108,7 +95,7 @@ const CartList = (): JSX.Element => {
           type="button"
           className="cursor-pointer duration-300"
           onClick={() => setIsDialogOpen(true)}
-          disabled={isClearCartDisabled()}
+          disabled={cartTotalQuantity === 0}
         >
           {isClearingCart ? (
             <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -153,28 +140,24 @@ const CartList = (): JSX.Element => {
         </DialogContent>
       </Dialog>
 
-      {(cart?.lineItems.length === 0 || !cart) && renderEmptyCart()}
+      {cartTotalQuantity === 0 && renderEmptyCart()}
 
-      {cart?.lineItems.map((item) => {
-        const productKey = item.productKey || item.productId;
-        const imageUrl = item.variant?.images?.[0]?.url || '';
-        const productName = item.name?.['en-US'] || '';
-        const sizeAttr = item.variant?.attributes?.find((attr) => attr.name === 'size');
-        const size = sizeAttr ? extractAttributeValue(sizeAttr) : '';
+      {cart.map((item) => {
+        const productKey = item.key;
+        const imageUrl = item.image;
+        const productName = item.name;
+        const size = item.size;
 
-        const itemPrice = priceFormat(item.price?.value?.centAmount / 100) || '0.00';
-        const itemDiscountedPrice = item.price.discounted
-          ? item.price?.discounted?.value?.centAmount / 100
-          : 0;
-        const hasDiscount = itemDiscountedPrice > 0;
-        const unitPrice = hasDiscount ? priceFormat(itemDiscountedPrice) : itemPrice;
-
-        const baseTotalPrice = priceFormat(parseFloat(itemPrice) * item.quantity);
-        const totalPrice = priceFormat(item.totalPrice?.centAmount / 100);
+        const hasDiscount = item.originalPrice && item.originalPrice > item.price;
+        const unitPrice = priceFormat(item.price / 100);
+        const totalPrice = priceFormat((item.price * item.quantity) / 100);
+        const baseTotalPrice = item.originalPrice
+          ? priceFormat((item.originalPrice * item.quantity) / 100)
+          : totalPrice;
 
         return (
           <Card
-            key={item.id}
+            key={item.key}
             className="flex min-[451px]:max-h-[250px] flex-row max-[450px]:flex-col gap-6 p-4 items-stretch"
           >
             <Link
@@ -229,17 +212,17 @@ const CartList = (): JSX.Element => {
                   max={MAX_QUANTITY}
                   value={item.quantity}
                   onChange={(e) => handleUpdateQuantity(item, e)}
-                  disabled={!!processingItems[item.id]}
+                  disabled={!!processingItems[item.key]}
                   className="w-20 appearance-auto number-visible cursor-pointer"
                 />
 
                 <Button
                   type="button"
                   className="cursor-pointer duration-300 min-w-[90px]"
-                  onClick={() => handleRemove(item.id)}
-                  disabled={!!processingItems[item.id]}
+                  onClick={() => handleRemove(item.key)}
+                  disabled={!!processingItems[item.key]}
                 >
-                  {processingItems[item.id] ? (
+                  {processingItems[item.key] ? (
                     <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
                   ) : (
                     'Remove'

@@ -3,35 +3,27 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useCart } from '@/context/CartContext';
 
-import { IProductSizePickerProps } from '@/types/types';
-
 import ProductSizeSelector from '@/components/ProductSizeSelector/ProductSizeSelector';
 import ProductCartButton from '@/components/ProductCartButton/ProductCartButton';
+
+import { IProductSizePickerProps, ICartItem } from '@/types/types';
+
+import { getPrice } from '@/lib/utils';
 
 const ProductSizePicker = ({ product, variants }: IProductSizePickerProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const { cart, addItem, removeItem } = useCart();
 
-  const productId = product.id;
-  const current = product.masterData.current;
-
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
 
-  const selectedVariant =
-    current.variants.find((v) => v.key === selectedKey) ||
-    (current.masterVariant.key === selectedKey ? current.masterVariant : null);
+  const selectedVariant = useMemo(
+    () => variants.find((v) => v.key === selectedKey) || null,
+    [selectedKey, variants]
+  );
 
-  const variantId = selectedVariant?.id;
-
-  const itemFromCart = useMemo(() => {
-    if (!variantId) return null;
-
-    return cart?.lineItems?.find(
-      (item) => item.productId === productId && item.variant.id === variantId
-    );
-  }, [cart, productId, variantId]);
-
-  const isInCart = !!itemFromCart;
+  const isInCart = useMemo(() => {
+    return !!cart.find((item) => item.key === selectedKey);
+  }, [cart, selectedKey]);
 
   useEffect(() => {
     if (!selectedKey && variants.length > 0) {
@@ -43,22 +35,28 @@ const ProductSizePicker = ({ product, variants }: IProductSizePickerProps) => {
     setSelectedKey(newKey);
   };
 
-  const handleAddToCart = async (e: React.MouseEvent) => {
+  const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (!variantId) return;
+    if (!selectedVariant || !selectedKey) return;
 
     setIsProcessing(true);
 
-    if (itemFromCart) {
-      await removeItem(itemFromCart.id);
+    if (isInCart) {
+      removeItem(selectedKey);
     } else {
-      await addItem({
-        productId,
-        variantId,
+      const newItem: ICartItem = {
+        key: selectedKey,
+        name: product.name,
+        originalPrice: product.prices[0].value.centAmount,
+        price: getPrice(product),
+        image: product.images[0],
+        size: selectedVariant.size,
         quantity: 1
-      });
+      };
+
+      addItem(newItem);
     }
 
     setIsProcessing(false);
@@ -75,7 +73,7 @@ const ProductSizePicker = ({ product, variants }: IProductSizePickerProps) => {
         variants={variants}
         currentKey={selectedKey}
         onChange={handleSizeChange}
-        cartLineItems={cart?.lineItems || []}
+        cartLineItems={cart}
       />
 
       <div className="mt-4 md:w-auto md:max-w-[200px]">

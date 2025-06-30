@@ -2,7 +2,7 @@
   {
     "id": 1,
     "key": "grand-court-alpha",
-    "category": "Lifestyle / Men",
+    "category": ["Men", "Lifestyle"],
     "name": "adidas Grand Court Alpha",
     "description": "Sleek, sporty and so easy to style. The adidas® Grand Court Alpha 00s won't spend much time in your shoe rack. A Cloudfoam midsole cushions your step while the soft lining hugs the foot in place. A classic rubber outsole keeps you grounded day to day. Whether you're trekking across the city or taking it easy with friends, the adidas heritage shines through.",
     "attributes": [
@@ -63,7 +63,7 @@
   {
     "id": 2,
     "key": "classics-530",
-    "category": "Women / Lifestyle",
+    "category": ["Women", "Lifestyle"],
     "name": "New Balance Classics 530",
     "description": "The New Balance® Classics 530 sneakers merge throwback style with modern comfort. They are made of a mesh upper with a lace-up closure for everyday style. The rubber insole and cotton lining add to their comfort. These running shoes feature an ABZORB midsole that delivers superior cushioning in these classic kicks.",
     "attributes": [
@@ -132,7 +132,7 @@
   {
     "id": 3,
     "key": "omega-trainer",
-    "category": "Women / Lifestyle",
+    "category": ["Women", "Lifestyle"],
     "name": "Converse Omega Trainer",
     "description": "Created a smart look wearing the Converse® Converse Omega Trainer. 80s-inspired suede and mesh upper with that signature Converse look and feel. The low-top sneakers feature Converse Comfort sockliner and a lightweight, EVA foam midsole to help provide optimal comfort. Star Chevron reps the Converse legacy of sport and street style.",
     "attributes": [
@@ -201,7 +201,7 @@
   {
     "id": 4,
     "key": "run-star-trainer",
-    "category": "Women / Lifestyle",
+    "category": ["Women", "Lifestyle"],
     "name": "Converse Run Star Trainer",
     "description": "A celebration of sports, style, and heritage, the Converse® Run Star Trainer blends sleek details with luxe cushioning to complement your favorite outfits, day or night. A durable nylon upper with suede overlays and leather accents is added for a luxe look and feel, while the responsive memory foam cushioning helps provide next-level comfort. These low-top sneakers come with a traction rubber outsole that helps provide grip. These feature punched eyelets and waxed laces, add a premium touch and offer a customized fit.",
     "attributes": [
@@ -270,7 +270,7 @@
   {
     "id": 5,
     "key": "disruptor-2-woven",
-    "category": "Women / Lifestyle",
+    "category": ["Women", "Lifestyle"],
     "name": "Fila Disruptor 2 Woven",
     "description": "Elevate your everyday style with the iconic Fila® Disruptor 2 Woven sneakers — a bold blend of fashion-forward design and lasting comfort. Featuring unique woven textural details, these sneakers add a chic, modern twist to a classic silhouette. The lace-up construction ensures a secure, adjustable fit, while the durable faux leather upper brings a sleek, polished finish. Inside, a soft, breathable textile lining enhances comfort, making them perfect for all-day wear.",
     "attributes": [
@@ -339,7 +339,7 @@
   {
     "id": 6,
     "key": "memory-decimus",
-    "category": "Men / Training / Lifestyle",
+    "category": ["Men", "Training"],
     "name": "Fila Memory Decimus",
     "description": "Never choose between fashion and comfort as you get the best of both by opting for Fila® Memory Decimus Sneakers. The sneakers feature a leather or synthetic upper for durable comfort, breathable textile lining, a comfortable textile insole, and sculpted EVA midsole for cushioning & comfort. The metal reinforced ghillies combine a secure fit with a fashionable twist.",
     "attributes": [

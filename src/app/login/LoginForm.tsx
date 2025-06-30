@@ -5,19 +5,18 @@ import { useState } from 'react';
 import { Form, Formik, ErrorMessage } from 'formik';
 import { toast } from 'sonner';
 import { useAuth } from '@/context/AuthContext';
-import { useCart } from '@/context/CartContext';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { cn, getCookieValue } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 import { Eye, EyeOff } from 'lucide-react';
+import { ERROR_CODE, ERROR_MESSAGES } from '@/constants/constants';
 
 import LoginSchema from './LoginSchema';
 
 const LoginForm = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
   const { setAuthentication, refreshUser } = useAuth();
-  const { refreshCart } = useCart();
   const router = useRouter();
 
   return (
@@ -29,29 +28,27 @@ const LoginForm = (): JSX.Element => {
       validationSchema={LoginSchema}
       onSubmit={async (values, { setSubmitting }) => {
         try {
-          const payload = {
-            ...values,
-            anonymousId: getCookieValue('anonymous_id'),
-            activeCartSignInMode: 'MergeWithExistingCustomerCart'
-          };
+          const user = localStorage.getItem('user');
+          const userData = user ? JSON.parse(user) : null;
 
-          const response = await fetch('/api/auth/login', {
+          if (!userData) throw new Error(ERROR_MESSAGES[ERROR_CODE.InvalidCredentials]);
+
+          if (userData.email !== values.email || userData.password !== values.password) {
+            throw new Error(ERROR_MESSAGES[ERROR_CODE.InvalidCredentials]);
+          }
+
+          await fetch('/api/auth/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
+            }
           });
 
-          const result = await response.json();
-
-          if (!response.ok) throw new Error(result.error.message);
+          refreshUser();
 
           setAuthentication(true);
           toast.success(`Logged in as ${values.email}`);
           router.push('/');
-          await refreshUser();
-          await refreshCart();
         } catch (error) {
           if (error instanceof Error) {
             toast.error(error.message || 'Login failed.');

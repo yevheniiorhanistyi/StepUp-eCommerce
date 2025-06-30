@@ -30,7 +30,7 @@ const UserInfo = (): JSX.Element => {
     lastName: user?.lastName ?? '',
     email: user?.email ?? '',
     dateOfBirth: user?.dateOfBirth ?? '',
-    phoneNumber: user?.custom?.fields?.phoneNumber ?? ''
+    phoneNumber: user?.phoneNumber ?? ''
   };
 
   const handleUpdate = async (values: PersonalInfoFieldsValues) => {
@@ -45,8 +45,7 @@ const UserInfo = (): JSX.Element => {
     if (values.lastName !== user.lastName) updates.lastName = values.lastName;
     if (values.dateOfBirth !== user.dateOfBirth) updates.dateOfBirth = values.dateOfBirth;
     if (values.email !== user.email) updates.email = values.email;
-    if (values.phoneNumber !== user.custom?.fields?.phoneNumber)
-      updates.phoneNumber = values.phoneNumber;
+    if (values.phoneNumber !== user?.phoneNumber) updates.phoneNumber = values.phoneNumber;
 
     if (Object.keys(updates).length === 0) {
       toast.message('No changes to fields.');
@@ -57,9 +56,9 @@ const UserInfo = (): JSX.Element => {
 
     try {
       await updatePersonalInfo({ version: user.version, ...updates });
-      toast.success('Profile updated successfully.');
+      refreshUser();
+      toast.success('Profile updated successfully!');
       setIsDialogOpen(false);
-      await refreshUser();
     } catch (error: unknown) {
       toast.error(handleErrors(error).message || 'Failed to update profile.');
     }
@@ -83,7 +82,7 @@ const UserInfo = (): JSX.Element => {
           <span className="font-semibold">Date of Birth:</span> {user?.dateOfBirth}
         </div>
         <div className="flex justify-between text-[16px]">
-          <span className="font-semibold">Phone:</span> {user?.custom?.fields.phoneNumber}
+          <span className="font-semibold">Phone:</span> {user?.phoneNumber}
         </div>
       </CardContent>
       <CardFooter className="px-0">

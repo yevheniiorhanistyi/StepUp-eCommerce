@@ -3,12 +3,11 @@
 import { useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { ICatalogSidebarProps } from '@/types/types';
+import { ICommonCatalogProps } from '@/types/types';
 import { IterationCw } from 'lucide-react';
 
-import { INITIAL_SEARCH_PARAMS, BRANDS, SIZES, COLORS } from '@/constants/constants';
+import { INITIAL_SEARCH_PARAMS, GENDER, BRANDS, SIZES, COLORS } from '@/constants/constants';
 import { useIsMobile } from '@/hooks/useMobile';
-import { cn } from '@/lib/utils';
 
 import {
   Sidebar,
@@ -23,17 +22,11 @@ import { Button } from '../ui/button';
 
 import SearchInput from '@/components/SearchInput/SearchInput';
 import PriceRange from '../PriceRange/PriceRange';
-import CategoryMenu from '../CategoryMenu/CategoryMenu';
 import SidebarFilterGroup from '@/components/SidebarFilterGroup/SidebarFilterGroup';
 import SizeSelectorGroup from '@/components/SizeSelectorGroup/SizeSelectorGroup';
 import ColorSelectorGroup from '../ColorSelectorGroup/ColorSelectorGroup';
 
-const CatalogSidebar = ({
-  searchParams,
-  categorySlug,
-  setSearchParams,
-  onCategoryClick
-}: ICatalogSidebarProps) => {
+const CatalogSidebar = ({ searchParams, setSearchParams }: ICommonCatalogProps) => {
   const router = useRouter();
   const isMobile = useIsMobile();
   const { setOpen, setOpenMobile } = useSidebar();
@@ -51,10 +44,7 @@ const CatalogSidebar = ({
   }, [isMobile, setOpen, setOpenMobile]);
 
   return (
-    <Sidebar
-      collapsible="offcanvas"
-      className={cn('absolute mr-10 border-none', categorySlug ? 'top-19' : 'top-14')}
-    >
+    <Sidebar collapsible="offcanvas" className="absolute mr-10 border-none md:top-14">
       <SidebarHeader className="lg:pt-0">
         <SearchInput searchParams={searchParams} setSearchParams={setSearchParams} />
       </SidebarHeader>
@@ -71,7 +61,13 @@ const CatalogSidebar = ({
           <SidebarGroupLabel className="text-sm text-sidebar-foreground">Price</SidebarGroupLabel>
           <PriceRange searchParams={searchParams} setSearchParams={setSearchParams} />
         </SidebarGroup>
-        <CategoryMenu categorySlug={categorySlug} onCategoryClick={onCategoryClick} />
+        <SidebarFilterGroup
+          label="Gender"
+          labelList={GENDER}
+          propertyToChange="gender"
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+        />
         <SidebarFilterGroup
           label="Brand"
           labelList={BRANDS}

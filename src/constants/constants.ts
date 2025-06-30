@@ -55,7 +55,7 @@ export enum ERROR_CODE {
 }
 
 export const ERROR_MESSAGES = {
-  [ERROR_CODE.InvalidCredentials]: 'Incorrect email or password.',
+  [ERROR_CODE.InvalidCredentials]: 'Incorrect email or password!',
   [ERROR_CODE.TokenStoreInvalid]: 'Authentication token could not be retrieved.',
   [ERROR_CODE.RefreshTokenMissing]: 'Refresh token not found.',
   [ERROR_CODE.RefreshFailed]: 'Failed to refresh token.',
@@ -165,6 +165,7 @@ export const countries = [
 export const ITEMS_PER_PAGE = 6;
 
 export const INITIAL_SEARCH_PARAMS: ISearchParams = {
+  category: '',
   offset: 0,
   limit: ITEMS_PER_PAGE,
   term: '',
@@ -180,6 +181,11 @@ export const SORTING_OPTIONS = [
   { label: 'Name: Z - A', value: 'name.en-us desc' },
   { label: 'Price: Low - High', value: 'price asc' },
   { label: 'Price: High - Low', value: 'price desc' }
+];
+
+export const GENDER = [
+  { label: 'Men', value: 'men' },
+  { label: 'Women', value: 'women' }
 ];
 
 export const BRANDS = [

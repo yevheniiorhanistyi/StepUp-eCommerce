@@ -1,8 +1,8 @@
 'use client';
 
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { IAuthContextType, IAuthStatus } from '@/types/types';
-import { Customer } from '@commercetools/platform-sdk';
+import { IAuthContextType } from '@/types/types';
+import { Customer } from '@/types/types';
 
 const AuthContext = createContext<IAuthContextType | undefined>(undefined);
 
@@ -21,43 +21,23 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<Customer | null>(null);
   const [isUserLoading, setUserLoading] = useState(true);
 
-  const refreshUser = async () => {
-    setUserLoading(true);
-    try {
-      const userResponse = await fetch('/api/user/me');
-      if (!userResponse.ok) throw new Error('Failed to fetch user info');
-
-      const userData: Customer = await userResponse.json();
-      setUser(userData);
-    } catch {
-      setUser(null);
-    } finally {
-      setUserLoading(false);
-    }
+  const refreshUser = () => {
+    const data = localStorage.getItem('user');
+    const userData = data ? JSON.parse(data) : null;
+    setUser(userData);
   };
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
         const res = await fetch('/api/auth/status');
-        if (!res.ok) throw new Error('Failed to fetch auth status');
+        const { isAuthenticated } = await res.json();
 
-        const data: IAuthStatus = await res.json();
-
-        if (data.hasAccessToken && data.shouldRefresh) {
-          const refreshRes = await fetch('/api/auth/refresh', { method: 'POST' });
-          if (!refreshRes.ok) throw new Error('Failed to refresh token');
-        }
-
-        setAuthentication(data.isAuthenticated);
-
-        if (data.isAuthenticated) {
-          await refreshUser();
-        } else {
-          setUser(null);
+        if (isAuthenticated) {
+          refreshUser();
+          setAuthentication(true);
         }
       } catch {
-        await fetch('/api/auth/logout', { method: 'DELETE' });
         setAuthentication(false);
         setUser(null);
       } finally {
@@ -76,9 +56,9 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         setAuthentication,
         user,
         setUser,
+        refreshUser,
         isUserLoading,
         setUserLoading,
-        refreshUser,
         isAuthChecked,
         setIsAuthChecked
       }}
