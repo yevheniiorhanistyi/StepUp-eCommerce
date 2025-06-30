@@ -21,7 +21,10 @@ jest.mock('@/components/ui/carousel', () => ({
 }));
 
 jest.mock('@/constants/constants', () => ({
-  BRAND_LOGOS: ['brand1.png', 'brand2.png', 'brand3.png']
+  BRAND_LOGOS: ['brand1.png', 'brand2.png', 'brand3.png'],
+  ROUTES: {
+    Catalog: '/catalog'
+  }
 }));
 
 describe('BrandCarousel', () => {

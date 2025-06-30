@@ -10,21 +10,21 @@ import { defineStepper } from '@/components/ui/stepper';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
-import { ERROR_CODE, ERROR_MESSAGES, REGISTER_INITIAL_VALUES } from '@/constants/constants';
+import { ERROR_CODE, ERROR_MESSAGES, REGISTER_INITIAL_VALUES, ROUTES } from '@/constants/constants';
 
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 
 import { RegisterFormFields } from '@/types/register';
 
-import { registerStepSchema, registerStep1Schema } from '@/lib/registerSchema';
+import { registerStepSchema, registerStep1Schema } from '@/validation/registerSchema';
 
 import AccountStep from './AccountStep';
 import PersonalInfoStep from './PersonalInfoStep';
 
 import handleErrors from '@/services/register/handleErrors';
-import checkEmailAvailability from '@/services/register/checkEmail';
 import registerUser from '@/services/register/registerUser';
+import { checkEmailAvailability } from '@/lib/utils';
 
 const RegisterForm = (): JSX.Element => {
   const { setAuthentication, refreshUser } = useAuth();
@@ -47,7 +47,7 @@ const RegisterForm = (): JSX.Element => {
 
       setAuthentication(true);
       toast.success(`Registration successful. Logged in as ${values.email}`);
-      router.push('/');
+      router.push(ROUTES.Home);
       await refreshUser();
       await refreshCart();
     } catch (error: unknown) {
@@ -208,7 +208,7 @@ const LoginButton = (): JSX.Element => {
     <div className="text-center text-sm">
       <span>Already have an account? </span>
       <Link
-        href="/login"
+        href={ROUTES.Login}
         className="underline underline-offset-4 text-black hover:text-neutral-600 transition-colors font-bold"
       >
         Sign In.

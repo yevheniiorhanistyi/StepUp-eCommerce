@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, ReactNode, useEffect, useCallback } from 'react';
 import { IAuthContextType, IAuthStatus } from '@/types/types';
 import { Customer } from '@commercetools/platform-sdk';
+import { AUTH_API, USER_API } from '@/constants/constants';
 
 const AuthContext = createContext<IAuthContextType | undefined>(undefined);
 
@@ -23,7 +24,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = useCallback(async () => {
     try {
-      await fetch('/api/auth/logout', { method: 'DELETE' });
+      await fetch(AUTH_API.Logout, { method: 'DELETE' });
     } catch (error) {
       console.error('Logout API failed', error);
     }
@@ -37,7 +38,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const refreshUser = useCallback(async () => {
     setUserLoading(true);
     try {
-      const userResponse = await fetch('/api/user/me');
+      const userResponse = await fetch(USER_API.Me);
 
       if (userResponse.status === 401) {
         await logout();
@@ -59,13 +60,13 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch('/api/auth/status');
+        const res = await fetch(AUTH_API.Status);
         if (!res.ok) throw new Error('Failed to fetch auth status');
 
         const data: IAuthStatus = await res.json();
 
         if (data.hasAccessToken && data.shouldRefresh) {
-          const refreshRes = await fetch('/api/auth/refresh', { method: 'POST' });
+          const refreshRes = await fetch(AUTH_API.Refresh, { method: 'POST' });
           if (!refreshRes.ok) throw new Error('Failed to refresh token');
         }
 

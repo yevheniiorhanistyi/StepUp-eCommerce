@@ -1,6 +1,7 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 import { render, screen, act } from '@testing-library/react';
 import AllTimeFavorites from '@/components/AllTimeFavorites/AllTimeFavorites';
+import { LANGUAGE_CODE } from '@/constants/constants';
 
 describe('AllTimeFavorites', () => {
   beforeEach(() => {
@@ -11,7 +12,7 @@ describe('AllTimeFavorites', () => {
     const mockProducts = [
       {
         id: '1',
-        name: { 'en-US': 'Product 1' },
+        name: { [LANGUAGE_CODE]: 'Product 1' },
         masterVariant: {
           images: [{ url: '/image1.jpg' }],
           prices: [{ value: { centAmount: 1000, currencyCode: 'USD' } }]
@@ -19,7 +20,7 @@ describe('AllTimeFavorites', () => {
       },
       {
         id: '2',
-        name: { 'en-US': 'Product 2' },
+        name: { [LANGUAGE_CODE]: 'Product 2' },
         masterVariant: {
           images: [{ url: '/image2.jpg' }],
           prices: [{ value: { centAmount: 2000, currencyCode: 'USD' } }]

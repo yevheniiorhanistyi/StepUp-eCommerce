@@ -2,25 +2,26 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+import { ROUTES } from '@/constants/constants';
 
 const PopularCategories = (): JSX.Element => {
   const categories = [
     {
       title: 'Training Shoes',
       description: 'Versatile performance shoes for gym sessions and daily workouts.',
-      href: '/catalog?category=mens-training',
+      href: `${ROUTES.Catalog}?category=mens-training`,
       image: '/images/categories/training-category.jpg'
     },
     {
       title: 'Running Shoes',
       description: 'Enhance your performance with our top-notch running sneakers.',
-      href: '/catalog?category=womans-running',
+      href: `${ROUTES.Catalog}?category=womans-running`,
       image: '/images/categories/running-category.jpg'
     },
     {
       title: 'Casual Sneakers',
       description: 'Find your perfect pair for everyday wear and comfort.',
-      href: '/catalog?category=womans-lifestyle',
+      href: `${ROUTES.Catalog}?category=womans-lifestyle`,
       image: '/images/categories/casual-category.jpg'
     }
   ];

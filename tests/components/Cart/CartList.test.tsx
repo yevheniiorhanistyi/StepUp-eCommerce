@@ -6,6 +6,7 @@ jest.mock('@/context/CartContext', () => ({
 import { render, screen } from '@testing-library/react';
 import CartList from '@/components/Cart/CartList';
 import { useCart } from '@/context/CartContext';
+import { LANGUAGE_CODE, ROUTES } from '@/constants/constants';
 
 describe('CartList', () => {
   it('renders empty CartList', () => {
@@ -28,7 +29,7 @@ describe('CartList', () => {
     expect(screen.getByText(/Your shopping cart is empty/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Go to Catalog.' })).toHaveAttribute(
       'href',
-      '/catalog'
+      ROUTES.Catalog
     );
   });
 
@@ -40,7 +41,7 @@ describe('CartList', () => {
         lineItems: [
           {
             id: 'item1',
-            name: { 'en-US': 'Test Product' },
+            name: { [LANGUAGE_CODE]: 'Test Product' },
             quantity: 2,
             price: { value: { centAmount: 1000 }, discounted: null },
             variant: { id: 1 }

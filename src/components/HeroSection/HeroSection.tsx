@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '../ui/button';
+import { ROUTES } from '@/constants/constants';
 
 const HeroSection = (): JSX.Element => {
   return (
@@ -23,7 +24,7 @@ const HeroSection = (): JSX.Element => {
             size="lg"
             className="mt-4 w-full cursor-pointer py-6 max-[640px]:bg-white max-[640px]:text-black"
           >
-            <Link href="/catalog">Shop Now</Link>
+            <Link href={ROUTES.Catalog}>Shop Now</Link>
           </Button>
         </div>
 

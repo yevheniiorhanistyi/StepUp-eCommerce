@@ -10,6 +10,7 @@ import { ProductSlider } from '@/components/ProductSlider/ProductSlider';
 
 import ProductSizePicker from '@/components/ProductSizePicker/ProductSizePicker';
 import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
+import { LANGUAGE_CODE } from '@/constants/constants';
 
 const ATTRIBUTE_NAME = 'size';
 
@@ -27,7 +28,7 @@ export default async function ProductPage({ params }: { params: Promise<{ key: s
 
   const price = masterVariant.prices?.[0];
   const categories = current.categories
-    .map((category) => category.obj?.name?.['en-US'])
+    .map((category) => category.obj?.name?.[LANGUAGE_CODE])
     .filter((categoryName) => categoryName && categoryName !== 'All-Time Favorites')
     .join(' / ');
 
@@ -49,12 +50,15 @@ export default async function ProductPage({ params }: { params: Promise<{ key: s
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       <div className="grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] grid-rows-[auto_auto] gap-x-6 gap-y-4 md:gap-y-2">
-        <ProductSlider images={masterVariant.images ?? []} productName={current.name['en-US']} />
+        <ProductSlider
+          images={masterVariant.images ?? []}
+          productName={current.name[LANGUAGE_CODE]}
+        />
 
         <div className="row-start-2 md:row-start-1 md:col-start-2 flex flex-col space-y-4">
           <div>
             <span className="text-sm text-gray-500">{categories}</span>
-            <h1 className="text-2xl md:text-3xl font-bold">{current.name['en-US']}</h1>
+            <h1 className="text-2xl md:text-3xl font-bold">{current.name[LANGUAGE_CODE]}</h1>
           </div>
 
           {price && (
@@ -74,7 +78,7 @@ export default async function ProductPage({ params }: { params: Promise<{ key: s
                   Description
                 </AccordionTrigger>
                 <AccordionContent className="pt-2 pl-2 pb-0">
-                  {current.description['en-US']}
+                  {current.description[LANGUAGE_CODE]}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>

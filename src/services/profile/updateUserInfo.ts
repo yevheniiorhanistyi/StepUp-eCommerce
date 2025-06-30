@@ -1,7 +1,8 @@
+import { USER_API } from '@/constants/constants';
 import { UserUpdateData } from '../../types/profile';
 
 async function updatePersonalInfo(data: UserUpdateData) {
-  const response = await fetch('/api/user/update', {
+  const response = await fetch(USER_API.Update, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),

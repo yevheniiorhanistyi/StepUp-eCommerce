@@ -7,7 +7,8 @@ import {
   ErrorResponse,
   Product,
   ByProjectKeyRequestBuilder,
-  MyCustomerSignin
+  MyCustomerSignin,
+  AnonymousCartSignInMode
 } from '@commercetools/platform-sdk';
 import { ReactNode } from 'react';
 
@@ -21,6 +22,7 @@ export interface IAuthContextType {
   refreshUser: () => Promise<void>;
   isAuthChecked: boolean;
   setIsAuthChecked: (value: boolean) => void;
+  logout: () => Promise<void>;
 }
 
 export interface IAuthStatus {
@@ -201,5 +203,11 @@ export interface ICustomerSignin extends MyCustomerSignin {
   email: string;
   password: string;
   anonymousId?: string;
-  activeCartSignInMode?: 'MergeWithExistingCustomerCart' | 'ReplaceWithEmptyCustomerCart';
+  activeCartSignInMode?: AnonymousCartSignInMode;
+}
+
+export interface ICredentials {
+  email: string;
+  password: string;
+  anonymousId: string;
 }

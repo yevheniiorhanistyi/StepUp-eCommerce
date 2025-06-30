@@ -1,3 +1,4 @@
+import { CART_API } from '@/constants/constants';
 import { Cart } from '@commercetools/platform-sdk';
 
 export const addPromoCodeApi = async (
@@ -5,7 +6,7 @@ export const addPromoCodeApi = async (
   cartId?: string,
   cartVersion?: number
 ): Promise<Cart> => {
-  const res = await fetch('/api/cart/add-promo', {
+  const res = await fetch(CART_API.AddPromo, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ code, cartId, cartVersion })

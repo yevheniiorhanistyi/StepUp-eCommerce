@@ -18,8 +18,8 @@ import { useState } from 'react';
 import updatePersonalInfo from '../../../services/profile/updateUserInfo';
 import { toast } from 'sonner';
 
-import { userInfoValidationSchema } from '@/lib/profileSchema';
 import handleErrors from '@/services/register/handleErrors';
+import { userInfoValidationSchema } from '@/validation/profileSchema';
 
 const UserInfo = (): JSX.Element => {
   const { user, refreshUser } = useAuth();

@@ -21,10 +21,11 @@ import { Badge } from '@/components/ui/badge';
 
 import DrawerMenu from '../DrawerMenu/DrawerMenu';
 import UserDropdownMenu from '../UserDropdownMenu/UserDropdownMenu';
+import { ROUTES } from '@/constants/constants';
 
 const navLinks = [
-  { href: '/catalog', label: 'Catalog' },
-  { href: '/about', label: 'About Us' }
+  { href: ROUTES.Catalog, label: 'Catalog' },
+  { href: ROUTES.About, label: 'About Us' }
 ];
 
 const Header = (): JSX.Element => {
@@ -49,7 +50,7 @@ const Header = (): JSX.Element => {
   return (
     <header className="px-5 sm:px-10 py-4 grow-0 shrink-0 basis-auto">
       <div className="flex items-center justify-between w-full max-w-[1440px] mx-auto">
-        <Link className="flex items-center gap-2" href={'/'}>
+        <Link className="flex items-center gap-2" href={ROUTES.Home}>
           <Image
             className="h-[35px] w-[17px] sm:h-[51px] sm:w-[25px]"
             src="/images/logo.png"
@@ -79,7 +80,7 @@ const Header = (): JSX.Element => {
               />
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href={'/cart'}>
+              <Link href={ROUTES.Cart}>
                 <Button
                   aria-label="Cart"
                   className="rounded-full cursor-pointer transition-colors duration-300 relative"

@@ -1,3 +1,5 @@
+import { CART_API } from '@/constants/constants';
+
 export const removeItemsFromCart = async (
   lineItemIds: string[],
   cartId?: string,
@@ -5,7 +7,7 @@ export const removeItemsFromCart = async (
 ) => {
   if (!cartId || version === undefined) throw new Error('Missing cart ID or version');
 
-  const res = await fetch('/api/cart/remove-multiple', {
+  const res = await fetch(CART_API.RemoveItems, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ lineItemIds, cartId, cartVersion: version })

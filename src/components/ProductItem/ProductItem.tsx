@@ -11,6 +11,7 @@ import { ProductProjection } from '@commercetools/platform-sdk';
 
 import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
 import ProductCartButton from '../ProductCartButton/ProductCartButton';
+import { LANGUAGE_CODE, ROUTES } from '@/constants/constants';
 
 const ProductItem = ({ product }: { product: ProductProjection }) => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const ProductItem = ({ product }: { product: ProductProjection }) => {
 
   const image = product.masterVariant.images?.[0];
   const price = product.masterVariant.prices?.[0];
-  const description = product?.description?.['en-US'];
+  const description = product?.description?.[LANGUAGE_CODE];
   const { key } = product;
 
   const [isProcessing, setProcessing] = useState(false);
@@ -46,7 +47,7 @@ const ProductItem = ({ product }: { product: ProductProjection }) => {
   };
 
   const handleCardClick = () => {
-    router.push(`/product/${key}`);
+    router.push(`${ROUTES.Product}/${key}`);
   };
 
   if (!image || !price || !description || !key) return null;
@@ -60,7 +61,7 @@ const ProductItem = ({ product }: { product: ProductProjection }) => {
         <div className="relative w-full aspect-[5/4]">
           <Image
             src={image.url}
-            alt={product.name['en-US']}
+            alt={product.name[LANGUAGE_CODE]}
             priority
             fill
             style={{ objectFit: 'contain' }}
@@ -70,8 +71,10 @@ const ProductItem = ({ product }: { product: ProductProjection }) => {
         </div>
       </CardContent>
       <CardHeader>
-        <CardTitle className="line-clamp-1">{product.name['en-US']}</CardTitle>
-        <CardDescription className="line-clamp-2">{product.description['en-US']}</CardDescription>
+        <CardTitle className="line-clamp-1">{product.name[LANGUAGE_CODE]}</CardTitle>
+        <CardDescription className="line-clamp-2">
+          {product.description[LANGUAGE_CODE]}
+        </CardDescription>
       </CardHeader>
       <CardFooter className="flex flex-col items-start gap-3 text-lg pb-3">
         <PriceDisplay price={price} />

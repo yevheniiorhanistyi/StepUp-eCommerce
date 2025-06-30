@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { ROUTES } from '@/constants/constants';
 
 const NotFound = (): JSX.Element => {
   return (
@@ -15,7 +16,7 @@ const NotFound = (): JSX.Element => {
           </h2>
           <p className="text-gray-600">Sorry, we couldn’t find the page you were looking for.</p>
           <Button size="lg" className="w-full max-w-[200px] mx-auto md:mx-0" asChild>
-            <Link href="/">Go back home</Link>
+            <Link href={ROUTES.Home}>Go back home</Link>
           </Button>
         </div>
       </div>

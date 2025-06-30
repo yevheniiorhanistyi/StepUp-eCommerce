@@ -1,3 +1,4 @@
+import { CART_API } from '@/constants/constants';
 import { Cart } from '@commercetools/platform-sdk';
 
 export const removeItemFromCart = async (
@@ -5,7 +6,7 @@ export const removeItemFromCart = async (
   cartId?: string,
   cartVersion?: number
 ): Promise<Cart> => {
-  const res = await fetch('/api/cart/remove-item', {
+  const res = await fetch(CART_API.RemoveItem, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ lineItemId, cartId, cartVersion })

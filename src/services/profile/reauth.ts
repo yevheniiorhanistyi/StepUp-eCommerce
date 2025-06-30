@@ -1,7 +1,9 @@
-const reauthenticate = async (email: string, password: string) => {
-  await fetch('/api/auth/logout', { method: 'DELETE' });
+import { AUTH_API } from '@/constants/constants';
 
-  const loginResponse = await fetch('/api/auth/login', {
+const reauthenticate = async (email: string, password: string) => {
+  await fetch(AUTH_API.Logout, { method: 'DELETE' });
+
+  const loginResponse = await fetch(AUTH_API.Login, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),

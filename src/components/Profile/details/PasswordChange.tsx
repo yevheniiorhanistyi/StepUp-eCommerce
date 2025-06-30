@@ -9,8 +9,9 @@ import { useAuth } from '@/context/AuthContext';
 
 import reauthenticate from '../../../services/profile/reauth';
 import updateUserPassword from '@/services/profile/updatePassword';
-import { passwordValidationSchema } from '@/lib/profileSchema';
+
 import handleErrors from '@/services/register/handleErrors';
+import { passwordValidationSchema } from '@/validation/profileSchema';
 
 const PasswordChange = (): JSX.Element => {
   const { user, refreshUser } = useAuth();

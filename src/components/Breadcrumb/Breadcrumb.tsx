@@ -14,6 +14,7 @@ import {
 
 import { useCategoryData } from '@/context/CategoryContext';
 import { getCategoryBreadcrumb } from '@/lib/utils';
+import { LANGUAGE_CODE, ROUTES } from '@/constants/constants';
 
 export const CatalogBreadcrumb = ({ categorySlug }: { categorySlug: string }) => {
   const { categoryData } = useCategoryData();
@@ -28,7 +29,7 @@ export const CatalogBreadcrumb = ({ categorySlug }: { categorySlug: string }) =>
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
-            <Link href="/catalog">Catalog</Link>
+            <Link href={ROUTES.Catalog}>Catalog</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
 
@@ -37,11 +38,11 @@ export const CatalogBreadcrumb = ({ categorySlug }: { categorySlug: string }) =>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               {index === breadcrumbItems.length - 1 ? (
-                <BreadcrumbPage>{category.name['en-US']}</BreadcrumbPage>
+                <BreadcrumbPage>{category.name[LANGUAGE_CODE]}</BreadcrumbPage>
               ) : (
                 <BreadcrumbLink asChild>
-                  <Link href={`/catalog?category=${category.slug['en-US']}`}>
-                    {category.name['en-US']}
+                  <Link href={`${ROUTES.Catalog}?category=${category.slug[LANGUAGE_CODE]}`}>
+                    {category.name[LANGUAGE_CODE]}
                   </Link>
                 </BreadcrumbLink>
               )}

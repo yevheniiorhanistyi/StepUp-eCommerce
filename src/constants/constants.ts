@@ -8,7 +8,8 @@ export enum ROUTES {
   Profile = '/profile',
   Cart = '/cart',
   Catalog = '/catalog',
-  Product = '/product'
+  Product = '/product',
+  About = '/about'
 }
 
 export const enum ENV_KEY {
@@ -85,6 +86,7 @@ export enum AUTH_API {
 }
 
 export enum CART_API {
+  GetCart = '/api/cart',
   AddItem = '/api/cart/add-item',
   AddPromo = '/api/cart/add-promo',
   RemoveItem = '/api/cart/remove-item',

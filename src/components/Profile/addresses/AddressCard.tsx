@@ -19,8 +19,9 @@ import { toast } from 'sonner';
 import { updateUserAddresses } from '../../../services/profile/updateAddress';
 
 import { AddresFields, AddressFieldsValues, Props } from '../../../types/profile';
-import { addressValidationSchema } from '@/lib/profileSchema';
+
 import handleErrors from '@/services/register/handleErrors';
+import { addressValidationSchema } from '@/validation/profileSchema';
 
 const AddressCard = ({ address, isDefault, onDelete, onSetDefault }: Props) => {
   const { user, refreshUser } = useAuth();

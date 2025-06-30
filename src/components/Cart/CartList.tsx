@@ -18,6 +18,7 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog';
+import { LANGUAGE_CODE, ROUTES } from '@/constants/constants';
 
 const extractAttributeValue = (attr: {
   name: string;
@@ -91,7 +92,7 @@ const CartList = (): JSX.Element => {
           Your shopping cart is empty.
         </div>
         <Link
-          href="/catalog"
+          href={ROUTES.Catalog}
           className="text-center text-lg underline underline-offset-4 text-black hover:text-neutral-600 transition-colors font-bold"
         >
           Go to Catalog.
@@ -158,7 +159,7 @@ const CartList = (): JSX.Element => {
       {cart?.lineItems.map((item) => {
         const productKey = item.productKey || item.productId;
         const imageUrl = item.variant?.images?.[0]?.url || '';
-        const productName = item.name?.['en-US'] || '';
+        const productName = item.name?.[LANGUAGE_CODE] || '';
         const sizeAttr = item.variant?.attributes?.find((attr) => attr.name === 'size');
         const size = sizeAttr ? extractAttributeValue(sizeAttr) : '';
 
@@ -178,7 +179,7 @@ const CartList = (): JSX.Element => {
             className="flex min-[451px]:max-h-[250px] flex-row max-[450px]:flex-col gap-6 p-4 items-stretch"
           >
             <Link
-              href={`/product/${productKey}`}
+              href={`${ROUTES.Product}/${productKey}`}
               className="shrink basis-1/3 max-[450px]:min-h-[250px] bg-transparent rounded-md flex items-center justify-center overflow-hidden self-stretch relative"
             >
               {imageUrl ? (
@@ -196,7 +197,7 @@ const CartList = (): JSX.Element => {
 
             <CardContent className="p-0 basis-1/3 flex flex-col gap-4 justify-between grow">
               <div>
-                <Link href={`/product/${productKey}`} className="text-lg font-semibold">
+                <Link href={`${ROUTES.Product}/${productKey}`} className="text-lg font-semibold">
                   {productName}
                 </Link>
                 {size && <div className="text-sm text-muted-foreground">Size: {size}</div>}

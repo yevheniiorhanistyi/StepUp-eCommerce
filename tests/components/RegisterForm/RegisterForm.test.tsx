@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import RegisterForm from '@/components/Register/Form/RegisterForm';
+import { ROUTES } from '@/constants/constants';
 
 jest.mock('next/navigation', () => ({
   useRouter: () => ({ push: jest.fn() })
@@ -13,14 +14,10 @@ jest.mock('@/context/CartContext', () => ({
   useCart: () => jest.fn()
 }));
 
-jest.mock('@/lib/registerSchema', () => ({
-  registerStep0Schema: {
+jest.mock('@/validation/registerSchema', () => ({
+  registerStepSchema: {
     validate: () => Promise.resolve({})
   }
-}));
-
-jest.mock('@/services/register/checkEmail', () => ({
-  checkEmailAvailability: jest.fn()
 }));
 
 jest.mock('@/services/commercetools/client/createAnonymousClient', () => ({
@@ -57,7 +54,7 @@ describe('RegisterForm', () => {
       expect(screen.getByRole('button', { name: /next/i })).toBeDisabled();
       expect(screen.getByText(/already have an account/i)).toBeInTheDocument();
       expect(screen.getByText(/sign in/i)).toBeInTheDocument();
-      expect(screen.getByText(/sign in/i)).toHaveAttribute('href', '/login');
+      expect(screen.getByText(/sign in/i)).toHaveAttribute('href', ROUTES.Login);
     });
   });
 });

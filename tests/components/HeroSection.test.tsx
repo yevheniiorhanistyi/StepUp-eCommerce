@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import HeroSection from '@/components/HeroSection/HeroSection';
+import { ROUTES } from '@/constants/constants';
 
 describe('HeroSection', () => {
   it('renders the correct words', () => {
@@ -15,7 +16,7 @@ describe('HeroSection', () => {
     render(<HeroSection />);
 
     const button = screen.getByRole('link', { name: /Shop Now/i });
-    expect(button).toHaveAttribute('href', '/catalog');
+    expect(button).toHaveAttribute('href', ROUTES.Catalog);
   });
 
   it('renders the subtitle correctly', () => {

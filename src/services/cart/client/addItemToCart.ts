@@ -1,3 +1,4 @@
+import { CART_API } from '@/constants/constants';
 import { Cart, LineItemDraft } from '@commercetools/platform-sdk';
 
 export const addItemToCart = async (
@@ -5,7 +6,7 @@ export const addItemToCart = async (
   cartId?: string,
   cartVersion?: number
 ): Promise<Cart> => {
-  const res = await fetch('/api/cart/add-item', {
+  const res = await fetch(CART_API.AddItem, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ ...item, cartId, cartVersion })

@@ -1,5 +1,6 @@
 import { MyCustomerUpdateAction } from '@commercetools/platform-sdk';
 import { UpdateUserAddressesParams } from '../../types/profile';
+import { USER_API } from '@/constants/constants';
 
 export async function updateUserAddresses(params: UpdateUserAddressesParams) {
   const {
@@ -66,7 +67,7 @@ export async function updateUserAddresses(params: UpdateUserAddressesParams) {
     throw new Error('No update fields provided');
   }
 
-  const response = await fetch('/api/user/update', {
+  const response = await fetch(USER_API.Update, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ version, actions: addressActions })

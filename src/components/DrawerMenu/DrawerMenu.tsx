@@ -12,6 +12,7 @@ import {
 import { Button } from '../ui/button';
 import { Menu, X, ChevronRight } from 'lucide-react';
 import { IDrawerMenuProps } from '@/types/types';
+import { ROUTES } from '@/constants/constants';
 
 const DrawerMenu = ({ navLinks, isAuthenticated, isOpen, setIsOpen }: IDrawerMenuProps) => {
   return (
@@ -55,7 +56,7 @@ const DrawerMenu = ({ navLinks, isAuthenticated, isOpen, setIsOpen }: IDrawerMen
         <div className="flex flex-col gap-5 p-5">
           <Link
             className="flex items-center justify-between w-full text-xl hover:text-accent-foreground/90"
-            href={'/cart'}
+            href={ROUTES.Cart}
             onClick={() => setIsOpen(false)}
           >
             Cart
@@ -79,14 +80,14 @@ const DrawerMenu = ({ navLinks, isAuthenticated, isOpen, setIsOpen }: IDrawerMen
             <div className="flex items-center flex-wrap gap-4">
               <Link
                 className="flex items-center gap-2"
-                href={'/login'}
+                href={ROUTES.Login}
                 onClick={() => setIsOpen(false)}
               >
                 <Button className="text-base font-bold rounded-2xl cursor-pointer">Sign In</Button>
               </Link>
               <Link
                 className="flex items-center gap-2"
-                href={'/register'}
+                href={ROUTES.Register}
                 onClick={() => setIsOpen(false)}
               >
                 <Button

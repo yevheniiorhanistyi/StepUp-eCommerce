@@ -23,7 +23,7 @@ const mockValues = {
   }
 } as Partial<RegisterFormFields>;
 
-describe('PersonalInfoStrep', () => {
+describe('PersonalInfoStep', () => {
   it('Render all required fields', () => {
     render(
       <PersonalInfoStep

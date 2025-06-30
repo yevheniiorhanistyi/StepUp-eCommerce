@@ -17,6 +17,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 import { IUserDropdownMenuProps } from '@/types/types';
+import { ROUTES } from '@/constants/constants';
 
 const UserDropdownMenu = ({ isAuthenticated }: IUserDropdownMenuProps) => {
   const { user, logout } = useAuth();
@@ -46,7 +47,7 @@ const UserDropdownMenu = ({ isAuthenticated }: IUserDropdownMenuProps) => {
       </DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuItem asChild className="px-5 cursor-pointer">
-        <Link href="/profile" className="flex items-center gap-2 w-full">
+        <Link href={ROUTES.Profile} className="flex items-center gap-2 w-full">
           <User />
           <span className="text-base">Profile</span>
         </Link>
@@ -65,13 +66,13 @@ const UserDropdownMenu = ({ isAuthenticated }: IUserDropdownMenuProps) => {
   const renderAuthOptions = () => (
     <>
       <DropdownMenuItem asChild>
-        <Link href="/login" className="flex items-center gap-2 w-full cursor-pointer">
+        <Link href={ROUTES.Login} className="flex items-center gap-2 w-full cursor-pointer">
           <KeyRound />
           <span className="text-base">Sign In</span>
         </Link>
       </DropdownMenuItem>
       <DropdownMenuItem asChild>
-        <Link href="/register" className="flex items-center gap-2 w-full cursor-pointer">
+        <Link href={ROUTES.Register} className="flex items-center gap-2 w-full cursor-pointer">
           <UserRoundPlus />
           <span className="text-base">Join Us</span>
         </Link>

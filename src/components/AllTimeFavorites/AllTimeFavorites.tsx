@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '../ui/card';
 import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
+import { LANGUAGE_CODE, PRODUCTS_API, ROUTES } from '@/constants/constants';
 
 const AllTimeFavorites = (): JSX.Element => {
   const [products, setProducts] = useState<ProductProjection[]>([]);
@@ -13,7 +14,7 @@ const AllTimeFavorites = (): JSX.Element => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('/api/products/all-time-favorites');
+        const response = await fetch(PRODUCTS_API.Favorites);
         if (!response.ok) throw new Error(`Failed to fetch products: ${response.statusText}`);
         const data: ProductProjection[] = await response.json();
         setProducts(data);
@@ -42,7 +43,7 @@ const AllTimeFavorites = (): JSX.Element => {
 
             return (
               <Link
-                href={`/product/${product.key}`}
+                href={`${ROUTES.Product}/${product.key}`}
                 key={product.id}
                 className="max-w-[364px] xl:max-w-[250px] w-full justify-self-center"
               >
@@ -51,14 +52,14 @@ const AllTimeFavorites = (): JSX.Element => {
                     <div className="relative w-full h-[200px] mb-2">
                       <Image
                         src={image.url}
-                        alt={product.name['en-US']}
+                        alt={product.name[LANGUAGE_CODE]}
                         fill
                         style={{ objectFit: 'contain' }}
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 364px"
                         className="rounded-md"
                       />
                     </div>
-                    <h3 className="font-medium text-lg mb-2">{product.name['en-US']}</h3>
+                    <h3 className="font-medium text-lg mb-2">{product.name[LANGUAGE_CODE]}</h3>
                     <PriceDisplay price={price} />
                   </CardContent>
                 </Card>

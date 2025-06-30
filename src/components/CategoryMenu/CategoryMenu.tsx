@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils';
 
 import { SidebarGroup, SidebarGroupLabel, SidebarMenuSub } from '../ui/sidebar';
 import { Button } from '../ui/button';
+import { LANGUAGE_CODE } from '@/constants/constants';
 
 const CategoryMenu = ({ categorySlug, onCategoryClick }: ICategoryMenuProps) => {
   const { categoryData } = useCategoryData();
@@ -37,10 +38,10 @@ const CategoryMenu = ({ categorySlug, onCategoryClick }: ICategoryMenuProps) => 
               <button
                 key={category.id}
                 type="button"
-                onClick={() => onCategoryClick(category.slug['en-US'])}
+                onClick={() => onCategoryClick(category.slug[LANGUAGE_CODE])}
                 className="text-left text-sm w-full font-medium hover:underline cursor-pointer pl-2"
               >
-                {category.name['en-US']}
+                {category.name[LANGUAGE_CODE]}
               </button>
             ))}
             {/* Categories with subcategories */}
@@ -49,10 +50,10 @@ const CategoryMenu = ({ categorySlug, onCategoryClick }: ICategoryMenuProps) => 
                 <div className="flex items-center w-full text-sm font-medium hover:bg-muted px-2 py-1 rounded">
                   <button
                     type="button"
-                    onClick={() => onCategoryClick(category.slug['en-US'])}
+                    onClick={() => onCategoryClick(category.slug[LANGUAGE_CODE])}
                     className="text-left w-1/2 hover:underline cursor-pointer"
                   >
-                    {category.name['en-US']}
+                    {category.name[LANGUAGE_CODE]}
                   </button>
                   <CollapsibleTrigger asChild>
                     <Button
@@ -71,13 +72,13 @@ const CategoryMenu = ({ categorySlug, onCategoryClick }: ICategoryMenuProps) => 
                       <span
                         key={child.id}
                         role="button"
-                        onClick={() => onCategoryClick(child.slug['en-US'])}
+                        onClick={() => onCategoryClick(child.slug[LANGUAGE_CODE])}
                         className={cn(
                           'flex font-medium text-sm text-primary hover:text-primary hover:underline text-left w-1/2 cursor-pointer',
-                          categorySlug === child.slug['en-US'] && 'font-semibold'
+                          categorySlug === child.slug[LANGUAGE_CODE] && 'font-semibold'
                         )}
                       >
-                        {child.name['en-US']}
+                        {child.name[LANGUAGE_CODE]}
                       </span>
                     ))}
                   </SidebarMenuSub>

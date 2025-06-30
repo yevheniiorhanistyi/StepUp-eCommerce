@@ -18,7 +18,7 @@ import { updateUserAddresses } from '../../../services/profile/updateAddress';
 import { toast } from 'sonner';
 
 import { AddressFieldsValues, AddressSectionProps } from '../../../types/profile';
-import { addressValidationSchema } from '@/lib/profileSchema';
+import { addressValidationSchema } from '@/validation/profileSchema';
 
 export function AddressesSection({
   type,
