@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { passwordSchema } from './registerSchema';
+import { passwordSchema } from '../validation/registerSchema';
 
 const today = new Date();
 const MIN_AGE = 14;
