@@ -13,7 +13,7 @@ import { cn, getCookieValue } from '@/lib/utils';
 import { Eye, EyeOff } from 'lucide-react';
 
 import { AUTH_API, ROUTES } from '@/constants/constants';
-import loginSchema from '@/validation/LoginSchema';
+import loginSchema from '@/validation/loginSchema';
 
 const LoginForm = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
