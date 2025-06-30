@@ -165,7 +165,7 @@ export const countries = [
 export const ITEMS_PER_PAGE = 6;
 
 export const INITIAL_SEARCH_PARAMS: ISearchParams = {
-  category: '',
+  gender: [],
   offset: 0,
   limit: ITEMS_PER_PAGE,
   term: '',
