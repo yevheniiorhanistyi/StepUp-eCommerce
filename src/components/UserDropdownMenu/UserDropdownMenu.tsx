@@ -18,8 +18,8 @@ import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 import { IUserDropdownMenuProps } from '@/types/types';
 
-const UserDropdownMenu = ({ isAuthenticated, setIsAuthenticated }: IUserDropdownMenuProps) => {
-  const { user } = useAuth();
+const UserDropdownMenu = ({ isAuthenticated }: IUserDropdownMenuProps) => {
+  const { user, logout } = useAuth();
   const { refreshCart } = useCart();
 
   const firstName = user?.firstName || '';
@@ -27,9 +27,8 @@ const UserDropdownMenu = ({ isAuthenticated, setIsAuthenticated }: IUserDropdown
   const email = user?.email || '';
 
   const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'DELETE' });
+    await logout();
     await refreshCart();
-    setIsAuthenticated(false);
   };
 
   const renderUserInfo = () => (

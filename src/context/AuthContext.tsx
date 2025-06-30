@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { createContext, useContext, useState, ReactNode, useEffect, useCallback } from 'react';
 import { IAuthContextType, IAuthStatus } from '@/types/types';
 import { Customer } from '@commercetools/platform-sdk';
 
@@ -21,10 +21,30 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<Customer | null>(null);
   const [isUserLoading, setUserLoading] = useState(true);
 
-  const refreshUser = async () => {
+  const logout = useCallback(async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'DELETE' });
+    } catch (error) {
+      console.error('Logout API failed', error);
+    }
+
+    setAuthentication(false);
+    setUser(null);
+    setUserLoading(false);
+    setIsAuthChecked(true);
+  }, []);
+
+  const refreshUser = useCallback(async () => {
     setUserLoading(true);
     try {
       const userResponse = await fetch('/api/user/me');
+
+      if (userResponse.status === 401) {
+        await logout();
+
+        return;
+      }
+
       if (!userResponse.ok) throw new Error('Failed to fetch user info');
 
       const userData: Customer = await userResponse.json();
@@ -34,7 +54,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     } finally {
       setUserLoading(false);
     }
-  };
+  }, [logout]);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -54,20 +74,17 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         if (data.isAuthenticated) {
           await refreshUser();
         } else {
-          setUser(null);
+          await logout();
         }
       } catch {
-        await fetch('/api/auth/logout', { method: 'DELETE' });
-        setAuthentication(false);
-        setUser(null);
+        await logout();
       } finally {
-        setUserLoading(false);
         setIsAuthChecked(true);
       }
     };
 
     checkAuth();
-  }, []);
+  }, [refreshUser, logout]);
 
   return (
     <AuthContext.Provider
@@ -80,7 +97,8 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         setUserLoading,
         refreshUser,
         isAuthChecked,
-        setIsAuthChecked
+        setIsAuthChecked,
+        logout
       }}
     >
       {children}

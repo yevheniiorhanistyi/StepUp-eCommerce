@@ -80,6 +80,8 @@ export async function POST(req: NextRequest) {
         await mergeCarts(client, anonymousId);
       } catch (mergeError) {
         console.error('Manual cart merge error:', mergeError);
+      } finally {
+        setCookie(response, COOKIES.AnonymousId, '', { httpOnly: false, maxAge: 0 });
       }
     }
 

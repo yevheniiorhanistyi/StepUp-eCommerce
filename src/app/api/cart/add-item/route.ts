@@ -53,30 +53,28 @@ export async function POST(req: NextRequest) {
 
       const anonymousId = req.cookies.get(COOKIES.AnonymousId)?.value || crypto.randomUUID();
 
+      let cart;
+
       if (isCartUpdatePossible) {
-        const updatedCart = await addLineItem({
+        cart = await addLineItem({
           client,
           cartId,
           cartVersion,
           lineItem: { productId, variantId, quantity }
         });
-
-        return NextResponse.json(updatedCart);
       } else {
-        const anonymousCart = await createCart({
+        cart = await createCart({
           client,
           lineItem: { productId, variantId, quantity },
           anonymousId
         });
 
-        const response = NextResponse.json(anonymousCart);
+        const response = NextResponse.json(cart);
 
-        if (!req.cookies.get(COOKIES.AnonymousId)?.value) {
-          setCookie(response, COOKIES.AnonymousId, anonymousId, {
-            ...cookieOptions,
-            httpOnly: false
-          });
-        }
+        setCookie(response, COOKIES.AnonymousId, anonymousId, {
+          ...cookieOptions,
+          httpOnly: false
+        });
 
         return response;
       }
