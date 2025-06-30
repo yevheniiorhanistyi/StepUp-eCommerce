@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-const LoginSchema = Yup.object({
+const loginSchema = Yup.object({
   email: Yup.string()
     .trim('Email must not contain leading or trailing spaces')
     .email('Enter a valid email (e.g. user@example.com)')
@@ -16,4 +16,4 @@ const LoginSchema = Yup.object({
     .required('Password is required')
 });
 
-export default LoginSchema;
+export default loginSchema;

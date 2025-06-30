@@ -4,8 +4,9 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import LoginForm from './LoginForm';
+import LoginForm from '../../components/Login/LoginForm';
 import { useAuth } from '@/context/AuthContext';
+import { ROUTES } from '@/constants/constants';
 
 const Login = (): JSX.Element | null => {
   const router = useRouter();
@@ -13,7 +14,7 @@ const Login = (): JSX.Element | null => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.replace('/');
+      router.replace(ROUTES.Home);
     }
   }, [isAuthenticated, router]);
 

@@ -12,7 +12,8 @@ import { cn, getCookieValue } from '@/lib/utils';
 
 import { Eye, EyeOff } from 'lucide-react';
 
-import LoginSchema from './LoginSchema';
+import { AUTH_API, ROUTES } from '@/constants/constants';
+import loginSchema from '@/validation/LoginSchema';
 
 const LoginForm = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,7 +27,7 @@ const LoginForm = (): JSX.Element => {
         email: '',
         password: ''
       }}
-      validationSchema={LoginSchema}
+      validationSchema={loginSchema}
       onSubmit={async (values, { setSubmitting }) => {
         try {
           const payload = {
@@ -35,7 +36,7 @@ const LoginForm = (): JSX.Element => {
             activeCartSignInMode: 'MergeWithExistingCustomerCart'
           };
 
-          const response = await fetch('/api/auth/login', {
+          const response = await fetch(AUTH_API.Login, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -49,7 +50,7 @@ const LoginForm = (): JSX.Element => {
 
           setAuthentication(true);
           toast.success(`Logged in as ${values.email}`);
-          router.push('/');
+          router.push(ROUTES.Home);
           await refreshUser();
           await refreshCart();
         } catch (error) {
@@ -145,7 +146,7 @@ const LoginForm = (): JSX.Element => {
           <div className="text-center mt-2 text-sm">
             <span>Don&apos;t have an account?</span>
             <a
-              href="/register"
+              href={ROUTES.Register}
               className="underline underline-offset-4 text-black hover:text-neutral-600 transition-colors font-bold ml-1"
             >
               Create one
