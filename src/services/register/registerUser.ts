@@ -1,44 +1,27 @@
 import { Customer } from '@commercetools/platform-sdk';
-import { createAnonymousClient } from '@/services/commercetools/client/createAnonymousClient';
 import { toast } from 'sonner';
-
 import { RegisterFormFields } from '../../types/register';
 import { getCookieValue } from '@/lib/utils';
 import handleErrors from './handleErrors';
-import mapFormData from './formUserData';
+import createCustomer from './createCustomer';
+import loginCustomer from './loginCustomer';
 
 const registerUser = async (userData: RegisterFormFields): Promise<Customer | undefined> => {
-  const apiRoot = createAnonymousClient();
-
-  const userDraft = {
-    ...mapFormData(userData),
-    anonymousId: getCookieValue('anonymous_id'),
-    activeCartSignInMode: 'MergeWithExistingCustomerCart'
-  };
+  const anonymousId = getCookieValue('anonymous_id');
   try {
-    await apiRoot.customers().post({ body: userDraft }).execute();
+    await createCustomer(userData);
 
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: userDraft.email,
-        password: userDraft.password,
-        anonymousId: userDraft.anonymousId
-      })
+    const customer = await loginCustomer({
+      email: userData.email,
+      password: userData.password,
+      anonymousId
     });
 
-    const result = await response.json();
-
-    if (!response.ok) {
-      throw new Error(result.error || 'Login failed after registration.');
-    }
-
-    return result.customer as Customer;
+    return customer;
   } catch (error: unknown) {
     toast.error(handleErrors(error).message);
+
+    return undefined;
   }
 };
 export default registerUser;

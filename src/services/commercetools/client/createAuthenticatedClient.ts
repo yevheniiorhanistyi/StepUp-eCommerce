@@ -10,12 +10,11 @@ import {
   getPasswordAuthMiddlewareOptions
 } from '@/services/commercetools/options/options';
 
-const projectKey = getEnvVar(process.env.NEXT_PUBLIC_PROJECT_KEY, ENV_KEY.PROJECT_KEY);
-
 export const createAuthenticatedClient = (
   username: string,
   password: string
 ): ByProjectKeyRequestBuilder => {
+  const projectKey = getEnvVar(process.env.NEXT_PUBLIC_PROJECT_KEY, ENV_KEY.PROJECT_KEY);
   const client: Client = new ClientBuilder()
     .withProjectKey(projectKey)
     .withPasswordFlow(getPasswordAuthMiddlewareOptions(username, password))
