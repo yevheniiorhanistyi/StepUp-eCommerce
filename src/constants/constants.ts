@@ -5,7 +5,10 @@ export enum ROUTES {
   Home = '/',
   Login = '/login',
   Register = '/register',
-  Profile = '/profile'
+  Profile = '/profile',
+  Cart = '/cart',
+  Catalog = '/catalog',
+  Product = '/product'
 }
 
 export const enum ENV_KEY {
@@ -73,6 +76,31 @@ export const ERROR_MESSAGES = {
   [ERROR_CODE.MissingVersion]: 'Missing version',
   [ERROR_CODE.EmailTaken]: 'Email is already taken'
 };
+
+export enum AUTH_API {
+  Login = '/api/auth/login',
+  Logout = '/api/auth/logout',
+  Refresh = '/api/auth/refresh',
+  Status = '/api/auth/status'
+}
+
+export enum CART_API {
+  AddItem = '/api/cart/add-item',
+  AddPromo = '/api/cart/add-promo',
+  RemoveItem = '/api/cart/remove-item',
+  RemoveItems = '/api/cart/remove-multiple',
+  UpdateItem = '/api/cart/update-item'
+}
+
+export enum PRODUCTS_API {
+  Favorites = '/api/products/favorites'
+}
+
+export enum USER_API {
+  Me = '/api/user/me',
+  Password = '/api/user/password',
+  Update = '/api/user/update'
+}
 
 export const REGISTER_INITIAL_VALUES: RegisterFormFields = {
   email: '',
