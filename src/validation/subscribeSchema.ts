@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-const SubscribeSchema = Yup.object({
+const subscribeSchema = Yup.object({
   email: Yup.string()
     .trim()
     .required('Email is required')
@@ -8,4 +8,4 @@ const SubscribeSchema = Yup.object({
     .email('Enter a valid email (user@example.com)')
 });
 
-export default SubscribeSchema;
+export default subscribeSchema;

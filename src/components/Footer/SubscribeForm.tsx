@@ -6,9 +6,9 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-import SubscribeSchema from './SubscribeSchema';
+import SubscribeSchema from '../../validation/subscribeSchema';
 
-const FooterForm = (): JSX.Element => {
+const SubscribeForm = (): JSX.Element => {
   return (
     <Formik
       initialValues={{
@@ -50,4 +50,4 @@ const FooterForm = (): JSX.Element => {
   );
 };
 
-export default FooterForm;
+export default SubscribeForm;

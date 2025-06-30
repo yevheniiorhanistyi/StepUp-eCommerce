@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import FooterForm from './FooterForm';
+import SubscribeForm from './SubscribeForm';
 
 const footerLinks = [
   { label: 'Privacy Policy', href: '#' },
@@ -38,7 +38,7 @@ const Footer = (): JSX.Element => {
             <p className="text-sm text-amber-50/80">
               Stay in step with new releases, style tips, and special deals — just for you.
             </p>
-            <FooterForm />
+            <SubscribeForm />
           </div>
         </div>
 
