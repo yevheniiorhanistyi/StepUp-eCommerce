@@ -24,9 +24,9 @@ export const useProductData = (
       try {
         let filtered = [...products];
 
-        if (Array.isArray(searchParams.category) && searchParams.category.length > 0) {
+        if (Array.isArray(searchParams.gender) && searchParams.gender.length > 0) {
           filtered = filtered.filter((product) =>
-            product.category.some((cat) => searchParams.category.includes(cat.toLowerCase()))
+            product.category.some((cat) => searchParams.gender.includes(cat.toLowerCase()))
           );
         }
 
