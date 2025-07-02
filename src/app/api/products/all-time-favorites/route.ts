@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createCredentialsClient } from '@/services/commercetools/client/createCredentialsClient';
 
-import { ERROR_CODE, ERROR_MESSAGES } from '@/constants/constants';
+import { ERROR_CODE, ERROR_MESSAGES } from '@/constants';
 
 export async function GET() {
   try {

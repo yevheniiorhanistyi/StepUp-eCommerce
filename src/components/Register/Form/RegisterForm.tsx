@@ -10,7 +10,7 @@ import { defineStepper } from '@/components/ui/stepper';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
-import { ERROR_CODE, ERROR_MESSAGES, REGISTER_INITIAL_VALUES } from '@/constants/constants';
+import { ERROR_CODE, ERROR_MESSAGES, REGISTER_INITIAL_VALUES } from '@/constants';
 
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';

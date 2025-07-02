@@ -5,7 +5,7 @@ import { createRefreshTokenClient } from '@/services/commercetools/client/create
 
 import { setCookie } from '@/lib/cookies/setCookie';
 
-import { COOKIES, COOKIE_MAX_AGE, ERROR_MESSAGES, ERROR_CODE } from '@/constants/constants';
+import { COOKIES, COOKIE_MAX_AGE, ERROR_MESSAGES, ERROR_CODE } from '@/constants';
 
 export async function POST(req: NextRequest) {
   try {

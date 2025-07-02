@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 import { tokenServiceInstance } from '@/services/commercetools/token/TokenService';
-import { COOKIES, ROUTES } from '@/constants/constants';
+import { COOKIES, ROUTES } from '@/constants';
 
 export async function DELETE(_req: NextRequest) {
   const response = NextResponse.json({ success: true });

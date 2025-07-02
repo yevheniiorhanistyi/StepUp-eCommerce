@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createTokenClient } from '@/services/commercetools/client/createTokenClient';
 import { createAnonymousClient } from '@/services/commercetools/client/createAnonymousClient';
 
-import { COOKIES, ERROR_CODE, ERROR_MESSAGES } from '@/constants/constants';
+import { COOKIES, ERROR_CODE, ERROR_MESSAGES } from '@/constants';
 
 export async function GET(req: NextRequest) {
   const accessToken = req.cookies.get(COOKIES.AccessToken)?.value || null;

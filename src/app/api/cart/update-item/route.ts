@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createAnonymousClient } from '@/services/commercetools/client/createAnonymousClient';
 import { createTokenClient } from '@/services/commercetools/client/createTokenClient';
 
-import { COOKIES, ERROR_CODE, ERROR_MESSAGES } from '@/constants/constants';
+import { COOKIES, ERROR_CODE, ERROR_MESSAGES } from '@/constants';
 
 export async function POST(req: NextRequest) {
   const isAuthenticated = req.cookies.get(COOKIES.IsAuthenticated)?.value === 'true';

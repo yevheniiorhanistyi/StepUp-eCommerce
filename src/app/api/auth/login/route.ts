@@ -8,7 +8,7 @@ import { setCookie } from '@/lib/cookies/setCookie';
 
 import { ICustomerSignin } from '@/types/types';
 
-import { COOKIES, ERROR_CODE, ERROR_MESSAGES, COOKIE_MAX_AGE } from '@/constants/constants';
+import { COOKIES, ERROR_CODE, ERROR_MESSAGES, COOKIE_MAX_AGE } from '@/constants';
 
 export async function POST(req: NextRequest) {
   try {

@@ -5,7 +5,7 @@ import { MyCustomerUpdateAction } from '@commercetools/platform-sdk';
 import checkEmailAvailability from '@/services/register/checkEmail';
 import handleErrors from '@/services/register/handleErrors';
 
-import { COOKIES, ERROR_CODE, ERROR_MESSAGES } from '@/constants/constants';
+import { COOKIES, ERROR_CODE, ERROR_MESSAGES } from '@/constants';
 
 export async function POST(req: NextRequest) {
   try {

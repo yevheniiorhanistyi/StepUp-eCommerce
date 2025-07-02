@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { COOKIES } from '@/constants/constants';
+import { COOKIES } from '@/constants';
 
 export async function GET(req: NextRequest) {
   const TOKEN_EXPIRY_BUFFER_MS = 2 * 60 * 60 * 1000;

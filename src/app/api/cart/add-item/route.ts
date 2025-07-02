@@ -6,7 +6,7 @@ import { createCart } from '@/services/cart/server/createCart';
 import { addLineItem } from '@/services/cart/server/addLineItem';
 import { setCookie } from '@/lib/cookies/setCookie';
 import { cookieOptions } from '@/lib/cookies/cookieOptions';
-import { COOKIES, ERROR_CODE, ERROR_MESSAGES } from '@/constants/constants';
+import { COOKIES, ERROR_CODE, ERROR_MESSAGES } from '@/constants';
 
 export async function POST(req: NextRequest) {
   const isAuthenticated = req.cookies.get(COOKIES.IsAuthenticated)?.value === 'true';
