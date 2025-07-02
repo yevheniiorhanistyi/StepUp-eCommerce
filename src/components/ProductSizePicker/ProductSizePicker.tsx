@@ -35,13 +35,15 @@ const ProductSizePicker = ({ product, variants }: IProductSizePickerProps) => {
     setSelectedKey(newKey);
   };
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
     if (!selectedVariant || !selectedKey) return;
 
     setIsProcessing(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     if (isInCart) {
       removeItem(selectedKey);
