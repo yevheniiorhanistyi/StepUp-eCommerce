@@ -4,6 +4,7 @@ import { Toaster } from '@/components/ui/sonner';
 import Layout from '@/components/Layout/Layout';
 import { AuthContextProvider } from '@/context/AuthContext';
 import { CartDataProvider } from '@/context/CartContext';
+import { Analytics } from '@vercel/analytics/next';
 import '@/styles/globals.css';
 
 const montserrat = Montserrat({
@@ -42,6 +43,7 @@ export default function RootLayout({
           </AuthContextProvider>
         </CartDataProvider>
         <Toaster position="bottom-left" />
+        <Analytics />
       </body>
     </html>
   );
