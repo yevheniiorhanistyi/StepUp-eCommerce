@@ -161,7 +161,7 @@ const CartList = (): JSX.Element => {
             className="flex min-[451px]:max-h-[250px] flex-row max-[450px]:flex-col gap-6 p-4 items-stretch"
           >
             <Link
-              href={`/product/${productKey}`}
+              href={`/product/${productKey.split('-').slice(0, -1).join('-')}`}
               className="shrink basis-1/3 max-[450px]:min-h-[250px] bg-transparent rounded-md flex items-center justify-center overflow-hidden self-stretch relative"
             >
               {imageUrl ? (
