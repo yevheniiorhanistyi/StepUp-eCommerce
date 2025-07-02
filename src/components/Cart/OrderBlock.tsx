@@ -9,6 +9,8 @@ import { toast } from 'sonner';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 import { priceFormat } from '@/lib/utils';
 
+const CENTS_IN_DOLLAR = 100;
+
 const OrderBlock = (): JSX.Element => {
   const { cart, addPromoCode } = useCart();
   const [promoCode, setPromoCode] = useState('');
@@ -34,10 +36,10 @@ const OrderBlock = (): JSX.Element => {
   const total = cart?.totalPrice?.centAmount || 0;
   const originalCartTotal = total + discount;
 
-  const shippingPrice = priceFormat(shipping / 100);
-  const promoValue = priceFormat(discount / 100);
-  const cartOriginalTotal = priceFormat(originalCartTotal / 100);
-  const totalPrice = priceFormat((originalCartTotal + shipping - discount) / 100);
+  const shippingPrice = priceFormat(shipping / CENTS_IN_DOLLAR);
+  const promoValue = priceFormat(discount / CENTS_IN_DOLLAR);
+  const cartOriginalTotal = priceFormat(originalCartTotal / CENTS_IN_DOLLAR);
+  const totalPrice = priceFormat((originalCartTotal + shipping - discount) / CENTS_IN_DOLLAR);
 
   const hasDiscount = discount > 0;
 

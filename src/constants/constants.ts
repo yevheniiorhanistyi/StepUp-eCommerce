@@ -1,4 +1,63 @@
+import { RegisterFormFields } from '@/types/register';
 import { ISearchParams } from '@/types/types';
+
+export enum ROUTES {
+  Home = '/',
+  Login = '/login',
+  Register = '/register',
+  Profile = '/profile'
+}
+
+export const enum ENV_KEY {
+  API_URL = 'NEXT_PUBLIC_API_URL',
+  AUTH_URL = 'NEXT_PUBLIC_AUTH_URL',
+  PROJECT_KEY = 'NEXT_PUBLIC_PROJECT_KEY',
+  CLIENT_ID = 'NEXT_PUBLIC_CLIENT_ID',
+  CLIENT_SECRET = 'NEXT_PUBLIC_CLIENT_SECRET',
+  SCOPES = 'NEXT_PUBLIC_SCOPES'
+}
+
+export enum COOKIES {
+  AccessToken = 'access_token',
+  RefreshToken = 'refresh_token',
+  TokenExpiresAt = 'token_expires_at',
+  IsAuthenticated = 'is_authenticated',
+  UserFirstName = 'user_first_name',
+  UserLastName = 'user_last_name',
+  UserEmail = 'user_email',
+  CustomerId = 'customer_id',
+  AnonymousId = 'anonymous_id'
+}
+
+export const COOKIE_MAX_AGE = {
+  ThirtyDays: 60 * 60 * 24 * 30,
+  OneHour: 60 * 60
+};
+
+export const REGISTER_INITIAL_VALUES: RegisterFormFields = {
+  email: '',
+  password: '',
+  confirmPassword: '',
+  firstName: '',
+  lastName: '',
+  dateOfBirth: '',
+  phoneNumber: '',
+  billingAddress: {
+    country: '',
+    city: '',
+    streetName: '',
+    postalCode: '',
+    isDefault: true
+  },
+  shippingAddress: {
+    country: '',
+    city: '',
+    streetName: '',
+    postalCode: '',
+    isDefault: true,
+    useSame: true
+  }
+};
 
 export const ANNOUNCEMENT_TEXTS = {
   seasonalSale: {

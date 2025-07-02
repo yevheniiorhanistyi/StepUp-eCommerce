@@ -12,7 +12,7 @@ const passwordSchema = Yup.string()
   .matches(/\d/, 'Must contain at least one digit')
   .required('Password is required');
 
-const registerStep0Schema = Yup.object({
+const registerStepSchema = Yup.object({
   email: Yup.string()
     .trim()
     .email('Enter a valid email (user@example.com)')
@@ -101,4 +101,4 @@ const registerStep1Schema = Yup.object({
   })
 });
 
-export { registerStep0Schema, registerStep1Schema, passwordSchema };
+export { registerStepSchema, registerStep1Schema, passwordSchema };

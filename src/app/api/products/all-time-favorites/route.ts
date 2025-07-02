@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { createCredentialsClient } from '@/services/commercetools/client/createCredentialsClient';
 
+import { ERROR_CODE, ERROR_MESSAGES } from '@/constants';
+
 export async function GET() {
   try {
     const key = 'all-time-favorites';
@@ -26,6 +28,9 @@ export async function GET() {
 
     return NextResponse.json(productsResponse.body.results);
   } catch {
-    return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
+    return NextResponse.json(
+      { error: ERROR_MESSAGES[ERROR_CODE.FailedToFetchProducts] },
+      { status: 500 }
+    );
   }
 }

@@ -1,13 +1,15 @@
 'use client';
 
-import { useCart } from '@/context/CartContext';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '../ui/input';
-import Link from 'next/link';
-import { priceFormat } from '@/lib/utils';
-import Image from 'next/image';
 import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { useCart } from '@/context/CartContext';
+import { priceFormat } from '@/lib/utils';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import {
   Dialog,
   DialogContent,
@@ -15,7 +17,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle
-} from '../ui/dialog';
+} from '@/components/ui/dialog';
 
 const extractAttributeValue = (attr: {
   name: string;
@@ -29,6 +31,9 @@ const extractAttributeValue = (attr: {
   return value;
 };
 
+const MIN_QUANTITY = 1;
+const MAX_QUANTITY = 99;
+
 const CartList = (): JSX.Element => {
   const { cart, removeItem, updateItemQuantity, clearCart } = useCart();
   const [isClearingCart, setIsClearingCart] = useState(false);
@@ -39,6 +44,62 @@ const CartList = (): JSX.Element => {
     setProcessingItems((prev) => ({ ...prev, [id]: value }));
   };
 
+  const isClearCartDisabled = (): boolean => {
+    return isClearingCart || !cart || cart.lineItems.length === 0;
+  };
+
+  const handleRemove = async (id: string) => {
+    if (processingItems[id]) return;
+    try {
+      setProcessingForItem(id, true);
+      await removeItem(id);
+    } finally {
+      setProcessingForItem(id, false);
+    }
+  };
+
+  const handleClearCart = async () => {
+    try {
+      setIsClearingCart(true);
+      await clearCart();
+      setIsDialogOpen(false);
+    } finally {
+      setIsClearingCart(false);
+    }
+  };
+
+  const handleUpdateQuantity = async (
+    item: { id: string; quantity: number },
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (processingItems[item.id]) return;
+    const value = Number(e.target.value);
+    if (!Number.isNaN(value) && value >= 1) {
+      try {
+        setProcessingForItem(item.id, true);
+        await updateItemQuantity(item.id, value);
+      } finally {
+        setProcessingForItem(item.id, false);
+      }
+    }
+  };
+
+  const renderEmptyCart = (): JSX.Element => {
+    return (
+      <>
+        <div className="text-center text-lg text-muted-foreground">
+          Your shopping cart is empty.
+        </div>
+        <Link
+          href="/catalog"
+          className="text-center text-lg underline underline-offset-4 text-black hover:text-neutral-600 transition-colors font-bold"
+        >
+          Go to Catalog.
+        </Link>
+      </>
+    );
+  };
+
   return (
     <div className="flex min-[767.97px]:basis-2/3 max-[768px]:mx-auto w-full flex-col gap-6 pt-5 relative">
       <div className="flex items-center justify-between min-w-full border-b-2 pb-1.5">
@@ -47,7 +108,7 @@ const CartList = (): JSX.Element => {
           type="button"
           className="cursor-pointer duration-300"
           onClick={() => setIsDialogOpen(true)}
-          disabled={isClearingCart || cart?.lineItems.length === 0 || !cart}
+          disabled={isClearCartDisabled()}
         >
           {isClearingCart ? (
             <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -79,15 +140,7 @@ const CartList = (): JSX.Element => {
             <Button
               type="button"
               className="cursor-pointer duration-300 min-w-[90px]"
-              onClick={async () => {
-                try {
-                  setIsClearingCart(true);
-                  await clearCart();
-                  setIsDialogOpen(false);
-                } finally {
-                  setIsClearingCart(false);
-                }
-              }}
+              onClick={handleClearCart}
               disabled={isClearingCart}
             >
               {isClearingCart ? (
@@ -100,19 +153,8 @@ const CartList = (): JSX.Element => {
         </DialogContent>
       </Dialog>
 
-      {(cart?.lineItems.length === 0 || !cart) && (
-        <>
-          <div className="text-center text-lg text-muted-foreground">
-            Your shopping cart is empty.
-          </div>
-          <Link
-            href="/catalog"
-            className="text-center text-lg underline underline-offset-4 text-black hover:text-neutral-600 transition-colors font-bold"
-          >
-            Go to Catalog.
-          </Link>
-        </>
-      )}
+      {(cart?.lineItems.length === 0 || !cart) && renderEmptyCart()}
+
       {cart?.lineItems.map((item) => {
         const productKey = item.productKey || item.productId;
         const imageUrl = item.variant?.images?.[0]?.url || '';
@@ -183,21 +225,10 @@ const CartList = (): JSX.Element => {
               <div className="flex items-center gap-4">
                 <Input
                   type="number"
-                  min={1}
-                  max={99}
+                  min={MIN_QUANTITY}
+                  max={MAX_QUANTITY}
                   value={item.quantity}
-                  onChange={async (e) => {
-                    if (processingItems[item.id]) return;
-                    const value = Number(e.target.value);
-                    if (!Number.isNaN(value) && value >= 1) {
-                      try {
-                        setProcessingForItem(item.id, true);
-                        await updateItemQuantity(item.id, value);
-                      } finally {
-                        setProcessingForItem(item.id, false);
-                      }
-                    }
-                  }}
+                  onChange={(e) => handleUpdateQuantity(item, e)}
                   disabled={!!processingItems[item.id]}
                   className="w-20 appearance-auto number-visible cursor-pointer"
                 />
@@ -205,15 +236,7 @@ const CartList = (): JSX.Element => {
                 <Button
                   type="button"
                   className="cursor-pointer duration-300 min-w-[90px]"
-                  onClick={async () => {
-                    if (processingItems[item.id]) return;
-                    try {
-                      setProcessingForItem(item.id, true);
-                      await removeItem(item.id);
-                    } finally {
-                      setProcessingForItem(item.id, false);
-                    }
-                  }}
+                  onClick={() => handleRemove(item.id)}
                   disabled={!!processingItems[item.id]}
                 >
                   {processingItems[item.id] ? (

@@ -3,12 +3,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createTokenClient } from '@/services/commercetools/client/createTokenClient';
 import { createAnonymousClient } from '@/services/commercetools/client/createAnonymousClient';
 
-export async function GET(req: NextRequest) {
-  const accessToken = req.cookies.get('access_token')?.value || null;
-  const isAuthenticated = req.cookies.get('is_authenticated')?.value === 'true';
-  const anonymousId = req.cookies.get('anonymous_id')?.value || null;
+import { COOKIES, ERROR_CODE, ERROR_MESSAGES } from '@/constants';
 
-  let customerId = req.cookies.get('customer_id')?.value || null;
+export async function GET(req: NextRequest) {
+  const accessToken = req.cookies.get(COOKIES.AccessToken)?.value || null;
+  const isAuthenticated = req.cookies.get(COOKIES.IsAuthenticated)?.value === 'true';
+  const anonymousId = req.cookies.get(COOKIES.AnonymousId)?.value || null;
+
+  let customerId = req.cookies.get(COOKIES.CustomerId)?.value || null;
 
   try {
     if (isAuthenticated && accessToken) {
@@ -50,8 +52,11 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(null);
     }
   } catch (error) {
-    console.error('Failed to fetch cart', error);
+    console.error(ERROR_MESSAGES[ERROR_CODE.FailedToFetchCart], error);
 
-    return NextResponse.json({ error: 'Failed to fetch cart' }, { status: 500 });
+    return NextResponse.json(
+      { error: ERROR_MESSAGES[ERROR_CODE.FailedToFetchCart] },
+      { status: 500 }
+    );
   }
 }

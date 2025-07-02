@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { ICommonCatalogProps } from '@/types/types';
-import { SORTING_OPTIONS } from '@/constants/constants';
+import { SORTING_OPTIONS } from '@/constants';
 import { Button } from '../ui/button';
 import {
   DropdownMenu,
