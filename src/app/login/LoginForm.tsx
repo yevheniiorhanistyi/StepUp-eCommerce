@@ -16,6 +16,7 @@ import LoginSchema from './LoginSchema';
 
 const LoginForm = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { setAuthentication, refreshUser } = useAuth();
   const router = useRouter();
 
@@ -30,6 +31,8 @@ const LoginForm = (): JSX.Element => {
         try {
           const user = localStorage.getItem('user');
           const userData = user ? JSON.parse(user) : null;
+
+          setIsLoading(true);
 
           if (!userData) throw new Error(ERROR_MESSAGES[ERROR_CODE.InvalidCredentials]);
 
@@ -47,6 +50,7 @@ const LoginForm = (): JSX.Element => {
           refreshUser();
 
           setAuthentication(true);
+          setIsLoading(false);
           toast.success(`Logged in as ${values.email}`);
           router.push('/');
         } catch (error) {
@@ -57,6 +61,7 @@ const LoginForm = (): JSX.Element => {
           }
         } finally {
           setSubmitting(false);
+          setIsLoading(false);
         }
       }}
     >
@@ -136,7 +141,11 @@ const LoginForm = (): JSX.Element => {
           </div>
 
           <Button type="submit" className="w-full cursor-pointer">
-            Login
+            {isLoading ? (
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+            ) : (
+              'Login'
+            )}
           </Button>
 
           <div className="text-center mt-2 text-sm">
