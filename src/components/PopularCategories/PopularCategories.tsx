@@ -9,21 +9,21 @@ const PopularCategories = (): JSX.Element => {
       description: 'Versatile performance shoes for gym sessions and daily workouts.',
       href: '/catalog',
       image:
-        'https://res.cloudinary.com/dlw0lezqr/image/upload/v1750774552/training-category_ccllcs.jpg'
+        'https://res.cloudinary.com/dlw0lezqr/image/upload/v1751730550/training-category_yj6umt.webp'
     },
     {
       title: 'Running Shoes',
       description: 'Enhance your performance with our top-notch running sneakers.',
       href: '/catalog',
       image:
-        'https://res.cloudinary.com/dlw0lezqr/image/upload/v1750774551/running-category_hkdla3.jpg'
+        'https://res.cloudinary.com/dlw0lezqr/image/upload/v1751730549/running-category_rvtdvb.webp'
     },
     {
       title: 'Casual Sneakers',
       description: 'Find your perfect pair for everyday wear and comfort.',
       href: '/catalog',
       image:
-        'https://res.cloudinary.com/dlw0lezqr/image/upload/v1750774551/casual-category_zst5z9.jpg'
+        'https://res.cloudinary.com/dlw0lezqr/image/upload/v1751730548/casual-category_zpexme.webp'
     }
   ];
 
