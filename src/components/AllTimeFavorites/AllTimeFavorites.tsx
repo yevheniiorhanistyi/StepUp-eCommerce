@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { Card, CardContent } from '../ui/card';
 import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
 
@@ -24,13 +23,11 @@ const AllTimeFavorites = (): JSX.Element => {
                 <Card className="h-full cursor-pointer transition-shadow hover:shadow-lg py-3">
                   <CardContent>
                     <div className="relative w-full h-[200px] mb-2">
-                      <Image
+                      <img
+                        loading="lazy"
+                        className="object-contain rounded-md w-full h-full"
                         src={image}
                         alt={product.name}
-                        fill
-                        style={{ objectFit: 'contain' }}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 364px"
-                        className="rounded-md"
                       />
                     </div>
                     <h3 className="font-medium text-lg mb-2">{product.name}</h3>

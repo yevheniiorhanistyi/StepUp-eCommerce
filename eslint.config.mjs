@@ -81,7 +81,8 @@ const eslintConfig = [
         {
           allow: ['warn', 'error']
         }
-      ]
+      ],
+      '@next/next/no-img-element': 'off'
     }
   },
   ...compat.extends('plugin:testing-library/react').map((config) => ({

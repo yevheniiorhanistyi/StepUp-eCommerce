@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { useCart } from '@/context/CartContext';
@@ -165,13 +164,14 @@ const CartList = (): JSX.Element => {
               className="shrink basis-1/3 max-[450px]:min-h-[250px] bg-transparent rounded-md flex items-center justify-center overflow-hidden self-stretch relative"
             >
               {imageUrl ? (
-                <Image
-                  src={imageUrl}
-                  alt={productName}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="max-w-full max-h-full max-[450px]:h-full max-[450px]:w-full object-contain"
-                />
+                <div className="relative w-full max-w-[300px] h-[180px] max-[450px]:h-[220px]">
+                  <img
+                    loading="lazy"
+                    src={imageUrl}
+                    alt={productName}
+                    className="absolute inset-0 w-full h-full object-contain"
+                  />
+                </div>
               ) : (
                 <span className="text-sm text-muted-foreground">No image</span>
               )}

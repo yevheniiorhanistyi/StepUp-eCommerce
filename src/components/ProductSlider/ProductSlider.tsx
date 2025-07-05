@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -47,12 +46,11 @@ export function ProductSlider({ images, productName }: IProductSliderProps) {
                       className="relative w-20 aspect-square overflow-hidden hover:shadow-sm hover:cursor-pointer"
                       onClick={() => handleSlideChange(index)}
                     >
-                      <Image
+                      <img
+                        loading="lazy"
+                        className="object-contain rounded-md w-full h-full"
                         src={image}
                         alt={`${productName} - ${index + 1}`}
-                        fill
-                        sizes="80px"
-                        className="object-contain"
                       />
                     </div>
                   </SwiperSlide>
@@ -85,13 +83,11 @@ export function ProductSlider({ images, productName }: IProductSliderProps) {
                   }}
                   onClick={handleImageClick}
                 >
-                  <Image
+                  <img
+                    loading="lazy"
+                    className="object-contain rounded-md w-full h-full"
                     src={image}
                     alt={`${productName} - ${index + 1}`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 600px"
-                    className="object-contain"
-                    priority={index === 0}
                   />
                   <div className="absolute bottom-2 right-2 bg-gray-500/30 text-gray-500 text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
                     Click to zoom

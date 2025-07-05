@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 import { Card, CardContent, CardDescription, CardTitle, CardFooter, CardHeader } from '../ui/card';
 
@@ -13,14 +12,11 @@ const ProductItem = ({ product }: { product: Product }) => {
       <Card className="h-full cursor-pointer transition-shadow hover:shadow-lg py-2 gap-2">
         <CardContent>
           <div className="relative w-full aspect-[5/4]">
-            <Image
+            <img
+              loading="lazy"
+              className="object-contain rounded-md w-full h-full"
               src={product.images[0]}
               alt={product.name}
-              priority
-              fill
-              style={{ objectFit: 'contain' }}
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 364px"
-              className="rounded-md"
             />
           </div>
         </CardContent>

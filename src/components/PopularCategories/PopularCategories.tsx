@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
@@ -55,13 +54,11 @@ const PopularCategories = (): JSX.Element => {
                 <Card className="h-full cursor-pointer transition-shadow hover:shadow-lg py-5">
                   <CardContent>
                     <div className="relative w-full h-[246px] mb-5">
-                      <Image
+                      <img
+                        loading="lazy"
+                        className="object-cover rounded-md w-full h-full"
                         src={category.image}
                         alt={category.title}
-                        fill
-                        style={{ objectFit: 'cover' }}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 364px"
-                        className="rounded-md"
                       />
                     </div>
                     <h3 className="text-lg mb-2">{category.title}</h3>

@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '../ui/button';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Github, Linkedin } from 'lucide-react';
 import teamMembers from './teamData';
@@ -22,12 +21,13 @@ const AboutUsPage = (): JSX.Element => {
         {teamMembers.map((member, index) => (
           <div key={index} className="flex flex-col md:flex-row items-center gap-4 md:gap-10">
             <div className="flex-shrink-0">
-              <Image
-                src={member.image}
-                alt={member.name}
+              <img
+                loading="lazy"
                 width={160}
                 height={160}
                 className="rounded-full object-cover"
+                src={member.image}
+                alt={member.name}
               />
             </div>
 
@@ -77,13 +77,13 @@ const AboutUsPage = (): JSX.Element => {
             rel="noopener noreferrer"
             className="relative w-[25px] h-[25px]"
           >
-            <Image
+            <img
+              loading="lazy"
+              width={25}
+              height={25}
+              className="hover:opacity-80 transition-opacity"
               src="/rsschool.png"
               alt="RsSchool Logo"
-              fill
-              sizes="25px"
-              title="Rolling Scopes School"
-              className="hover:opacity-80 transition-opacity"
             />
           </Link>
         </p>

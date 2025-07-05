@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const Benefits = (): JSX.Element => {
@@ -62,12 +61,13 @@ const Benefits = (): JSX.Element => {
                 }}
                 transition={{ duration: 0.6 }}
               >
-                <Image
-                  src={advantage.imageSrc}
-                  alt={advantage.imageAlt}
+                <img
+                  loading="lazy"
                   width={65}
                   height={65}
                   className="mx-auto"
+                  src={advantage.imageSrc}
+                  alt={advantage.imageAlt}
                 />
               </motion.div>
               <motion.h3

@@ -1,5 +1,4 @@
 import { ITeamContributionModalProps } from '@/types/types';
-import Image from 'next/image';
 import {
   Dialog,
   DialogContent,
@@ -42,13 +41,13 @@ const TeamContributionModal = ({
             <SwiperSlide key={index}>
               <div className="pb-9 flex flex-col gap-4">
                 <div className="relative w-full md:h-[45vh] max-md:h-[35vh] max-sm:h-[20vh] overflow-clip flex grow shrink">
-                  <Image
-                    src={item.image}
-                    sizes="(max-width: 768px) 100vw, 800px"
-                    alt={item.title}
+                  <img
+                    loading="lazy"
                     width={600}
                     height={200}
                     className="object-contain min-w-full min-h-full relative"
+                    src={item.image}
+                    alt={item.title}
                   />
                 </div>
                 <div className="flex flex-col gap-4 grow shrink">
