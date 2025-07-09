@@ -54,7 +54,7 @@ const CatalogClient = (): JSX.Element => {
                 )}
               >
                 {productList.length === 0 && !isLoading ? (
-                  <h6 className="text-lg font-semibold">
+                  <h6 className="text-center text-lg font-semibold">
                     Nothing found. Please try adjusting your filters.
                   </h6>
                 ) : (
