@@ -10,7 +10,7 @@ import { ProductSlider } from '@/components/ProductSlider/ProductSlider';
 import ProductSizePicker from '@/components/ProductSizePicker/ProductSizePicker';
 import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
 
-import products from '@/data/all-time-favorites.json';
+import products from '@/data/all-products.json';
 
 const ATTRIBUTE_NAME = 'size';
 

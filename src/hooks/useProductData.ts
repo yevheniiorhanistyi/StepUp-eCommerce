@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { ISearchParams } from '@/types/types';
 import { getPrice } from '@/lib/utils';
 
-import products from '@/data/all-time-favorites.json';
+import products from '@/data/all-products.json';
 
 export const useProductData = (
   searchParams: ISearchParams,

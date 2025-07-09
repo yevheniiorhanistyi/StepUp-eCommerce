@@ -1,0 +1,786 @@
+[
+  {
+    "id": 1,
+    "key": "fresh-foam-x-860",
+    "category": ["Men", "Lifestyle"],
+    "name": "New Balance Fresh Foam X 860v14",
+    "description": "Run like the wind in style and comfort! The New Balance® Fresh Foam X 860v14 features a breathable mesh upper and durable outsole for superior ventilation and grip. Enjoy the cozy embrace of cotton lining and a secure fit with lace-up closure. Designed with a round toe for enhanced comfort, these running shoes are your perfect partner for every mile.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "Gray",
+          "label": "Gray"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "New Balance",
+          "label": "New Balance"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "42",
+            "label": "42"
+          },
+          {
+            "key": "43",
+            "label": "43"
+          },
+          {
+            "key": "44",
+            "label": "44"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993335/image-1_stwbkr.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993337/image-2_e7k8zr.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993339/image-3_whhyj3.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993341/image-4_fj6rws.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993343/image-5_xc8tfh.webp"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 17500,
+          "fractionDigits": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "key": "fuel-cell",
+    "category": ["Men", "Lifestyle"],
+    "name": "New Balance Fuel Cell",
+    "description": "Crafted with a lightweight FuelCell foam midsole, the New Balance® FuelCell sneakers deliver exceptional energy return and plush cushioning for all-day comfort. Designed for both performance and everyday wear, these sneakers combine innovative technology with a sleek, modern silhouette to keep you moving in style.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "Blue",
+          "label": "Blue"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "New Balance",
+          "label": "New Balance"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "42",
+            "label": "42"
+          },
+          {
+            "key": "43",
+            "label": "43"
+          },
+          {
+            "key": "44",
+            "label": "44"
+          },
+          {
+            "key": "45",
+            "label": "45"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993346/image-1_mw3qpp.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993348/image-2_sgfrws.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993350/image-3_shkxzn.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993352/image-4_jcgg2m.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993355/image-5_wpvhos.webp"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 14400,
+          "fractionDigits": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "key": "court-rider-chaos",
+    "category": ["Men", "Lifestyle"],
+    "name": "PUMA Court Rider Chaos",
+    "description": "Look good on and off the court wearing the PUMA® Court Rider Chaos Slash sneakers. Designed for dynamic performance and street-ready style, these sneakers feature a responsive foam midsole for cushioning, a high-traction rubber outsole for quick cuts, and bold layered overlays for a standout look. The breathable upper and secure lace-up design keep you locked in, whether you're playing hard or chilling after the game.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "Blue",
+          "label": "Blue"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "PUMA",
+          "label": "PUMA"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "42",
+            "label": "42"
+          },
+          {
+            "key": "43",
+            "label": "43"
+          },
+          {
+            "key": "44",
+            "label": "44"
+          },
+          {
+            "key": "45",
+            "label": "45"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993323/image-1_d2s8gm.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993325/image-2_cjuo0t.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993326/image-3_dknmtk.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993329/image-4_waohkf.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751993332/image-5_u0z0lz.webp"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 11000,
+          "fractionDigits": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "key": "exhibit-select",
+    "category": ["Women", "Training"],
+    "name": "adidas Exhibit Select",
+    "description": "Light-footed and buoyant, the adidas® Exhibit Select Mid Trainers are ready to take on any opponent. An ultralight Lightstrike midsole provides lightweight cushioning with every step, while the textile upper keeps the overall feel airy and light. The Lightstrike cushioning offers added comfort and support.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "Black",
+          "label": "Black"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "Addidas",
+          "label": "Addidas"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "37",
+            "label": "37"
+          },
+          {
+            "key": "38",
+            "label": "38"
+          },
+          {
+            "key": "41",
+            "label": "41"
+          },
+          {
+            "key": "42",
+            "label": "42"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992960/image-1_ndebow.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992962/image-2_okmzgo.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992964/image-3_rxh6pw.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992968/image-4_epxbqe.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992966/image-5_lsd4tl.webp"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 11000,
+          "fractionDigits": 2
+        },
+        "discounted": {
+          "value": {
+            "type": "centPrecision",
+            "currencyCode": "USD",
+            "centAmount": 10450,
+            "fractionDigits": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "key": "eletrico",
+    "category": ["Women", "Training"],
+    "name": "Fila Eletrico",
+    "description": "The Fila® Eletrico sneakers are designed with a breathable textile lining that helps reduce moisture and keep your feet dry. The sneakers also offer a stylish mesh upper design and durable construction, making them a great choice for both casual wear and light athletic activities.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "Blue",
+          "label": "Blue"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "Fila",
+          "label": "Fila"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "37",
+            "label": "37"
+          },
+          {
+            "key": "38",
+            "label": "38"
+          },
+          {
+            "key": "41",
+            "label": "41"
+          },
+          {
+            "key": "42",
+            "label": "42"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992951/image-1_socypv.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992952/image-2_cbbcqh.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992954/image-3_ypreg9.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992956/image-4_cmyrlt.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992958/image-5_grimwh.webp"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 6500,
+          "fractionDigits": 2
+        },
+        "discounted": {
+          "value": {
+            "type": "centPrecision",
+            "currencyCode": "USD",
+            "centAmount": 6175,
+            "fractionDigits": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "key": "floatzig",
+    "category": ["Women", "Training"],
+    "name": "Reebok Floatzig 1",
+    "description": "Give an expensive touch to your feet wearing the Reebok® Floatzig 1. Crafted from textile upper, lining and insole, this pair of shoes features round toe, lace detailing, full length floatride energy foam in a zig shape that provides lightweight and responsive energy return, targeted foam panels at the tongue and collar, engineered mesh vamp with reflective overlays and a reinforced midfoot panel with 2-layer textiles providing extra support.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "Gray",
+          "label": "Gray"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "New Balance",
+          "label": "New Balance"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "37",
+            "label": "37"
+          },
+          {
+            "key": "38",
+            "label": "38"
+          },
+          {
+            "key": "41",
+            "label": "41"
+          },
+          {
+            "key": "42",
+            "label": "42"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992970/image-1_xkqalb.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992972/image-2_idpiyl.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992974/image-3_hhh1ho.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992976/image-4_ytb6tr.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992978/image-5_lk2keq.webp"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 12000,
+          "fractionDigits": 2
+        },
+        "discounted": {
+          "value": {
+            "type": "centPrecision",
+            "currencyCode": "USD",
+            "centAmount": 11400,
+            "fractionDigits": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "key": "grand-court-alpha",
+    "category": ["Men", "Lifestyle"],
+    "name": "adidas Grand Court Alpha",
+    "description": "Sleek, sporty and so easy to style. The adidas® Grand Court Alpha 00s won't spend much time in your shoe rack. A Cloudfoam midsole cushions your step while the soft lining hugs the foot in place. A classic rubber outsole keeps you grounded day to day. Whether you're trekking across the city or taking it easy with friends, the adidas heritage shines through.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "Gray",
+          "label": "Gray"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "Addidas",
+          "label": "Addidas"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "41",
+            "label": "41"
+          },
+          {
+            "key": "42",
+            "label": "42"
+          },
+          {
+            "key": "43",
+            "label": "43"
+          },
+          {
+            "key": "44",
+            "label": "44"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751731158/image-1_ug40z9.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751731151/image-2_w1vifn.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751731152/image-3_lrqtjs.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751731154/image-4_u2miao.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751731156/image-5_q9k72g.webp"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 8000,
+          "fractionDigits": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "key": "classics-530",
+    "category": ["Women", "Lifestyle"],
+    "name": "New Balance Classics 530",
+    "description": "The New Balance® Classics 530 sneakers merge throwback style with modern comfort. They are made of a mesh upper with a lace-up closure for everyday style. The rubber insole and cotton lining add to their comfort. These running shoes feature an ABZORB midsole that delivers superior cushioning in these classic kicks.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "White",
+          "label": "White"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "New Balance",
+          "label": "New Balance"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "42",
+            "label": "42"
+          },
+          {
+            "key": "43",
+            "label": "43"
+          },
+          {
+            "key": "44",
+            "label": "44"
+          },
+          {
+            "key": "45",
+            "label": "45"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751730890/image-1_n8gkn9.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751730885/image-2_kcuy9i.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751730884/image-3_mx3qdd.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751730886/image-4_g8b0h9.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751730888/image-5_dnjofk.webp"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 10000,
+          "fractionDigits": 2
+        },
+        "discounted": {
+          "value": {
+            "type": "centPrecision",
+            "currencyCode": "USD",
+            "centAmount": 9500,
+            "fractionDigits": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "key": "omega-trainer",
+    "category": ["Women", "Lifestyle"],
+    "name": "Converse Omega Trainer",
+    "description": "Created a smart look wearing the Converse® Converse Omega Trainer. 80s-inspired suede and mesh upper with that signature Converse look and feel. The low-top sneakers feature Converse Comfort sockliner and a lightweight, EVA foam midsole to help provide optimal comfort. Star Chevron reps the Converse legacy of sport and street style.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "Gray",
+          "label": "Gray"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "Converse",
+          "label": "Converse"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "39",
+            "label": "39"
+          },
+          {
+            "key": "40",
+            "label": "40"
+          },
+          {
+            "key": "41",
+            "label": "41"
+          },
+          {
+            "key": "42",
+            "label": "42"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991574/image-1_ppptmw.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991574/image-2_ogzc3q.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991573/image-3_yacwyk.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991573/image-4_vnuqcw.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991574/image-5_gviuo4.webp"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 7500,
+          "fractionDigits": 2
+        },
+        "discounted": {
+          "value": {
+            "type": "centPrecision",
+            "currencyCode": "USD",
+            "centAmount": 7125,
+            "fractionDigits": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "key": "run-star-trainer",
+    "category": ["Women", "Lifestyle"],
+    "name": "Converse Run Star Trainer",
+    "description": "A celebration of sports, style, and heritage, the Converse® Run Star Trainer blends sleek details with luxe cushioning to complement your favorite outfits, day or night. A durable nylon upper with suede overlays and leather accents is added for a luxe look and feel, while the responsive memory foam cushioning helps provide next-level comfort. These low-top sneakers come with a traction rubber outsole that helps provide grip. These feature punched eyelets and waxed laces, add a premium touch and offer a customized fit.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "White",
+          "label": "White"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "Converse",
+          "label": "Converse"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "39",
+            "label": "39"
+          },
+          {
+            "key": "40",
+            "label": "40"
+          },
+          {
+            "key": "41",
+            "label": "41"
+          },
+          {
+            "key": "42",
+            "label": "42"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991744/image-1_mod1tw.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991739/image-2_ah9ntu.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991740/image-3_btfke6.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991741/image-4_tlygj5.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991743/image-5_ocaht8.webp"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 9000,
+          "fractionDigits": 2
+        },
+        "discounted": {
+          "value": {
+            "type": "centPrecision",
+            "currencyCode": "USD",
+            "centAmount": 8550,
+            "fractionDigits": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "key": "disruptor-2-woven",
+    "category": ["Women", "Lifestyle"],
+    "name": "Fila Disruptor 2 Woven",
+    "description": "Elevate your everyday style with the iconic Fila® Disruptor 2 Woven sneakers — a bold blend of fashion-forward design and lasting comfort. Featuring unique woven textural details, these sneakers add a chic, modern twist to a classic silhouette. The lace-up construction ensures a secure, adjustable fit, while the durable faux leather upper brings a sleek, polished finish. Inside, a soft, breathable textile lining enhances comfort, making them perfect for all-day wear.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "Yellow",
+          "label": "Yellow"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "Fila",
+          "label": "Fila"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "37",
+            "label": "37"
+          },
+          {
+            "key": "38",
+            "label": "38"
+          },
+          {
+            "key": "41",
+            "label": "41"
+          },
+          {
+            "key": "42",
+            "label": "42"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991929/image-1_nqlyqc.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991926/image-2_f6iskz.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991928/image-3_x3rkpb.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991925/image-4_bzkgtz.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751991934/image-5_hdmjjo.webp"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 7500,
+          "fractionDigits": 2
+        },
+        "discounted": {
+          "value": {
+            "type": "centPrecision",
+            "currencyCode": "USD",
+            "centAmount": 7125,
+            "fractionDigits": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "key": "memory-decimus",
+    "category": ["Men", "Training"],
+    "name": "Fila Memory Decimus",
+    "description": "Never choose between fashion and comfort as you get the best of both by opting for Fila® Memory Decimus Sneakers. The sneakers feature a leather or synthetic upper for durable comfort, breathable textile lining, a comfortable textile insole, and sculpted EVA midsole for cushioning & comfort. The metal reinforced ghillies combine a secure fit with a fashionable twist.",
+    "attributes": [
+      {
+        "name": "color",
+        "value": {
+          "key": "White",
+          "label": "White"
+        }
+      },
+      {
+        "name": "brand",
+        "value": {
+          "key": "Fila",
+          "label": "Fila"
+        }
+      },
+      {
+        "name": "size",
+        "value": [
+          {
+            "key": "37",
+            "label": "37"
+          },
+          {
+            "key": "38",
+            "label": "38"
+          },
+          {
+            "key": "41",
+            "label": "41"
+          },
+          {
+            "key": "42",
+            "label": "42"
+          }
+        ]
+      }
+    ],
+    "images": [
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992151/image-1_v0w5mx.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992149/image-2_sjr3ti.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992146/image-3_bxuwml.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992147/image-4_ummwq0.webp",
+      "https://res.cloudinary.com/dlw0lezqr/image/upload/v1751992152/image-5_tp0uj8.webp"
+    ],
+    "prices": [
+      {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "USD",
+          "centAmount": 6000,
+          "fractionDigits": 2
+        }
+      }
+    ]
+  }
+]
