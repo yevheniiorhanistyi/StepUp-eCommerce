@@ -1,34 +1,31 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { SOCIAL_LOGOS } from '@/constants/constants';
+'use client';
+
+import { motion } from 'framer-motion';
 import { IAnnouncementBannerProps } from '@/types/types';
 
-const AnnouncementBanner = ({ label, text, socials }: IAnnouncementBannerProps): JSX.Element => {
+const AnnouncementBanner = ({ label, text }: IAnnouncementBannerProps): JSX.Element => {
   return (
     <div className="flex flex-col items-center justify-center gap-4 text-center text-xs sm:text-sm p-4 bg-neutral-950 text-amber-50">
       {label && <span className="font-bold">{label}</span>}
-      <div className="flex flex-col">
-        {text.map((line) => (
-          <p key={line}>{line}</p>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="flex flex-col"
+      >
+        {text.map((line, index) => (
+          <motion.p
+            variants={{
+              hidden: { opacity: 0, y: 10 },
+              visible: { opacity: 1, y: 0 }
+            }}
+            transition={{ duration: 0.5, delay: 0.2 * index, ease: 'easeOut' }}
+            key={line}
+          >
+            {line}
+          </motion.p>
         ))}
-      </div>
-      {socials && (
-        <div className="flex flex-row items-center gap-5">
-          {SOCIAL_LOGOS.map((logo) => (
-            <Link key={logo} href={'#'}>
-              <div className="relative w-[18px] h-[18px]">
-                <Image
-                  src={`/images/socials/${logo}`}
-                  alt={logo.replace('.png', '')}
-                  fill
-                  className="object-contain"
-                  sizes="18px"
-                />
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
+      </motion.div>
     </div>
   );
 };
