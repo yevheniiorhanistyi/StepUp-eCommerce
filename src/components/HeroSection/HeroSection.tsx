@@ -2,6 +2,17 @@ import Link from 'next/link';
 import { Button } from '../ui/button';
 
 const HeroSection = (): JSX.Element => {
+  const videos = [
+    {
+      src: '/videos/vid1.mp4',
+      poster: '/images/posters/poster-1.webp'
+    },
+    {
+      src: '/videos/vid2.mp4',
+      poster: '/images/posters/poster-2.webp'
+    }
+  ];
+
   return (
     <section className="relative w-full min-h-[80vh] md:min-h-[75vh] overflow-hidden px-4 sm:px-10 py-5">
       <div className="relative z-10 flex flex-col justify-between w-full h-full max-w-[1440px] mx-auto">
@@ -30,7 +41,7 @@ const HeroSection = (): JSX.Element => {
       </h2>
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute rotate-[-45deg] left-[5%] top-[-22%] w-[145%] h-[145%] max-w-none flex justify-end">
-          {['/videos/vid1.mp4', '/videos/vid2.mp4'].map((src, idx) => (
+          {videos.map(({ src, poster }, idx) => (
             <div
               key={idx}
               className="relative w-1/2 h-full overflow-hidden border-r-[15px] border-white last:border-r-0"
@@ -38,6 +49,7 @@ const HeroSection = (): JSX.Element => {
               <video
                 data-testid="hero-video"
                 src={src}
+                poster={poster}
                 autoPlay
                 muted
                 loop
