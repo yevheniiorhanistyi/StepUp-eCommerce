@@ -1,8 +1,13 @@
+'use client';
+
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Card, CardContent } from '../ui/card';
 import PriceDisplay from '@/components/PriceDisplay/PriceDisplay';
 
 import products from '@/data/all-time-favorites.json';
+
+const MotionLink = motion(Link);
 
 const AllTimeFavorites = (): JSX.Element => {
   return (
@@ -10,14 +15,18 @@ const AllTimeFavorites = (): JSX.Element => {
       <div className="relative flex flex-col items-center justify-between gap-2 xl:gap-0 w-full h-full max-w-[1440px] mx-auto z-10">
         <h2 className="text-2xl self-start mb-7">All Time Favorites</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 items-start gap-4 xl:gap-2 w-full">
-          {products.map((product) => {
+          {products.map((product, index) => {
             const image = product.images[0];
             const price = product.prices[0];
 
             return (
-              <Link
+              <MotionLink
                 href={`/product/${product.key}`}
                 key={product.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index, duration: 0.6 }}
+                viewport={{ once: true }}
                 className="max-w-[364px] xl:max-w-[250px] w-full justify-self-center"
               >
                 <Card className="h-full cursor-pointer transition-shadow hover:shadow-lg py-3">
@@ -34,7 +43,7 @@ const AllTimeFavorites = (): JSX.Element => {
                     <PriceDisplay price={price} />
                   </CardContent>
                 </Card>
-              </Link>
+              </MotionLink>
             );
           })}
         </div>

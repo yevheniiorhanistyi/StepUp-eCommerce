@@ -1,6 +1,12 @@
+'use client';
+
+import { motion } from 'framer-motion';
+
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+
+const MotionLink = motion(Link);
 
 const PopularCategories = (): JSX.Element => {
   const categories = [
@@ -41,9 +47,13 @@ const PopularCategories = (): JSX.Element => {
             else if (index === 2) justify = 'xl:justify-self-end';
 
             return (
-              <Link
+              <MotionLink
                 href={category.href}
                 key={category.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 * index, duration: 0.6 }}
+                viewport={{ once: true }}
                 className={cn(
                   'max-w-[420px] w-full',
                   'justify-self-center',
@@ -65,7 +75,7 @@ const PopularCategories = (): JSX.Element => {
                     <p className="text-base sm:-tracking-tight mb-1">{category.description}</p>
                   </CardContent>
                 </Card>
-              </Link>
+              </MotionLink>
             );
           })}
         </div>
