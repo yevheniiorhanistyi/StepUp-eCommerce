@@ -19,7 +19,7 @@ const Register = (): JSX.Element | null => {
   if (isAuthenticated) return null;
 
   return (
-    <div className="flex items-center justify-center p-4 sm:p-8 w-full">
+    <div className="flex items-center justify-center py-10 px-4 sm:p-8 w-full">
       <RegisterForm />
     </div>
   );
